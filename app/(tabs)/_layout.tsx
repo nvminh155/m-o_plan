@@ -7,6 +7,7 @@ export default function RootLayout() {
     <Tabs >
       <Tabs.Screen name="index" />
       <Tabs.Screen name="design" />
+      <Tabs.Screen name="map" />
     </Tabs>
   );
 }
