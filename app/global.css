@@ -2,37 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   .wrapper {
-    color: red !important;
+    color: hsl(var(--text-color));
+    background-color: hsl(var(--background));
+    flex: 1;
+    @apply px-3;
   }
   :root {
-    --text-color: 207 43% 9%;
+    --text-color: 229 19% 11%;
     --background: 0 0% 100%;
-    --foreground: 207 43% 9%;
+    --foreground: 229 19% 11%;
+
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
+
     --primary: 13 92% 60%;
-    --primary-foreground: 229 0% 100%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 87 61% 93%;
     --secondary-foreground: 229 19% 11%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 229 19% 11%;
-    --accent-foreground: 229 0% 100%;
+    --accent-foreground: 0 0% 100%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
+    --border: 0 0% 93%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
 
     --radius: 2rem;
     --affix-header: 6.5rem;
-    --space-node: 2.4rem;
+    --space-node: 1.25rem;
     --space-section: 15rem;
     --extra-pageHorizontal: 2.4rem;
   }
