@@ -6,10 +6,11 @@ const withStorybook = require("@storybook/react-native/metro/withStorybook");
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
+config.resolver.sourceExts.push("cjs");
 
-if (process.env.EXPO_PUBLIC_IS_STORYBOOK === "false") {
-  console.log("Using Storybook config");
-}
+// if (process.env.EXPO_PUBLIC_IS_STORYBOOK === "false") {
+//   console.log("Using Storybook config");
+// }
 
 const storybook_config = withStorybook(config, {
   // Set to false to remove storybook specific options
