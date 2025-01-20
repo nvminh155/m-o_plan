@@ -7,7 +7,7 @@ import Avatar from "@/components/ui/Avatar";
 
 export default function Header() {
   return (
-    <View className="header flex-row items-center justify-between">
+    <View className="header flex-row items-center justify-between max-h-[50px]">
       <View className="logo">
         <AppText
           text="M/O Plans"
@@ -15,20 +15,12 @@ export default function Header() {
         />
       </View>
 
-      <View className="flex-row gap-1">
-        <AppButton
-          variant="primary"
-          size="icon"
-          className="!p-0 h-[3rem] w-[3rem]"
-        >
+      <View className="flex-row gap-2 flex-1 justify-end items-center">
+        <AppButton variant="primary" size="icon">
           <IconAntd name="search1" className="!text-primary-foreground " />
         </AppButton>
 
-        <AppButton
-          variant="primary"
-          size="icon"
-          className="!p-0 h-[3rem] w-[3rem]"
-        >
+        <AppButton variant="primary" size="icon">
           <IconIcons
             name="notifications-outline"
             className="!text-primary-foreground"

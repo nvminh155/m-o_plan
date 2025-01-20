@@ -1,8 +1,6 @@
 import { IconAntd } from "@/components/icon";
 import { Tabs } from "expo-router";
 
-
-
 export default function RootLayout() {
   return (
     <Tabs
@@ -19,8 +17,16 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="calendar"
+        options={{
+          title: "Lịch",
+          tabBarIcon: ({ color }) => (
+            <IconAntd size={24} name="calendar" color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen name="design" />
-      <Tabs.Screen name="map" />
     </Tabs>
   );
 }

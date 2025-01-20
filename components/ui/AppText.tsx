@@ -9,6 +9,7 @@ cssInterop(Text, {
   },
 });
 
+
 interface AppTextProps extends TextProps {
   text?: string;
   containerClassName?: string;
