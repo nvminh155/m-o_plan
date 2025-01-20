@@ -19,7 +19,7 @@ export default function Index() {
         </View>
 
         <FastSchedule />
-        
+
         <ActiveNow />
       </ScrollView>
     </Wrapper>

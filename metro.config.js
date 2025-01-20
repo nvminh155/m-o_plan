@@ -28,6 +28,7 @@ const storybook_config = withStorybook(config, {
 });
 const nativeWind_config = withNativeWind(storybook_config, {
   input: "./app/global.css",
+  inlineRem: 10
 });
 
 module.exports = nativeWind_config;

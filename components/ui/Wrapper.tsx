@@ -14,7 +14,7 @@ const Wrapper = ({ className, children, ...rest }: WrapperProps) => {
   return (
     <SafeAreaProvider>
       <SafeAreaView
-        className={cn(`pt-3 bg-background flex-1 px-3`, className)}
+        className={cn(`pt-4 bg-background flex-1 px-4`, className)}
         {...rest}
       >
         {children}
@@ -23,4 +23,5 @@ const Wrapper = ({ className, children, ...rest }: WrapperProps) => {
   );
 };
 
+export const paddingHorizontalWrapper = 20;
 export default Wrapper;

@@ -1,13 +1,17 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
-import {
-  TouchableOpacity,
-  TouchableOpacityProps,
-} from "react-native";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import AppText from "@/components/ui/AppText";
 import { cn } from "@/lib/cn";
+import { cssInterop } from "nativewind";
 
-const className = "h-12 p-3";
+const className = "h-12 p-3 px-5";
+
+cssInterop(TouchableOpacity, {
+  className: {
+    target: "style",
+  },
+});
 
 const button = tv({
   // Common styles
@@ -38,7 +42,7 @@ const button = tv({
       small: "px-3 py-1 text-xs",
       medium: "px-5 py-2 text-sm",
       large: "px-7 py-3 text-base",
-      icon: "p-3 !rounded-full",
+      icon: "h-16 w-16 !rounded-full",
     },
     disabled: {
       true: "opacity-50 cursor-not-allowed bg-gray-300 text-gray-600 pointer-events-none",
