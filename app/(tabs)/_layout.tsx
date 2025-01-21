@@ -26,6 +26,12 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="message"
+        options={{
+          title: "Tin nhắn",
+        }}
+      />
       <Tabs.Screen name="design" />
     </Tabs>
   );
