@@ -32,6 +32,12 @@ export default function RootLayout() {
           title: "Tin nhắn",
         }}
       />
+      <Tabs.Screen
+        name="plans"
+        options={{
+          title: "Kế hoạch",
+        }}
+      />
       <Tabs.Screen name="design" />
     </Tabs>
   );

@@ -10,7 +10,7 @@ interface IconFontAwesomeProps
     Omit<FontAwesomeProps, "name"> {
   name: FontAwesome5Props["name"] | FontAwesomeProps["name"];
   version?: 5 | 4;
-  containerClassName?: string
+  containerClassName?: string;
 }
 
 const IconFontAwesome = ({
