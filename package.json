@@ -9,8 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint",
-    "storybook-generate": "sb-rn-get-stories"
+    "lint": "expo lint"
   },
   "jest": {
     "preset": "jest-expo"
