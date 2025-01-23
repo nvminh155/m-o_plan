@@ -1,6 +1,6 @@
 // Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig, mergeConfig } = require("expo/metro-config");
-const path = require("path");
+
 const { withNativeWind } = require("nativewind/metro");
 
 /** @type {import('expo/metro-config').MetroConfig} */
@@ -12,7 +12,7 @@ config.resolver.sourceExts.push("cjs");
 // }
 
 const nativeWind_config = withNativeWind(config, {
-  input: "./src/app/global.css",
+  input: "./app/global.css",
   inlineRem: 10,
 });
 
