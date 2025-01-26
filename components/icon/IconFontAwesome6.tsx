@@ -11,7 +11,7 @@ interface IconFontAwesomeProps extends FontAwesome6Props {
 const IconFontAwesome6 = ({
   name,
   size = 24,
-  color,
+  color = "white",
   className,
   containerClassName,
   ...rest

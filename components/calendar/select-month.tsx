@@ -35,7 +35,7 @@ const SelectMonth = () => {
         className="roundd"
         value={
           <View className="flex-row gap-2">
-            <IconAntd name="calendar" size={15} className="!text-accent" />
+            <IconAntd name="calendar" size={15} className="!text-tertiary-500" />
             <AppText>{selectedIndex.value}</AppText>
           </View>
         }

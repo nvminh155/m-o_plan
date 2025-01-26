@@ -10,7 +10,7 @@ interface IconAntDesignProps extends React.ComponentProps<typeof AntDesign> {
 const IconAntd = ({
   name,
   size = 24,
-  color,
+  color = "white",
   className,
   containerClassName,
   ...rest
@@ -21,8 +21,8 @@ const IconAntd = ({
         name={name}
         size={size}
         color={color}
-        className={`text-center ${className}`}
         {...rest}
+        className={`text-center  ${className}`}
       />
     </WrapperIcon>
   );

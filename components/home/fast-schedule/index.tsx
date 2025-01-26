@@ -1,10 +1,19 @@
 import { IconAntd, IconIcons, IconFontAwesome } from "../../icon";
-import AppButton from "../../ui/AppButton";
+import { Button, ButtonIcon, ButtonText } from "../../ui/button";
 import AppText from "../../ui/AppText";
 import Input from "../../ui/input";
 import { ScrollView, View } from "react-native";
+import { cn } from "@/lib/cn";
 
 const FastSchedule = () => {
+  const actions: TAction[] = [
+    { text: "Now", iconName: "notifications-outline", iconType: "icons" },
+    { text: "Tomorrow", iconName: "clockcircleo", iconType: "antd" },
+    // from scroll view
+    { text: "Next Week", iconName: "calendar", iconType: "antd" },
+    { text: "Next Week", iconName: "calendar", iconType: "antd" },
+  ];
+
   return (
     <View className="mt-5">
       <View className="flex-row items-center gap-3">
@@ -18,57 +27,55 @@ const FastSchedule = () => {
             </View>
           }
         />
-        <AppButton variant="primary" size="icon" className="!rounded-full !p-4">
+        <Button action="primary" size="lg" className="!rounded-full">
           <IconFontAwesome
             name="send-o"
             version={4}
             className="!text-primary-foreground"
             size={20}
           />
-        </AppButton>
+        </Button>
       </View>
 
       <ScrollView
         contentContainerClassName="items-center flex-row gap-3 mt-5"
         horizontal
       >
-        <AppButton variant="primary" className="!font-medium !rounded-full">
-          <View className="flex-row h-full items-center gap-2">
-            <IconIcons
-              name="notifications-outline"
-              className="!text-primary-foreground"
-              size={20}
-            />
-            <AppText
-              text="Now"
-              className="!text-primary-foreground font-medium"
-            />
-          </View>
-        </AppButton>
-        <AppButton variant="ghost" className="!font-medium !rounded-full">
-          <View className="flex-row h-full items-center gap-2">
-            <IconAntd name="clockcircleo" className="!text-color/60" />
-            <AppText text="Tomorrow" className="!text-color/60 font-medium" />
-          </View>
-        </AppButton>
-        <AppButton variant="ghost" className="!font-medium !rounded-full">
-          <View className="flex-row h-full items-center gap-2">
-            <IconAntd name="calendar" className="!text-color/60" />
-            <AppText text="Next Week" className="!text-color/60 font-medium" />
-          </View>
-        </AppButton>
-        <AppButton variant="ghost" className="!font-medium !rounded-full">
-          <View className="flex-row h-full items-center gap-2">
-            <IconIcons
-              name="notifications-outline"
-              className="!text-color/60"
-            />
-            <AppText text="Next Week" className="!text-color/60 font-medium" />
-          </View>
-        </AppButton>
+        {actions.map((btn, i) => (
+          <Action key={i + 1} item={btn} active={i === 0} />
+        ))}
       </ScrollView>
     </View>
   );
 };
 
+type TAction = {
+  text: string;
+  iconName: any;
+  iconType: "antd" | "icons";
+};
+interface ActionProps {
+  item: TAction;
+  active?: boolean;
+}
+
+const Action = ({ item, active }: ActionProps) => {
+  const MyIcon = item.iconType === "antd" ? IconAntd : IconIcons;
+
+  return (
+    <Button
+      action={active ? "primary" : "secondary"}
+      className="!font-medium !rounded-full"
+    >
+      <MyIcon
+        name={item.iconName}
+        className={cn({
+          "!text-typography-800": !active,
+        })}
+        size={20}
+      />
+      <ButtonText>{item.text}</ButtonText>
+    </Button>
+  );
+};
 export default FastSchedule;

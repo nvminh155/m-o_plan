@@ -1,5 +1,5 @@
 import { IconAntd, IconEntypo } from "../../icon";
-import AppButton from "../../ui/AppButton";
+import { Button } from "../../ui/button";
 import AppText from "../../ui/AppText";
 import { cn } from "../../../lib/cn";
 import { Image } from "expo-image";
@@ -12,9 +12,9 @@ const CardActivityInSchedule = () => {
   return (
     <View
       className={cn(
-        "flex-row relative flex-1 bg-secondary rounded-[20px] p-3 gap-3",
+        "flex-row relative flex-1 bg-secondary-500 rounded-[20px] p-3 gap-3",
         {
-          "flex-col bg-accent": view === "lg",
+          "flex-col bg-tertiary-500": view === "lg",
         }
       )}
     >
@@ -31,7 +31,7 @@ const CardActivityInSchedule = () => {
       <View className="flex-1">
         <AppText
           className={cn("font-medium text-base line-clamp-1", {
-            "text-accent-foreground": view === "lg",
+            "text-white": view === "lg",
           })}
         >
           Traveling to Swit zerl and
@@ -44,33 +44,33 @@ const CardActivityInSchedule = () => {
         >
           <IconAntd
             name="calendar"
-            className={cn("!text-color/60", {
-              "!text-accent-foreground/80": view === "lg",
+            className={cn("!text-typography-600", {
+              "!text-white/90": view === "lg",
             })}
             size={15}
           />
           <AppText
-            className={cn("text-xs", {
-              "!text-accent-foreground/80": view === "lg",
+            className={cn("text-xs !text-typography-600", {
+              "!text-white/90": view === "lg",
             })}
           >
             11 Nov {view === "lg" && "- 16 Nov"}
           </AppText>
           <View
-            className={cn("w-1 h-1 bg-color/20", {
-              "bg-accent-foreground/80": view === "lg",
+            className={cn("w-1 h-1 bg-typography-600", {
+              "bg-typography-300": view === "lg",
             })}
           ></View>
           <IconAntd
             name="clockcircleo"
-            className={cn("!text-color/60", {
-              "!text-accent-foreground/80": view === "lg",
+            className={cn("!text-typography-600", {
+              "!text-white/90": view === "lg",
             })}
             size={15}
           />
           <AppText
-            className={cn("!text-color/60 font-medium text-xs", {
-              "!text-accent-foreground/80": view === "lg",
+            className={cn("!text-typography-600  text-xs", {
+              "!text-white/90": view === "lg",
             })}
           >
             Tomorrow
@@ -91,7 +91,7 @@ const CardActivityInSchedule = () => {
                   "h-8 w-8 rounded-full border-[1.5px] border-white",
                   {
                     "-ml-3": index !== 0,
-                    "border-accent": view === "lg",
+                    "border-tertiary-500": view === "lg",
                   }
                 )}
               />
@@ -101,7 +101,7 @@ const CardActivityInSchedule = () => {
             <AppText
               containerClassName="self-center"
               className={cn("font-medium", {
-                "!text-accent-foreground": view === "lg",
+                "!text-tertiary-foreground-500": view === "lg",
               })}
             >
               +2
@@ -111,9 +111,9 @@ const CardActivityInSchedule = () => {
       </View>
 
       {view === "md" && (
-        <AppButton
-          variant="ghost"
-          size="icon"
+        <Button
+          variant="link"
+          size="lg"
           className={cn("!px-0 !py-0 ")}
           style={{
             position: "absolute",
@@ -128,15 +128,16 @@ const CardActivityInSchedule = () => {
         >
           <IconEntypo
             name="resize-full-screen"
-            className="!text-accent "
+            className="!text-typography-800"
             size={22}
           />
-        </AppButton>
+        </Button>
       )}
 
       {view === "lg" && (
-        <AppButton
-          className={cn("px-2 py-0 bg-accent/5a rounded-full")}
+        <Button
+          variant="link"
+          className={cn("px-2 py-0  rounded-full")}
           style={{
             position: "absolute",
             right: 10,
@@ -149,9 +150,9 @@ const CardActivityInSchedule = () => {
           <IconAntd
             name="minus"
             size={20}
-            className="!text-accent-foreground"
+            className="!text-tertiary-foreground-500"
           />
-        </AppButton>
+        </Button>
       )}
     </View>
   );

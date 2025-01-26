@@ -1,8 +1,8 @@
-import ActiveNow from "../../../components/home/active-now";
-import FastSchedule from "../../../components/home/fast-schedule";
-import Header from "../../../components/home/header";
-import AppText from "../../../components/ui/AppText";
-import Wrapper from "../../../components/ui/Wrapper";
+import ActiveNow from "@/components/home/active-now";
+import FastSchedule from "@/components/home/fast-schedule";
+import Header from "@/components/home/header";
+import AppText from "@/components/ui/AppText";
+import Wrapper from "@/components/ui/Wrapper";
 import { ScrollView, View } from "react-native";
 
 export default function Index() {

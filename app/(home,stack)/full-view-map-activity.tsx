@@ -1,4 +1,4 @@
-import AppMapMarker from "../../components/map/AppMapMarker";
+import AppMapMarker from "@/components/map/AppMapMarker";
 import React from "react";
 import { View } from "react-native";
 import MapView from "react-native-maps";

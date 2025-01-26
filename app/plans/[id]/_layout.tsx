@@ -1,6 +1,6 @@
-import { IconAntd } from "../../../components/icon";
-import AppButton from "../../../components/ui/AppButton";
-import Wrapper from "../../../components/ui/Wrapper";
+import { IconAntd } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import Wrapper from "@/components/ui/Wrapper";
 import { cn } from "../../../lib/cn";
 import { TabRouter } from "@react-navigation/native";
 import {
@@ -76,13 +76,11 @@ const TabsNavigation = () => {
       style={{ elevation: 5 }}
     >
       {itemsTab.map((tab) => (
-        <AppButton
+        <Button
           key={tab.key}
-          variant={pathname === tab.url ? "primary" : "ghost"}
-          size="icon"
-          className={cn("!px-0 !py-0 h-20 w-20 rounded-full", {
-            "bg-primary": pathname === tab.url,
-          })}
+          action={pathname === tab.url ? "primary" : "secondary"}
+          size="lg"
+          className={cn("!px-0 !py-0 h-20 w-20 rounded-full", {})}
           onPress={() => {
             router.replace(tab.href);
           }}
@@ -91,18 +89,19 @@ const TabsNavigation = () => {
             size={22}
             name={tab.icon as any}
             className={cn({
-              "!text-primary-foreground": pathname === tab.url,
+              "!text-typography-800": pathname !== tab.url,
             })}
           />
-        </AppButton>
+        </Button>
       ))}
 
-      <AppButton
+      <Button
+        variant="link"
         className="bg-transparent !px-0 !py-0"
         onPress={() => router.back()}
       >
-        <IconAntd name="back" />
-      </AppButton>
+        <IconAntd name="back" className="!text-typography-800" />
+      </Button>
     </View>
   );
 };

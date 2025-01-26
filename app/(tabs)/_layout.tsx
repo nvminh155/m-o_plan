@@ -1,4 +1,4 @@
-import { IconAntd } from "../../components/icon";
+import { IconAntd } from "@/components/icon";
 import { Tabs } from "expo-router";
 
 export default function RootLayout() {

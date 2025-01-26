@@ -1,4 +1,4 @@
-import AppButton from "../../ui/AppButton";
+import { Button, ButtonIcon } from "../../ui/button";
 import AppText from "../../ui/AppText";
 import IconAntd from "../../icon/IconAntd";
 import { View } from "react-native";
@@ -16,16 +16,23 @@ export default function Header() {
       </View>
 
       <View className="flex-row gap-2 flex-1 justify-end items-center">
-        <AppButton variant="primary" size="icon">
+        <Button
+          action="primary"
+          size="lg"
+          className="rounded-full !px-[.55rem]"
+        >
           <IconAntd name="search1" className="!text-primary-foreground " />
-        </AppButton>
-
-        <AppButton variant="primary" size="icon">
+        </Button>
+        <Button
+          action="primary"
+          size="lg"
+          className="rounded-full !px-[.55rem]"
+        >
           <IconIcons
             name="notifications-outline"
             className="!text-primary-foreground"
           />
-        </AppButton>
+        </Button>
 
         <Avatar />
       </View>

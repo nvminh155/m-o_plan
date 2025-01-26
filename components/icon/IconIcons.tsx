@@ -9,7 +9,7 @@ interface IconIconsProps extends React.ComponentProps<typeof Ionicons> {
 const IconIcons = ({
   name,
   size = 24,
-  color,
+  color = "white",
   className,
   containerClassName,
   ...rest
