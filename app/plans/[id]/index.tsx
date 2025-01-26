@@ -1,12 +1,9 @@
-import { IconAntd } from "../../../components/icon";
-import AppImage from "../../../components/image/AppImage";
-import MoneyView from "../../../components/plans/money-view";
-import AppButton from "../../../components/ui/AppButton";
-import AppText from "../../../components/ui/AppText";
-import Tabs, {
-  TabsContent,
-  TRenderInfoItem,
-} from "../../../components/ui/tabs";
+import { IconAntd } from "@/components/icon";
+import AppImage from "@/components/image/AppImage";
+import MoneyView from "@/components/plans/money-view";
+import { Button, ButtonText } from "@/components/ui/button";
+import AppText from "@/components/ui/AppText";
+import Tabs, { TabsContent, TRenderInfoItem } from "@/components/ui/tabs";
 import { cn } from "../../../lib/cn";
 import React from "react";
 import { FlatList, View } from "react-native";
@@ -29,23 +26,18 @@ const DetailPlans = () => {
     onPressCB,
   }: TRenderInfoItem) => {
     return (
-      <AppButton
+      <Button
         key={item.key}
-        className={cn("bg-primary flex-1", {
-          "!bg-gray-100": item.key !== activeTab,
-        })}
+        action={activeTab === item.key ? "primary" : "secondary"}
+        className={cn("flex-1")}
         onPress={() => {
           if (onPressCB) onPressCB(item.key);
         }}
       >
-        <AppText
-          className={cn("text-lg font-medium", {
-            "!text-primary-foreground": activeTab === item.key,
-          })}
-        >
+        <ButtonText className={cn("text-lg font-medium")}>
           {item.label}
-        </AppText>
-      </AppButton>
+        </ButtonText>
+      </Button>
     );
   };
 
@@ -85,7 +77,7 @@ const DetailPlans = () => {
         </TabsContent>
 
         <TabsContent tabKey="History ">
-          <AppText>asdfsdafjlkj tab1</AppText>
+          <AppText className="text-primary-foreground-0">asdfsdafjlkj tab1</AppText>
         </TabsContent>
       </Tabs>
 

@@ -1,13 +1,15 @@
-import DaysOfMonth from "../../components/calendar/days-of-month";
-import { IconAntd } from "../../components/icon";
-import AppButton from "../../components/ui/AppButton";
-import AppText from "../../components/ui/AppText";
-import Wrapper from "../../components/ui/Wrapper";
+import DaysOfMonth from "@/components/calendar/days-of-month";
+
+import { Button, ButtonIcon } from "@/components/ui/button";
+import AppText from "@/components/ui/AppText";
+import Wrapper from "@/components/ui/Wrapper";
 import React, { useCallback } from "react";
 import { View, ScrollView } from "react-native";
 
-import CardActivityInSchedule from "../../components/calendar/schedule/card-activity-schedule";
-import SelectMonth from "../../components/calendar/select-month";
+import CardActivityInSchedule from "@/components/calendar/schedule/card-activity-schedule";
+import SelectMonth from "@/components/calendar/select-month";
+import { CloseIcon, SearchIcon } from "@/components/ui/AppIcon";
+import { IconAntd } from "@/components/icon";
 
 const hoursOfDay = [
   "00 am",
@@ -46,14 +48,22 @@ const CalendarScreen = () => {
   return (
     <Wrapper className="flex flex-col h-full relative">
       <View className="flex-row items-center justify-between">
-        <AppButton variant="ghost" size="icon">
-          <IconAntd name="close" className="!text-accent" />
-        </AppButton>
+        <Button
+          size="lg"
+          action={"secondary"}
+          className="rounded-full !px-[.55rem]"
+        >
+          <IconAntd name="close" className="!text-typography-800" />
+        </Button>
 
         <View className="flex-row gap-2 flex-1 justify-end">
-          <AppButton variant="ghost" size="icon">
-            <IconAntd name="search1" className="!text-accent " />
-          </AppButton>
+          <Button
+            size="lg"
+            action={"secondary"}
+            className="rounded-full !px-[.55rem]"
+          >
+            <IconAntd name="search1" className="!text-typography-800" />
+          </Button>
 
           <SelectMonth />
         </View>
@@ -70,24 +80,15 @@ const CalendarScreen = () => {
         <ScrollView contentContainerClassName="gap-16" className="mt-10">
           {generateHoursOfDay().map((hour, i) => (
             <View key={i + 1} className="flex-row items-start gap-3">
-              <AppText className="font-medium text-accent/60">{hour}</AppText>
+              <AppText className="font-medium text-tertiary-500">
+                {hour}
+              </AppText>
               <CardActivityInSchedule />
             </View>
           ))}
         </ScrollView>
       </View>
 
-      <AppButton
-        variant="primary"
-        size="icon"
-        style={{
-          position: "absolute",
-          bottom: 5,
-          right: 5,
-        }}
-      >
-        <IconAntd name="plus" className="!text-primary-foreground" size={24} />
-      </AppButton>
     </Wrapper>
   );
 };

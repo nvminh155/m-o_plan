@@ -1,5 +1,5 @@
-import { IconAntd } from "../../components/icon";
-import AppButton from "../../components/ui/AppButton";
+import { IconAntd } from "@/components/icon";
+import { Button } from "@/components/ui/button";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -56,7 +56,7 @@ const ChatPrivate = () => {
         style={styles.header}
         className="flex-row items-center gap-3 pl-4 !rounded-none justify-start"
       >
-        <AppButton
+        <Button
           className="bg-transparent !px-0 !py-0"
           onPress={() => {
             router.back();
@@ -64,7 +64,7 @@ const ChatPrivate = () => {
         >
           <IconAntd name="arrowleft" size={24} color="#fff" />
           <Text style={styles.headerText}>Private Chat {id}</Text>
-        </AppButton>
+        </Button>
       </View>
 
       {/* Chat Messages */}
@@ -84,9 +84,9 @@ const ChatPrivate = () => {
           value={inputText}
           onChangeText={setInputText}
         />
-        <AppButton style={styles.sendButton} onPress={sendMessage}>
+        <Button style={styles.sendButton} onPress={sendMessage}>
           <Text style={styles.sendButtonText}>Send</Text>
-        </AppButton>
+        </Button>
       </View>
     </KeyboardAvoidingView>
   );

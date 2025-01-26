@@ -9,7 +9,7 @@ interface IconEntypoProps extends React.ComponentProps<typeof Entypo> {
 const IconEntypo = ({
   name,
   size = 24,
-  color,
+  color = "white",
   className,
   containerClassName,
   ...rest

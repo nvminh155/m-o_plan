@@ -11,7 +11,7 @@ interface IconMaterialCommunityProps
 const IconMaterialCommunity = ({
   name,
   size = 24,
-  color,
+  color = "white",
   className,
   containerClassName,
   ...rest

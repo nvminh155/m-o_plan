@@ -21,7 +21,7 @@ const ListAvatarMember = ({ size = "md" }: ListAvatarMemberProps) => {
             source={"https://picsum.photos/seed/696/3000/2000"}
             className={cn("h-8 w-8 rounded-full border-[1.5px] border-white", {
               "-ml-3": index !== 0,
-              "border-accent": size === "lg",
+              "border-tertiary-500": size === "lg",
             })}
           />
         </View>
@@ -30,7 +30,7 @@ const ListAvatarMember = ({ size = "md" }: ListAvatarMemberProps) => {
         <AppText
           containerClassName="self-center"
           className={cn("font-medium", {
-            "!text-accent-foreground": size === "lg",
+            "!text-tertiary-500-foreground": size === "lg",
           })}
         >
           +2

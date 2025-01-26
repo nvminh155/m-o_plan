@@ -1,10 +1,10 @@
-import { IconMaterialCommunity } from "../../icon";
-import IconAntd from "../../icon/IconAntd";
-import IconEntypo from "../../icon/IconEntypo";
-import IconEvil from "../../icon/IconEvil";
-import AppButton from "../../ui/AppButton";
-import AppText from "../../ui/AppText";
-import { cn } from "../../../lib/cn";
+import { IconMaterialCommunity } from "@/components/icon";
+import IconAntd from "@/components/icon/IconAntd";
+import IconEntypo from "@/components/icon/IconEntypo";
+import IconEvil from "@/components/icon/IconEvil";
+import { Button } from "@/components/ui/button";
+import AppText from "@/components/ui/AppText";
+import { cn } from "@/lib/cn";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import React from "react";
@@ -13,7 +13,7 @@ import MapView, { Marker } from "react-native-maps";
 
 const ActiveNow = () => {
   return (
-    <View className="flex-1 mt-node rounded-[30px]">
+    <View className="flex-1 mt-5 rounded-[30px]">
       <Image
         source={require("@/assets/images/3x4anime.jpg")}
         className="absolute w-full h-full z-[0] rounded-[30px]"
@@ -64,16 +64,16 @@ const MapActive = () => {
 
             <SubTitle />
           </View>
-          <AppButton
-            variant="primary"
-            size="icon"
+          <Button
+            action="primary"
+            size="lg"
             className="!p-0 h-[3rem] w-[3rem]  bg-gray-100 mr-3"
           >
             <IconMaterialCommunity
               name="bell-ring-outline"
-              className="!text-accent "
+              className="!text-tertiary-500 "
             />
-          </AppButton>
+          </Button>
         </View>
 
         <YourMap />
@@ -85,11 +85,20 @@ const MapActive = () => {
 const SubTitle = () => {
   return (
     <View className="flex-row items-center gap-1">
-      <IconAntd name="calendar" className="!text-color/60" size={15} />
-      <AppText className="text-sm">11 Nov - 16 Nov</AppText>
-      <View className="w-1 h-1 bg-color/20"></View>
-      <IconAntd name="clockcircleo" className="!text-color/60" size={15} />
-      <AppText text="Tomorrow" className="!text-color/60 font-medium text-sm" />
+      <IconAntd name="calendar" className="!text-typography-600" size={15} />
+      <AppText className="text-sm !text-typography-600">
+        11 Nov - 16 Nov
+      </AppText>
+      <View className="w-1 h-1 bg-typography-600"></View>
+      <IconAntd
+        name="clockcircleo"
+        className="!text-typography-600"
+        size={15}
+      />
+      <AppText
+        text="Tomorrow"
+        className="!text-typography-600 font-medium text-sm"
+      />
     </View>
   );
 };
@@ -121,19 +130,19 @@ const YourMap = () => {
         </Marker>
       </MapView>
 
-      <AppButton
-        variant="primary"
-        size="icon"
-        className="!p-0 h-[3rem] w-[3rem] absolute right-0 bottom-0 bg-accent"
+      <Button
+        action="primary"
+        size="lg"
+        className="!p-0 h-[3rem] w-[3rem] absolute right-0 bottom-0 bg-tertiary-500"
         onPress={() => {
           router.push("/(home)/full-view-map-activity");
         }}
       >
         <IconEntypo
           name="resize-full-screen"
-          className="!text-accent-foreground "
+          className="!text-tertiary-500-foreground "
         />
-      </AppButton>
+      </Button>
     </View>
   );
 };

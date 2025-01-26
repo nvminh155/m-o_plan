@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Navigator, Slot, Stack } from "expo-router";
 import "./global.css";
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
@@ -10,6 +10,8 @@ import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
 } from "react-native-reanimated";
+import { StackRouter } from "@react-navigation/native";
+import { SafeAreaView, View } from "react-native";
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -25,15 +27,13 @@ cssInterop(Image, {
 export default function RootLayout() {
   return (
     <GluestackUIProvider mode="light">
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName="(tabs)"
-      >
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="(home)" />
-      </Stack>
+      <Navigator router={StackRouter}>
+        <SafeAreaView className={"flex-1 !bg-red-500"}>
+          <View className="flex-1 !bg-red-500">
+            <Slot />
+          </View>
+        </SafeAreaView>
+      </Navigator>
     </GluestackUIProvider>
   );
 }

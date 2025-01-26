@@ -68,7 +68,7 @@ const DaysOfMonth = ({ month }: DaysOfMonthProps) => {
         ref={flatListRef}
         className="daysOfMonth"
         data={generateDaysOfWeek()}
-        contentContainerClassName="gap-4"
+        contentContainerClassName="gap-8"
         onScrollToIndexFailed={({ index }) => {
           console.log("Failed", index);
         }}

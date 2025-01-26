@@ -2,7 +2,7 @@ import { IconMaterialCommunity } from "../icon";
 import IconAntd from "../icon/IconAntd";
 import IconEntypo from "../icon/IconEntypo";
 import IconEvil from "../icon/IconEvil";
-import AppButton from "../ui/AppButton";
+import { Button } from "../ui/button";
 import AppText from "../ui/AppText";
 import { cn } from "../../lib/cn";
 import { Image } from "expo-image";
@@ -68,16 +68,16 @@ const MapActive = () => {
 
             <SubTitle />
           </View>
-          <AppButton
+          <Button
             variant="primary"
             size="icon"
             className="!p-0 h-[3rem] w-[3rem]  bg-gray-100 mr-3"
           >
             <IconMaterialCommunity
               name="bell-ring-outline"
-              className="!text-accent "
+              className="!text-tertiary-500 "
             />
-          </AppButton>
+          </Button>
         </View>
 
         <YourMap />
@@ -125,19 +125,19 @@ const YourMap = () => {
         </Marker>
       </MapView>
 
-      <AppButton
+      <Button
         variant="primary"
         size="icon"
-        className="!p-0 h-[3rem] w-[3rem] absolute right-0 bottom-0 bg-accent"
+        className="!p-0 h-[3rem] w-[3rem] absolute right-0 bottom-0 bg-tertiary-500"
         onPress={() => {
           router.push("/(home)/full-view-map-activity");
         }}
       >
         <IconEntypo
           name="resize-full-screen"
-          className="!text-accent-foreground "
+          className="!text-tertiary-500-foreground "
         />
-      </AppButton>
+      </Button>
     </View>
   );
 };

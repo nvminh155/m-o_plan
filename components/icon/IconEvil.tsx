@@ -10,7 +10,7 @@ interface IconEvilProps extends React.ComponentProps<typeof EvilIcons> {
 const IconEvil = ({
   name,
   size = 24,
-  color,
+  color = "white",
   className,
   containerClassName,
   ...rest

@@ -16,7 +16,7 @@ interface IconFontAwesomeProps
 const IconFontAwesome = ({
   name,
   size = 24,
-  color,
+  color = "white",
   version = 5,
   className,
   containerClassName,

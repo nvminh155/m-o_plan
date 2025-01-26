@@ -1,6 +1,6 @@
-import AppImage from "../../../components/image/AppImage";
-import AppButton from "../../../components/ui/AppButton";
-import Wrapper from "../../../components/ui/Wrapper";
+import AppImage from "@/components/image/AppImage";
+import { Button } from "@/components/ui/button";
+import Wrapper from "@/components/ui/Wrapper";
 import { router } from "expo-router";
 import React from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
@@ -42,7 +42,7 @@ export default function App() {
           {item.title}
         </Text>
         <Text className="text-sm text-gray-600 mb-2">{item.description}</Text>
-        <AppButton
+        <Button
           className="bg-green-600 py-2 rounded-lg items-center"
           onPress={() => {
             router.push({
@@ -52,7 +52,7 @@ export default function App() {
           }}
         >
           <Text className="text-white text-base font-bold">Xem</Text>
-        </AppButton>
+        </Button>
       </View>
     </View>
   );
