@@ -1,9 +1,9 @@
 import { IconAntd, IconIcons, IconFontAwesome } from "../../icon";
-import { Button, ButtonIcon, ButtonText } from "../../ui/button";
-import AppText from "../../ui/AppText";
-import Input from "../../ui/input";
+import { Button, ButtonText } from "../../ui/button";
+
 import { ScrollView, View } from "react-native";
 import { cn } from "@/lib/cn";
+import { Input, InputField } from "@/components/ui/input";
 
 const FastSchedule = () => {
   const actions: TAction[] = [
@@ -17,16 +17,12 @@ const FastSchedule = () => {
   return (
     <View className="mt-5">
       <View className="flex-row items-center gap-3">
-        <Input
-          className="rounded-full px-5 border-border text-gray-500 border-[.8px] flex-1"
-          placeholder="Tôi muốn ..."
-          suffix={
-            <View className="flex-row items-center justify-end gap-3 h-full w-auto">
-              <IconFontAwesome name={"tasks"} className="!text-color/60" />
-              <IconAntd name="staro" className="!text-color/60" />
-            </View>
-          }
-        />
+        <Input className="flex-1 rounded-full">
+          <InputField
+            className="rounded-full px-5 border-border text-gray-500 border-[.8px] flex-1"
+            placeholder="Tôi muốn ..."
+          />
+        </Input>
         <Button action="primary" size="lg" className="!rounded-full">
           <IconFontAwesome
             name="send-o"

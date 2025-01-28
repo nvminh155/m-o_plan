@@ -1,6 +1,7 @@
 import { cn } from "../../lib/cn";
 import React, { PropsWithChildren, useState } from "react";
 import { View, Text } from "react-native";
+import { Button } from "./button";
 
 type TItemTab = {
   key: string;
@@ -16,7 +17,7 @@ export type TRenderInfoItem = {
 interface TabsProps {
   items: TItemTab[];
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   renderItem: ({
     item,
     activeTab,
@@ -54,7 +55,16 @@ const Tabs = ({ items, className, children, renderItem }: TabsProps) => {
       <View className={cn("flex-1 bg-white", className)}>
         {/* Tabs */}
         <View className="flex-row justify-around bg-gray-200 py-3 px-3">
-          {items.map((tab) => renderItem({ item: tab, activeTab, onPressCB }))}
+          {items.map((tab) => (
+            <Button
+              key={tab.key}
+              action={activeTab === tab.key ? "primary" : "secondary"}
+              className="flex-1"
+              onPress={() => onPressCB(tab.key)}
+            >
+              {renderItem({ item: tab, activeTab, onPressCB })}
+            </Button>
+          ))}
         </View>
 
         {/* Tab Content */}
@@ -62,6 +72,16 @@ const Tabs = ({ items, className, children, renderItem }: TabsProps) => {
       </View>
     </TabsContext.Provider>
   );
+};
+
+interface TabsTriggerProps {
+  tabKey: string;
+  children?: React.ReactNode;
+}
+const TabsTrigger = ({ tabKey, ...rest}: TabsTriggerProps) => {
+  const { activeKey } = useTabsContext();
+
+  return <Button action={activeKey === tabKey ? "primary" : "secondary"} {...rest} />;
 };
 
 interface TabsContentProps extends PropsWithChildren<{}> {

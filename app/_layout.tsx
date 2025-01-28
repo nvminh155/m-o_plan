@@ -27,7 +27,7 @@ cssInterop(Image, {
 export default function RootLayout() {
   return (
     <GluestackUIProvider mode="light">
-      <Navigator router={StackRouter}>
+      <Navigator router={StackRouter} initialRouteName="plans">
         <SafeAreaView className={"flex-1 !bg-red-500"}>
           <View className="flex-1 !bg-red-500">
             <Slot />

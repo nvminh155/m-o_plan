@@ -211,7 +211,7 @@ const buttonIconStyle = tva({
       sm: "h-4 w-4",
       md: "h-[18px] w-[18px]",
       lg: "h-[18px] w-[18px]",
-      xl: "h-5 w-5",
+      xl: "h-8 w-8",
     },
     action: {
       primary:
@@ -230,7 +230,7 @@ const buttonIconStyle = tva({
       variant: "solid",
       action: "primary",
       class:
-        "text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0",
+        "text-primary-foreground-0 data-[hover=true]:text-primary-foreground-0 data-[active=true]:text-primary-foreground-0",
     },
     {
       variant: "solid",

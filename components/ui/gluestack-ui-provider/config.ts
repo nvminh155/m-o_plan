@@ -166,7 +166,7 @@ export const config = {
     // "--color-typography-950": "23 23 23",
 
     ...{
-      "--color-typography-0": "143 148 185",
+      "--color-typography-0": "255 255 255",
       "--color-typography-50": "143 148 185",
       "--color-typography-100": "125 129 163",
       "--color-typography-200": "110 113 138",

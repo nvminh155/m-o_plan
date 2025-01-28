@@ -1,5 +1,5 @@
 import AppImage from "@/components/image/AppImage";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonText } from "@/components/ui/button";
 import Wrapper from "@/components/ui/Wrapper";
 import { router } from "expo-router";
 import React from "react";
@@ -59,6 +59,11 @@ export default function App() {
 
   return (
     <Wrapper>
+      <Button onPress={() => {
+        router.push('/plans/create')
+      }}>
+        <ButtonText>Create</ButtonText>
+      </Button>
       <FlatList
         data={plans}
         renderItem={renderPlan}
