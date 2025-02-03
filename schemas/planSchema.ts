@@ -7,28 +7,24 @@ export const piggyBankSchema = z.object({
   endDate: z.number(),
 });
 
-export const activitySchema = z.object({
-  title: z.string().nonempty().max(50),
-  description: z.string().nonempty().max(200),
-  startDate: z.number(),
-  endDate: z.number(),
-});
-
-export const friendsSchema = z.array(z.string().nonempty());
-
+export const activitiesSchema = z.array(
+  z.object({
+    title: z.string().nonempty().max(50),
+    description: z.string().nonempty().max(200),
+    startDate: z.number(),
+    endDate: z.number(),
+  })
+);
 export const step1Schema = z.object({
   title: z.string().nonempty().max(50),
   startDate: z.number(),
   endDate: z.number(),
 });
 
-export const planSchema = z
-  .object({
-    piggyBank: piggyBankSchema.optional(),
-    activities: z.array(activitySchema).optional(),
-    friends: friendsSchema.optional(),
-    thumbnail: z.string().optional(),
-  })
-  .extend({
-    step1Schema,
-  });
+export const planSchema = z.object({
+  piggyBank: piggyBankSchema.optional(),
+  activities: activitiesSchema.optional(),
+  friends: z.array(z.string().nonempty()).optional(),
+  thumbnail: z.string().optional(),
+  step1: step1Schema,
+});
