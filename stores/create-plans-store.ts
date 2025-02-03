@@ -71,7 +71,7 @@ interface CreatePlanState {
   updateStep: (by: number) => void;
   updateFormData: (
     data:
-      | TPlan["step1Schema"]
+      | TPlan["step1"]
       | TPlan["piggyBank"]
       | TPlan["activities"]
       | TPlan["friends"]
@@ -93,7 +93,7 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
     activities: [],
     friends: [],
     thumbnail: "",
-    step1Schema: {
+    step1: {
       title: "",
       startDate: 0,
       endDate: 0,
@@ -125,7 +125,7 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
         activities: [],
         friends: [],
         thumbnail: "",
-        step1Schema: {
+        step1: {
           title: "",
           startDate: 0,
           endDate: 0,

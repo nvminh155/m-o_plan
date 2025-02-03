@@ -17,9 +17,9 @@ const FastSchedule = () => {
   return (
     <View className="mt-5">
       <View className="flex-row items-center gap-3">
-        <Input className="flex-1 rounded-full">
+        <Input className="flex-1 rounded-full px-5" size="xl">
           <InputField
-            className="rounded-full px-5 border-border text-gray-500 border-[.8px] flex-1"
+            className=" text-gray-500 "
             placeholder="Tôi muốn ..."
           />
         </Input>

@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { cn } from "@/lib/cn";
-import { step1Schema } from "@/schemas/planSchema";
 import { useCreatePlanStore } from "@/stores/create-plans-store";
 import FormDateTimePicker from "@/components/ui/form-control/form-datetime-picker";
 import ButtonNextStep from "./button-next-step";
+import { step1Schema } from "@/schemas/planSchema";
 
 const formSchema = step1Schema;
 

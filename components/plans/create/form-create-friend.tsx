@@ -21,7 +21,7 @@ interface FormCreateFriendsProps {
 
 const FormCreateFriends = ({ isShow }: FormCreateFriendsProps) => {
   const updateStep = useCreatePlanStore((state) => state.updateStep);
-
+  
   const [searchBy, setSearchBy] = useState<"phone" | "email">("email");
   const [friends, setFriends] = useState<string[]>([]);
   const [userSearched, setUserSearched] = useState<string | null>(null);
