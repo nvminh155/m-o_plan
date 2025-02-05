@@ -1616,9 +1616,6 @@ const NotificationLineIcon = createIcon({
 NotificationLineIcon.displayName = "NotificationLineIcon";
 export { NotificationLineIcon };
 
-
-
-
 const PlusIcon = createIcon({
   Root: Svg,
   viewBox: "0 0 24 24",
@@ -1636,3 +1633,74 @@ const PlusIcon = createIcon({
 
 PlusIcon.displayName = "PlusIcon";
 export { PlusIcon };
+
+const ResizeFullScreenIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M3.75 15a.75.75 0 0 1 .75.75v3.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 3 19.25v-3.5a.75.75 0 0 1 .75-.75m16.5 0a.75.75 0 0 1 .75.75v3.5A1.75 1.75 0 0 1 19.25 21h-3.5a.75.75 0 0 1 0-1.5h3.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 .75-.75M4.75 4.5a.25.25 0 0 0-.25.25v3.5a.75.75 0 0 1-1.5 0v-3.5C3 3.784 3.784 3 4.75 3h3.5a.75.75 0 0 1 0 1.5ZM15 3.75a.75.75 0 0 1 .75-.75h3.5c.966 0 1.75.784 1.75 1.75v3.5a.75.75 0 0 1-1.5 0v-3.5a.25.25 0 0 0-.25-.25h-3.5a.75.75 0 0 1-.75-.75"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
+  ),
+});
+
+ResizeFullScreenIcon.displayName = "ResizeFullScreenIcon";
+export { ResizeFullScreenIcon };
+
+const BellOutLineIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3H4a4 4 0 0 0 2-3v-3a7 7 0 0 1 4-6M9 17v1a3 3 0 0 0 6 0v-1"
+      />
+    </>
+  ),
+});
+
+BellOutLineIcon.displayName = "BellOutLineIcon";
+export { BellOutLineIcon };
+
+const TickIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59z"
+        strokeWidth={2}
+      />
+    </>
+  ),
+});
+
+TickIcon.displayName = "TickIcon";
+export { TickIcon };
+
+const SwitchLightIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M13.694 5.5h.02a.5.5 0 0 1 0 1c-1.287 0-2.282 0-3.077.064c-.796.063-1.336.187-1.734.4A4.2 4.2 0 0 0 7.12 8.839c-.21.433-.328.956-.388 1.727c-.06.777-.06 1.762-.06 3.114v.713l1.546-1.547a.5.5 0 0 1 .707.708l-2.4 2.4a.5.5 0 0 1-.724-.019l-2.172-2.4a.5.5 0 0 1 .742-.67l1.3 1.437v-.644c0-1.325 0-2.35.064-3.17c.065-.829.197-1.492.485-2.085a5.2 5.2 0 0 1 2.212-2.32c.58-.311 1.283-.449 2.126-.516c.84-.067 1.873-.067 3.136-.067m4.147 2.4a.5.5 0 0 1 .358.165l2.172 2.4a.5.5 0 0 1-.742.67l-1.3-1.437v.644c0 1.326 0 2.35-.064 3.17c-.065.829-.197 1.492-.485 2.085a5.2 5.2 0 0 1-2.212 2.32c-.58.311-1.283.449-2.126.516c-.839.067-1.873.067-3.136.067h-.02a.5.5 0 0 1 0-1c1.287 0 2.282 0 3.077-.064c.796-.063 1.336-.187 1.734-.4a4.2 4.2 0 0 0 1.784-1.875c.21-.434.327-.956.387-1.727c.06-.777.06-1.762.06-3.114v-.713l-1.546 1.547a.5.5 0 0 1-.707-.708l2.4-2.4a.5.5 0 0 1 .366-.146"
+      />
+    </>
+  ),
+});
+
+SwitchLightIcon.displayName = "SwitchLightIcon";
+export { SwitchLightIcon };

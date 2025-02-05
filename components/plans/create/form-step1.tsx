@@ -8,10 +8,13 @@ import { cn } from "@/lib/cn";
 import { useCreatePlanStore } from "@/stores/create-plans-store";
 import FormDateTimePicker from "@/components/ui/form-control/form-datetime-picker";
 import ButtonNextStep from "./button-next-step";
-import { step1Schema } from "@/schemas/planSchema";
+import { planSchema } from "@/schemas/planSchema";
 
-const formSchema = step1Schema;
-
+const formSchema = planSchema.pick({
+  title: true,
+  startDate: true,
+  endDate: true,
+});
 type TForm = z.infer<typeof formSchema>;
 
 interface FormStep1Props {

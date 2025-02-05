@@ -1,33 +1,30 @@
 import { IconAntd } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import Wrapper from "@/components/ui/Wrapper";
-import { cn } from "../../../lib/cn";
-import { TabRouter } from "@react-navigation/native";
-import {
-  Href,
-  Navigator,
-  router,
-  Slot,
-  useLocalSearchParams,
-  usePathname,
-} from "expo-router";
+import { cn } from "@/lib/cn";
+import { StackRouter } from "@react-navigation/native";
+import { Href, Navigator, router, Slot, usePathname } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
+import PlanProvider, { usePlanContext } from "@/contexts/PlanProvider";
+
 const PlansTabsLayout = () => {
   return (
-    <Navigator router={TabRouter} initialRouteName="index" routerOptions={{}}>
-      <Wrapper className="flex-1 bg-white pb-8">
-        <Slot />
+    <Navigator router={StackRouter} initialRouteName="index">
+      <PlanProvider>
+        <View className="flex-1 pb-4">
+          <Slot />
 
-        <TabsNavigation />
-      </Wrapper>
+          <TabsNavigation />
+        </View>
+      </PlanProvider>
     </Navigator>
   );
 };
 
 const TabsNavigation = () => {
-  const { id: idPlan } = useLocalSearchParams();
+  const { data } = usePlanContext();
   const pathname = usePathname();
 
   const itemsTab = ((): {
@@ -36,7 +33,7 @@ const TabsNavigation = () => {
     icon: string;
     url: string;
   }[] => {
-    const id = idPlan as string;
+    const id = data?.id as string;
     const baseHref: Href = {
       pathname: "/plans/[id]",
       params: { id },
@@ -57,9 +54,13 @@ const TabsNavigation = () => {
       },
       {
         key: "message",
-        href: { ...baseHref, pathname: "/plans/[id]" },
+        href: {
+          ...baseHref,
+          pathname: "/chat-private/[id]",
+          params: { id: data?.groupChatId as string },
+        },
         icon: "message1",
-        url: `/plans/${id}1`,
+        url: `/chat-private/${data?.groupChatId}`,
       },
       {
         key: "setting",
@@ -80,7 +81,7 @@ const TabsNavigation = () => {
           key={tab.key}
           action={pathname === tab.url ? "primary" : "secondary"}
           size="lg"
-          className={cn("!px-0 !py-0 h-20 w-20 rounded-full", {})}
+          className={cn("!px-0 !py-0 h-16 w-16 rounded-full", {})}
           onPress={() => {
             router.replace(tab.href);
           }}

@@ -52,7 +52,7 @@ const buttonStyle = tva({
         "bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
     },
     variant: {
-      link: "px-0",
+      link: "!px-0 !py-0",
       outline:
         "bg-transparent border data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
       solid: "",
@@ -95,7 +95,7 @@ const buttonStyle = tva({
       action: "primary",
       variant: "outline",
       class:
-        "bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
+        "bg-transparent data-[hover=true]:bg-primary-800 data-[active=true]:bg-primary-600",
     },
     {
       action: "secondary",
@@ -174,7 +174,7 @@ const buttonTextStyle = tva({
       variant: "outline",
       action: "primary",
       class:
-        "text-primary-foreground-500 data-[hover=true]:text-primary-foreground-500 data-[active=true]:text-primary-foreground-500",
+        "text-primary-500 data-[hover=true]:text-primary-foreground-0 data-[active=true]:text-primary-foreground-0",
     },
     {
       variant: "outline",
@@ -193,6 +193,11 @@ const buttonTextStyle = tva({
       action: "negative",
       class:
         "text-primary-foreground-500 data-[hover=true]:text-primary-foreground-500 data-[active=true]:text-primary-foreground-500",
+    },
+    {
+      variant: "link",
+      action: "primary",
+      class: "text-primary-500 data-[hover=true]:text-primary-600",
     },
   ],
 });
@@ -249,6 +254,18 @@ const buttonIconStyle = tva({
       action: "negative",
       class:
         "text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0",
+    },
+    {
+      variant: "link",
+      action: "default",
+      class:
+        "text-typography-500 data-[hover=true]:text-typography-500 data-[active=true]:text-typography-500 !px-0 !py-0",
+    },
+    {
+      variant: "outline",
+      action: "primary",
+      class:
+        "text-primary-500 data-[hover=true]:text-primary-500 data-[active=true]:text-primary-500",
     },
   ],
 });

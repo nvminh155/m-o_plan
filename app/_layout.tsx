@@ -7,6 +7,14 @@ import { cssInterop } from "nativewind";
 import { Image } from "expo-image";
 
 import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
+import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
 } from "react-native-reanimated";
@@ -24,16 +32,20 @@ cssInterop(Image, {
   },
 });
 
+const queryClient = new QueryClient();
+
 export default function RootLayout() {
   return (
     <GluestackUIProvider mode="light">
-      <Navigator router={StackRouter} initialRouteName="plans">
-        <SafeAreaView className={"flex-1 !bg-red-500"}>
-          <View className="flex-1 !bg-red-500">
-            <Slot />
-          </View>
-        </SafeAreaView>
-      </Navigator>
+      <QueryClientProvider client={queryClient}>
+        <Navigator router={StackRouter} initialRouteName="plans">
+          <SafeAreaView className={"flex-1 !bg-red-500"}>
+            <View className="flex-1 !bg-red-500">
+              <Slot />
+            </View>
+          </SafeAreaView>
+        </Navigator>
+      </QueryClientProvider>
     </GluestackUIProvider>
   );
 }

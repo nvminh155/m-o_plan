@@ -2,7 +2,7 @@ import { IconMaterialCommunity } from "@/components/icon";
 import IconAntd from "@/components/icon/IconAntd";
 import IconEntypo from "@/components/icon/IconEntypo";
 import IconEvil from "@/components/icon/IconEvil";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonIcon } from "@/components/ui/button";
 import AppText from "@/components/ui/AppText";
 import { cn } from "@/lib/cn";
 import { Image } from "expo-image";
@@ -10,6 +10,7 @@ import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { BellOutLineIcon, ResizeFullScreenIcon } from "@/components/ui/icon";
 
 const ActiveNow = () => {
   return (
@@ -65,14 +66,11 @@ const MapActive = () => {
             <SubTitle />
           </View>
           <Button
-            action="primary"
+            action="secondary"
             size="lg"
-            className="!p-0 h-[3rem] w-[3rem]  bg-gray-100 mr-3"
+            className="!p-0 h-[3rem] w-[3rem] mr-3 rounded-full"
           >
-            <IconMaterialCommunity
-              name="bell-ring-outline"
-              className="!text-tertiary-500 "
-            />
+            <ButtonIcon as={BellOutLineIcon} />
           </Button>
         </View>
 
@@ -133,15 +131,12 @@ const YourMap = () => {
       <Button
         action="primary"
         size="lg"
-        className="!p-0 h-[3rem] w-[3rem] absolute right-0 bottom-0 bg-tertiary-500"
+        className="!p-0 h-[3rem] w-[3rem] absolute right-4 bottom-4 bg-tertiary-500"
         onPress={() => {
           router.push("/(home)/full-view-map-activity");
         }}
       >
-        <IconEntypo
-          name="resize-full-screen"
-          className="!text-tertiary-500-foreground "
-        />
+        <ButtonIcon as={ResizeFullScreenIcon} />
       </Button>
     </View>
   );

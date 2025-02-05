@@ -7,6 +7,10 @@ import Tabs, { TabsContent, TRenderInfoItem } from "@/components/ui/tabs";
 import { cn } from "../../../lib/cn";
 import React from "react";
 import { FlatList, View } from "react-native";
+import { useLocalSearchParams } from "expo-router";
+import { usePlanQuery } from "@/hooks/query/usePlanQuery";
+import { usePlanContext } from "@/contexts/PlanProvider";
+import Loading from "@/components/ui/loading";
 
 const itemsTab = [
   {
@@ -20,6 +24,8 @@ const itemsTab = [
 ];
 
 const DetailPlans = () => {
+  const { data } = usePlanContext();
+
   const renderTabTrigger = ({
     item,
     activeTab,
@@ -41,29 +47,31 @@ const DetailPlans = () => {
     );
   };
 
+  if (!data) return <Loading />;
+
   return (
     <View className="flex-1">
-      <View className="relative flex-1 w-screen -ml-[10px] max-h-[200px] items-center justify-center">
+      <View className="relative flex-1 max-h-[200px] items-center justify-center">
         <AppText
           containerClassName="self-center"
           className="font-medium !text-2xl self-center z-[2] !text-white"
         >
-          Tiền tích lũy đi du lịch nước ngoài
+          {data?.title + " - " + data?.id?.slice(0, 6)}
         </AppText>
         <View className="absolute overlay w-full h-full bg-black/75 z-[1]"></View>
         <AppImage
           source={require("@/assets/images/test/16x9anime.png")}
-          className="absolute w-full h-full z-0"
+          className="absolute w-full h-full top-0 left-0 z-0"
           style={{
             aspectRatio: 16 / 9,
           }}
         />
       </View>
 
-      <MoneyView />
+      <MoneyView piggyBank={data.piggyBank} />
 
       <Tabs
-        className="mt-4 w-screen"
+        className="mt-4 flex-1"
         items={itemsTab}
         renderItem={renderTabTrigger}
       >
@@ -77,7 +85,9 @@ const DetailPlans = () => {
         </TabsContent>
 
         <TabsContent tabKey="History ">
-          <AppText className="text-primary-foreground-0">asdfsdafjlkj tab1</AppText>
+          <AppText className="text-primary-foreground-0">
+            asdfsdafjlkj tab1
+          </AppText>
         </TabsContent>
       </Tabs>
 

@@ -1,57 +1,44 @@
 import AppImage from "@/components/image/AppImage";
-import { Button, ButtonText } from "@/components/ui/button";
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { PlusIcon } from "@/components/ui/icon";
 import Wrapper from "@/components/ui/Wrapper";
+import { planService } from "@/services/planService";
+import { TPlan } from "@/types/plan";
+import { useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import React from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-
-// Sample Plans Data
-const plans = [
-  {
-    id: "1",
-    title: "We plan to go to the moon",
-    description: "Go with the flow and see where it takes you.",
-    price: "$5/month",
-    image: "https://via.placeholder.com/800x450", // Placeholder image
-  },
-  {
-    id: "2",
-    title: "Pro Plan",
-    description: "Best for professionals needing more features.",
-    price: "$15/month",
-    image: "https://via.placeholder.com/800x450",
-  },
-  {
-    id: "3",
-    title: "Enterprise Plan",
-    description: "Tailored solutions for your team.",
-    price: "$30/month",
-    image: "https://via.placeholder.com/800x450",
-  },
-];
+import { View, Text, FlatList, ListRenderItemInfo } from "react-native";
 
 export default function App() {
-  const renderPlan = ({ item }) => (
+  const query = useQuery({
+    queryKey: ["plans"],
+    queryFn: () => planService.getList(),
+  });
+
+  const renderPlan = ({ item }: ListRenderItemInfo<TPlan>) => (
     <View className="bg-white rounded-lg overflow-hidden mb-4 shadow-lg">
       <AppImage
         source={require("@/assets/images/test/16x9anime.png")}
-        className="w-full aspect-video object-cover"
+        className="w-full aspect-video"
       />
       <View className="p-4">
         <Text className="text-lg font-bold text-gray-800 mb-2">
           {item.title}
         </Text>
-        <Text className="text-sm text-gray-600 mb-2">{item.description}</Text>
+        <Text className="text-sm text-gray-600 mb-2">
+          {"GO to the moon test_app"}
+        </Text>
         <Button
-          className="bg-green-600 py-2 rounded-lg items-center"
+          action="primary"
+          className="py-2 rounded-lg items-center"
           onPress={() => {
             router.push({
               pathname: "/plans/[id]",
-              params: { id: item.id },
+              params: { id: item.id ?? "????" },
             });
           }}
         >
-          <Text className="text-white text-base font-bold">Xem</Text>
+          <ButtonText>Xem</ButtonText>
         </Button>
       </View>
     </View>
@@ -59,16 +46,23 @@ export default function App() {
 
   return (
     <Wrapper>
-      <Button onPress={() => {
-        router.push('/plans/create')
-      }}>
-        <ButtonText>Create</ButtonText>
+      <Button
+        onPress={() => {
+          router.push("/plans/create");
+        }}
+        size="lg"
+        variant="outline"
+        action="primary"
+        className="rounded-full ml-auto !py-[.4rem]"
+      >
+        <ButtonIcon as={PlusIcon} />
       </Button>
       <FlatList
-        data={plans}
+        data={query.data?.data}
         renderItem={renderPlan}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id ?? ""}
         contentContainerStyle={{ paddingBottom: 16 }}
+        className="mt-node"
       />
     </Wrapper>
   );
