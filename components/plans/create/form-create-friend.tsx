@@ -14,6 +14,7 @@ import { CloseIcon, SearchIcon } from "@/components/ui/icon";
 import { FlatList, ListRenderItemInfo } from "react-native";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
+import { router } from "expo-router";
 
 interface FormCreateFriendsProps {
   isShow?: boolean;
@@ -21,7 +22,8 @@ interface FormCreateFriendsProps {
 
 const FormCreateFriends = ({ isShow }: FormCreateFriendsProps) => {
   const updateStep = useCreatePlanStore((state) => state.updateStep);
-  
+  const setData = useCreatePlanStore((state) => state.updateFormData);
+
   const [searchBy, setSearchBy] = useState<"phone" | "email">("email");
   const [friends, setFriends] = useState<string[]>([]);
   const [userSearched, setUserSearched] = useState<string | null>(null);
@@ -89,7 +91,10 @@ const FormCreateFriends = ({ isShow }: FormCreateFriendsProps) => {
 
       <ButtonNextStep
         onNext={() => {
-          updateStep(1);
+          setData({
+            friends: friends,
+          });
+          router.push("/plans/create/status");
         }}
       />
     </VStack>

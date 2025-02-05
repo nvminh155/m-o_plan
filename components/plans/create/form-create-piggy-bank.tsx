@@ -42,7 +42,7 @@ const FormCreatePiggyBank = ({ isShow }: FormCreatePiggyBankProps) => {
 
   const onSubmit = (data: TForm) => {
     console.log("MY DATA CREA PLAN PIGGY", data);
-    updatePiggyBank({ ...data });
+    updatePiggyBank({ piggyBank: data });
     updateStep(1);
   };
 

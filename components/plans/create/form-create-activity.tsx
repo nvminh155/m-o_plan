@@ -107,7 +107,7 @@ const FormCreateActivity = ({ isShow }: FormCreateActivityProps) => {
   };
 
   const onSubmit = (data: TForm) => {
-    updateActivities(data.activities);
+    updateActivities(data);
     updateStep(1);
   };
 

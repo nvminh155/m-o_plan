@@ -2,7 +2,7 @@ import { Button, ButtonIcon } from "@/components/ui/button";
 
 import { VStack } from "@/components/ui/vstack";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Text } from "@/components/ui/text";
 import { useCreatePlanStore } from "@/stores/create-plans-store";
@@ -12,12 +12,17 @@ import FormStep1 from "@/components/plans/create/form-step1";
 import FormCreateFriends from "@/components/plans/create/form-create-friend";
 import { ArrowLeftIcon } from "@/components/ui/icon";
 import { router } from "expo-router";
-import { cn } from "@/lib/cn";
+
+import CreateDoneScreen from "@/components/plans/create/create-done";
 
 const PlanCreate = () => {
   const step = useCreatePlanStore((state) => state.stepString);
   const clearState = useCreatePlanStore((state) => state.clear);
   console.log("STEP", step);
+
+  useEffect(() => {
+    clearState();
+  }, []);
 
   return (
     <VStack className="flex-1 rounded-md">
@@ -32,24 +37,15 @@ const PlanCreate = () => {
       >
         <ButtonIcon as={ArrowLeftIcon} className="!text-typography-500" />
       </Button>
-
       <Text bold className="text-center py-8">
         Bước {`${step.id}: ${step.title}`}
       </Text>
-
       <FormStep1 isShow={step.key.includes("base")} />
-
       <FormCreatePiggyBank isShow={step.key.includes("piggy-bank")} />
-
       {/* <FormCreateActivity /> */}
-
       <FormCreateActivity isShow={step.key.includes("activities")} />
-
       <FormCreateFriends isShow={step.key.includes("friends")} />
-
-      <VStack className={cn({ hidden: !step.key.includes("done") })}>
-        <Text>Hoàn thành</Text>
-      </VStack>
+      {step.key.includes("done") && <CreateDoneScreen />}
     </VStack>
   );
 };

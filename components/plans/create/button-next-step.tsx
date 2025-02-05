@@ -4,11 +4,16 @@ import { useCreatePlanStore } from "@/stores/create-plans-store";
 import React from "react";
 
 interface ButtonNextStepProps {
+  disabled?: boolean;
   onNext?: () => void;
   onPrevious?: () => void;
 }
 
-const ButtonNextStep = ({ onNext, onPrevious }: ButtonNextStepProps) => {
+const ButtonNextStep = ({
+  disabled,
+  onNext,
+  onPrevious,
+}: ButtonNextStepProps) => {
   const step = useCreatePlanStore((state) => state.step);
   const updateStep = useCreatePlanStore((state) => state.updateStep);
 
@@ -35,6 +40,7 @@ const ButtonNextStep = ({ onNext, onPrevious }: ButtonNextStepProps) => {
             onNext();
           }
         }}
+        disabled={disabled}
       >
         <ButtonText>{step === 3 ? "Hoàn thành" : "Bước tiếp theo"}</ButtonText>
       </Button>
