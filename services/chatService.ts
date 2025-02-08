@@ -1,6 +1,15 @@
 import { db } from "@/firebaseConfig";
 import { TChat, TChatGroup } from "@/types/chat";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import uuid from "react-native-uuid";
 
 const CHAT_PATH = "chats";
@@ -28,6 +37,26 @@ export const chatService = {
       data: {
         ...docData,
       },
+    };
+  },
+  get: async (roomId: string) => {
+    const ref = doc(db, CHAT_PATH, roomId);
+    const room = await getDoc(ref);
+
+    return {
+      ref: room.ref,
+      data: room.data() as TChat,
+    };
+  },
+  getListRoom: async (userId: string) => {
+    const roomQuery = query(
+      collection(db, CHAT_PATH),
+      where("members", "array-contains-any", [userId])
+    );
+    const rooms = await getDocs(roomQuery);
+
+    return {
+      data: rooms.docs.map((r) => r.data() as TChat),
     };
   },
 };

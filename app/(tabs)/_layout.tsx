@@ -7,6 +7,7 @@ export default function RootLayout() {
       screenOptions={{
         headerShown: false,
       }}
+      backBehavior="history"
     >
       <Tabs.Screen
         name="(home)"

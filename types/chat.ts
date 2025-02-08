@@ -1,9 +1,9 @@
 type TMessageBase = {
-  id?: string;
+  id: string;
   sender: {
     id: string;
     fullName: string;
-    avatar: string;
+    avatar: string | null;
   };
   createdAt: number;
   updatedAt: number;
@@ -20,7 +20,7 @@ type TFile = {
   updatedAt: number;
 };
 
-type TMessageUser = TMessageBase & {
+export type TMessageUser = TMessageBase & {
   content: string; // emoji, text,
   files: TFile[];
   reactions: string[];
@@ -42,15 +42,15 @@ type TMessageBotRemindPiggyBank = TMessageBotBase & {
   content: string;
 };
 
-type TMessageBot =
+export type TMessageBot =
   | TMessageBotRemindActivity
   | TMessageBotRemindPiggyBank
   | TMessageBotWelcome;
 
-type TMessage = TMessageUser | TMessageBot;
+export type TMessage = TMessageUser | TMessageBot;
 
 type TChatBase = {
-  id?: string;
+  id: string;
   messages: TMessage[];
   settingId: string[];
   type: "group" | "private";
@@ -63,6 +63,7 @@ export type TChatGroup = TChatBase & {
   groupName: string; // maybe name of plan
   members: string[]; // array userid
 };
+
 export type TChatPrivate = TChatBase & {
   receiver: {
     id: string;

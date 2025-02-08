@@ -15,3 +15,5 @@ export type TPlan = PlanSchema & {
   createdAt: number;
   updatedAt: number;
 };
+
+export type TActivity = keyof (keyof Pick<TPlan, "activities">)[number];

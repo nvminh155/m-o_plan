@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mo_plan_thuancf",
-    "slug": "mo_plan_thuancf",
+    "name": "yo_plan",
+    "slug": "yo_plan",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.minhrxpo1505.mo_plan_thuancf"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +37,20 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e5f19816-484a-42db-9b66-075f8af87f95"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e5f19816-484a-42db-9b66-075f8af87f95"
     }
   }
 }

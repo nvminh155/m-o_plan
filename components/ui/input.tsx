@@ -38,10 +38,10 @@ const inputStyle = tva({
 
   variants: {
     size: {
-      xl: "h-12",
-      lg: "h-11",
-      md: "h-10",
-      sm: "h-9",
+      xl: "h-18",
+      lg: "h-16",
+      md: "h-12",
+      sm: "h-8",
     },
 
     variant: {
@@ -64,8 +64,8 @@ const inputIconStyle = tva({
       "2xs": "h-3 w-3",
       xs: "h-3.5 w-3.5",
       sm: "h-4 w-4",
-      md: "h-[18px] w-[18px]",
-      lg: "h-5 w-5",
+      md: "h-[2.4rem] w-[2.4rem]",
+      lg: "h-[2.6rem] w-[2.6rem]",
       xl: "h-6 w-6",
     },
   },
@@ -76,7 +76,7 @@ const inputSlotStyle = tva({
 });
 
 const inputFieldStyle = tva({
-  base: "flex-1 text-typography-900 py-0 px-3 placeholder:text-typography-100 h-full ios:leading-[0px] web:cursor-text web:data-[disabled=true]:cursor-not-allowed",
+  base: "flex-1 text-typography-900 py-0 px-3 placeholder:text-typography-500/50 h-full ios:leading-[0px] web:cursor-text web:data-[disabled=true]:cursor-not-allowed",
 
   parentVariants: {
     variant: {

@@ -4,11 +4,14 @@ import { TBot } from "@/types/user";
 import uuid from "react-native-uuid";
 
 const USER_PATH = "users";
+const BOT_PATH = "bots";
 
-export const userService = {
+export const userService = {};
+
+export const botService = {
   createBot: async (botName: string) => {
     const idDoc = uuid.v4();
-    const ref = doc(db, USER_PATH, idDoc);
+    const ref = doc(db, BOT_PATH, idDoc);
 
     const docData: TBot = {
       createdAt: Date.now(),
