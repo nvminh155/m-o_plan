@@ -10,7 +10,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { chatService } from "./chatService";
-import { userService } from "./userService";
+import { botService } from "./userService";
 
 import uuid from "react-native-uuid";
 
@@ -38,7 +38,7 @@ export const planService = {
       plan.title,
       createByUserId
     );
-    const bot = await userService.createBot("Bot - Plan - " + ref.id);
+    const bot = await botService.createBot("Bot - Plan - " + ref.id);
 
     await updateDoc(groupChat.ref, {
       ...groupChat.data,

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "771337698600",
+    "firebase_url": "https://m-o-plans-default-rtdb.firebaseio.com",
+    "project_id": "m-o-plans",
+    "storage_bucket": "m-o-plans.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771337698600:android:bc4a55ebf86f9b4243e41d",
+        "android_client_info": {
+          "package_name": "com.yoplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771337698600-k6d2t5bobj7spbsjcigsttlh4pd9nsgq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoplan",
+            "certificate_hash": "b22592842c3d8b2ab01bc591a41a473ba5da2995"
+          }
+        },
+        {
+          "client_id": "771337698600-c1jc59ahemrrret8sbrh7r56jvtfi802.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC0aV_EdrFuP4X454fsMulBSfkYV-sxUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771337698600-c1jc59ahemrrret8sbrh7r56jvtfi802.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

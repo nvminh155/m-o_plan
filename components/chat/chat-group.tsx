@@ -1,6 +1,5 @@
 import HeaderChat from "@/components/chat/chat-container/header-chat";
 import ChatInput from "@/components/chat/chat-input";
-import MessageRemindActivity from "@/components/chat/message/message-bot/message-remind-activity";
 import { IconAntd } from "@/components/icon";
 import { Button, ButtonIcon } from "@/components/ui/button";
 import { HStack } from "@/components/ui/hstack";
@@ -28,9 +27,7 @@ import {
   ListRenderItemInfo,
 } from "react-native";
 
-//fix performance issue (when change message), split message input slice that groupBy date createdAt
-
-const ChatPrivate = () => {
+const ChatGroupScreen = () => {
   const { user } = useAuthContext();
 
   const {
@@ -86,27 +83,23 @@ const ChatPrivate = () => {
     return date.getHours() + ":" + date.getMinutes();
   };
 
-  const renderMessage = ({ item, index }: ListRenderItemInfo<TMessage>) => {
-    return item.typeUser === "user" && index < 24 ? (
-      <View
-        style={[
-          item.sender.id === user.id ? styles.yourMessage : styles.theirMessage,
-        ]}
-        className="p-4 mb-4 rounded-[8px]"
-      >
-        <Text>
-          {item.typeUser === "user"
-            ? (item as TMessageUser).content
-            : "bot message here"}
-        </Text>
-        <Text size="xs" className="text-typography-500/50">
-          {sendAtTime(item.createdAt)}
-        </Text>
-      </View>
-    ) : (
-      <MessageRemindActivity />
-    );
-  };
+  const renderMessage = ({ item }: ListRenderItemInfo<TMessage>) => (
+    <View
+      style={[
+        item.sender.id === user.id ? styles.yourMessage : styles.theirMessage,
+      ]}
+      className="p-4 mb-4 rounded-[8px]"
+    >
+      <Text>
+        {item.typeUser === "user"
+          ? (item as TMessageUser).content
+          : "bot message here"}
+      </Text>
+      <Text size="xs" className="text-typography-500/50">
+        {sendAtTime(item.createdAt)}
+      </Text>
+    </View>
+  );
 
   const scrollToEnd = () => {
     if (flatListRef.current) {
@@ -150,7 +143,7 @@ const ChatPrivate = () => {
   );
 };
 
-export default ChatPrivate;
+export default ChatGroupScreen;
 
 const styles = StyleSheet.create({
   container: {

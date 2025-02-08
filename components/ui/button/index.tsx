@@ -56,6 +56,7 @@ const buttonStyle = tva({
       outline:
         "bg-transparent border data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
       solid: "",
+      default: "",
     },
 
     size: {
@@ -64,6 +65,7 @@ const buttonStyle = tva({
       md: "px-4 h-12",
       lg: "px-5 h-14",
       xl: "px-6 h-16",
+      auto: "h-auto px-3",
     },
   },
   compoundVariants: [
@@ -136,6 +138,8 @@ const buttonTextStyle = tva({
       outline: "",
       solid:
         "text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0",
+      default:
+        "text-typography-500 data-[hover=true]:text-typography-500 data-[active=true]:text-typography-500",
     },
     size: {
       xs: "text-xs",
@@ -199,6 +203,11 @@ const buttonTextStyle = tva({
       action: "primary",
       class: "text-primary-500 data-[hover=true]:text-primary-600",
     },
+    {
+      variant: "solid",
+      action: "default",
+      class: "",
+    },
   ],
 });
 
@@ -210,12 +219,13 @@ const buttonIconStyle = tva({
       outline: "",
       solid:
         "text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0",
+      default: "",
     },
     size: {
       xs: "h-3.5 w-3.5",
       sm: "h-4 w-4",
-      md: "h-[18px] w-[18px]",
-      lg: "h-[18px] w-[18px]",
+      md: "h-[24px] w-[24px]",
+      lg: "h-[26px] w-[26px]",
       xl: "h-8 w-8",
     },
     action: {
@@ -228,6 +238,7 @@ const buttonIconStyle = tva({
 
       negative:
         "text-error-600 data-[hover=true]:text-error-600 data-[active=true]:text-error-700",
+      default: "text-typography-500",
     },
   },
   parentCompoundVariants: [
