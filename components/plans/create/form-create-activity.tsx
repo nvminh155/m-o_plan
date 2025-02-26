@@ -17,6 +17,7 @@ import { ListRenderItemInfo, FlatList } from "react-native";
 import { z } from "zod";
 import ButtonNextStep from "./button-next-step";
 import { PlusIcon } from "@/components/ui/icon";
+import FormClockPicker from "@/components/ui/form-control/form-clock.picker";
 
 const formSchema = planSchema.pick({
   activities: true,
@@ -84,12 +85,29 @@ const FormCreateActivity = ({ isShow }: FormCreateActivityProps) => {
             text: "Ngày bắt đầu",
           }}
         />
+
+        <FormClockPicker
+          control={form.control}
+          name={`activities.${index}.fromHours`}
+          formLabelProps={{
+            text: "Giờ bắt đầu",
+          }}
+        />
+
         <FormDateTimePicker
           control={form.control}
           name={`activities.${index}.endDate`}
           formLabelProps={{
             text: "Ngày kết thúc",
           }}
+        />
+        <FormClockPicker
+          control={form.control}
+          name={`activities.${index}.toHours`}
+          formLabelProps={{
+            text: "Giờ kết thúc",
+          }}
+          className="changeme_add_location_input_map_below"
         />
 
         <ButtonGroup flexDirection="row" className="ml-auto">
@@ -126,6 +144,8 @@ const FormCreateActivity = ({ isShow }: FormCreateActivityProps) => {
               title: "",
               endDate: 0,
               startDate: 0,
+              fromHours: 0,
+              toHours: 0,
             });
           }}
           className="ml-auto"

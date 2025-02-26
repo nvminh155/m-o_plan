@@ -1,4 +1,4 @@
-import ActiveNow from "@/components/home/active-now";
+import Activity from "@/components/activity/next-activity";
 import FastSchedule from "@/components/home/fast-schedule";
 import Header from "@/components/home/header";
 import AppText from "@/components/ui/AppText";
@@ -20,8 +20,16 @@ export default function Index() {
 
         <FastSchedule />
 
-        <ActiveNow />
+        <Activity
+          data={{
+            title: "Traveling to Switzerland",
+            description: "Traveling to Switzerland",
+            startDate: new Date().getTime(),
+            endDate: new Date().getTime(),
+          }}
+        />
       </ScrollView>
+      {/* <MapScreen /> */}
     </Wrapper>
   );
 }

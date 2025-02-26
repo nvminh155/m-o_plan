@@ -1,15 +1,15 @@
 import DaysOfMonth from "@/components/calendar/days-of-month";
 
-import { Button, ButtonIcon } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import AppText from "@/components/ui/AppText";
 import Wrapper from "@/components/ui/Wrapper";
 import React, { useCallback } from "react";
 import { View, ScrollView } from "react-native";
 
-import CardActivityInSchedule from "@/components/calendar/schedule/card-activity-schedule";
 import SelectMonth from "@/components/calendar/select-month";
-import { CloseIcon, SearchIcon } from "@/components/ui/AppIcon";
+
 import { IconAntd } from "@/components/icon";
+import ActivityOnCalendar from "@/components/activity/activity-on-calendar";
 
 const hoursOfDay = [
   "00 am",
@@ -83,12 +83,19 @@ const CalendarScreen = () => {
               <AppText className="font-medium text-tertiary-500">
                 {hour}
               </AppText>
-              <CardActivityInSchedule />
+              <ActivityOnCalendar
+                data={{
+                  id: "12321",
+                  title: "Traveling to Switzerland",
+                  description: "Traveling to Switzerland",
+                  startDate: new Date().getTime(),
+                  endDate: new Date().getTime(),
+                }}
+              />
             </View>
           ))}
         </ScrollView>
       </View>
-
     </Wrapper>
   );
 };

@@ -14,6 +14,14 @@ export const activitiesSchema = z.array(
     description: z.string().nonempty().max(200),
     startDate: z.number(),
     endDate: z.number(),
+    fromHours: z.number(),
+    toHours: z.number(),
+    location: z
+      .object({
+        latitude: z.number(),
+        longitude: z.number(),
+      })
+      .optional(),
   })
 );
 
