@@ -1,16 +1,17 @@
-import { IconMaterialCommunity } from "@/components/icon";
-import IconAntd from "@/components/icon/IconAntd";
-import IconEntypo from "@/components/icon/IconEntypo";
-import IconEvil from "@/components/icon/IconEvil";
 import { Button, ButtonIcon } from "@/components/ui/button";
 import AppText from "@/components/ui/AppText";
 import { cn } from "@/lib/cn";
 import { Image } from "expo-image";
-import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
-import { BellOutLineIcon, ResizeFullScreenIcon } from "@/components/ui/icon";
+import {
+  BellOutLineIcon,
+  CalendarDaysIcon,
+  ClockLightIcon,
+  Icon,
+} from "@/components/ui/icon";
+import MapScreen from "@/components/map";
+import { HStack } from "@/components/ui/hstack";
 
 const ActiveNow = () => {
   return (
@@ -74,7 +75,15 @@ const MapActive = () => {
           </Button>
         </View>
 
-        <YourMap />
+        <MapScreen
+          markers={[
+            {
+              coordinate: { latitude: 10.9996864, longitude: 106.6782293 },
+              title: "Điểm đến",
+            },
+          ]}
+          className="rounded-[19px] overflow-hidden relative"
+        />
       </View>
     </View>
   );
@@ -82,63 +91,13 @@ const MapActive = () => {
 
 const SubTitle = () => {
   return (
-    <View className="flex-row items-center gap-1">
-      <IconAntd name="calendar" className="!text-typography-600" size={15} />
-      <AppText className="text-sm !text-typography-600">
-        11 Nov - 16 Nov
-      </AppText>
-      <View className="w-1 h-1 bg-typography-600"></View>
-      <IconAntd
-        name="clockcircleo"
-        className="!text-typography-600"
-        size={15}
-      />
-      <AppText
-        text="Tomorrow"
-        className="!text-typography-600 font-medium text-sm"
-      />
-    </View>
-  );
-};
-
-const YourMap = () => {
-  return (
-    <View className="flex-1 rounded-[19px] overflow-hidden relative">
-      <MapView
-        style={{
-          flex: 1,
-        }}
-        initialRegion={{
-          latitude: 13.33420029031534,
-          latitudeDelta: 10.969723141807847,
-          longitude: 108.8669391721487,
-          longitudeDelta: 9.573061466217041,
-        }}
-      >
-        <Marker
-          coordinate={{ latitude: 10.9996864, longitude: 106.6782293 }}
-          title="my location"
-        >
-          <View className="bg-white rounded-full h-6 w-6 relative">
-            <View className="bg-primary rounded-full border-2 w-full h-full items-center justify-center border-white">
-              <IconEvil name="location" size={15} className="!text-white" />
-            </View>
-            <View className="h-1.5 1 w-1 rounded-br-md rounded-bl-md absolute bg-white -bottom-1 left-1/2 -translate-x-1/2" />
-          </View>
-        </Marker>
-      </MapView>
-
-      <Button
-        action="primary"
-        size="lg"
-        className="!p-0 h-[3rem] w-[3rem] absolute right-4 bottom-4 bg-tertiary-500"
-        onPress={() => {
-          router.push("/(home)/full-view-map-activity");
-        }}
-      >
-        <ButtonIcon as={ResizeFullScreenIcon} />
-      </Button>
-    </View>
+    <HStack className="flex-row items-center gap-1">
+      <Icon as={CalendarDaysIcon} className="!text-black/50" />
+      <AppText className="text-sm !text-black/50">11 Nov - 16 Nov</AppText>
+      <View className="w-1 h-1 bg-black/50 mx-1"></View>
+      <Icon as={ClockLightIcon} className="!text-black/50" />
+      <AppText text="Tomorrow" className="!text-black/50 font-medium text-sm" />
+    </HStack>
   );
 };
 

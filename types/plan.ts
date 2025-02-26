@@ -5,15 +5,20 @@ export type PlanSchema = z.infer<typeof planSchema>;
 
 //member is friends
 
-export type TPlan = PlanSchema & {
+export type TPlan = Omit<PlanSchema, "activities"> & {
   id?: string;
   groupChatId: string;
   createByUserId: string;
   logs: string[];
   inviteCode: string;
   settingId: string[];
+  activities: NonNullable<PlanSchema["activities"]>;
   createdAt: number;
   updatedAt: number;
 };
 
-export type TActivity = keyof (keyof Pick<TPlan, "activities">)[number];
+export type TActivity =   (TPlan["activities"][number]) & {
+  id: string;
+};
+
+

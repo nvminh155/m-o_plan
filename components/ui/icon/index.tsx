@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { createIcon } from "@gluestack-ui/icon";
-import { Path } from "react-native-svg";
+import { G, Path } from "react-native-svg";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { cssInterop } from "nativewind";
 import { VariantProps } from "@gluestack-ui/nativewind-utils";
@@ -26,6 +26,7 @@ const iconStyle = tva({
       md: "h-[18px] w-[18px]",
       lg: "h-5 w-5",
       xl: "h-6 w-6",
+      "2xl": "h-8 w-8",
     },
   },
 });
@@ -1723,3 +1724,76 @@ const SendIcon = createIcon({
 
 SendIcon.displayName = "SendIcon";
 export { SendIcon };
+
+const LocationIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7"
+      />
+    </>
+  ),
+});
+
+LocationIcon.displayName = "LocationIcon";
+export { LocationIcon };
+
+const ClockLightIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 7h1v5.42l4.7 2.71l-.5.87l-5.2-3z"
+      />
+    </>
+  ),
+});
+
+ClockLightIcon.displayName = "ClockLightIcon";
+export { ClockLightIcon };
+
+const OpenRegularIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 20 20",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M6 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2.5a.5.5 0 0 1 1 0V14a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h2.5a.5.5 0 0 1 0 1zm5-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V4.707l-4.146 4.147a.5.5 0 0 1-.708-.708L15.293 4H11.5a.5.5 0 0 1-.5-.5"
+      />
+    </>
+  ),
+});
+
+OpenRegularIcon.displayName = "OpenRegularIcon";
+export { OpenRegularIcon };
+
+const MapIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 20 20",
+  path: (
+    <>
+      <G fill="currentColor">
+        <Path
+          fill-rule="evenodd"
+          d="M10 8.5a2 2 0 1 0 0-4a2 2 0 0 0 0 4m0-3a1 1 0 1 1 0 2a1 1 0 0 1 0-2"
+          clip-rule="evenodd"
+        />
+        <Path
+          fill-rule="evenodd"
+          d="M5.5 6.286C5.5 8.959 8.153 13.5 10 13.5c1.848 0 4.5-4.541 4.5-7.214C14.5 3.65 12.493 1.5 10 1.5S5.5 3.65 5.5 6.286m8 0c0 2.193-2.348 6.214-3.5 6.214c-1.151 0-3.5-4.02-3.5-6.214C6.5 4.187 8.075 2.5 10 2.5s3.5 1.687 3.5 3.786"
+          clip-rule="evenodd"
+        />
+        <Path d="M13.435 9.14a.5.5 0 0 1 .369-.929a3 3 0 0 1 1.74 1.84l1.334 4A3 3 0 0 1 14.03 18H5.97a3 3 0 0 1-2.846-3.949l1.333-4A3 3 0 0 1 6.24 8.194a.5.5 0 1 1 .355.935a2 2 0 0 0-1.19 1.239l-1.333 4A2 2 0 0 0 5.97 17h8.062a2 2 0 0 0 1.897-2.633l-1.332-4a2 2 0 0 0-1.16-1.226" />
+      </G>
+    </>
+  ),
+});
+
+MapIcon.displayName = "MapIcon";
+export { MapIcon };
