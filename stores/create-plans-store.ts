@@ -22,7 +22,7 @@ const steps = [
   },
   {
     id: 4,
-    key: "friends",
+    key: "members",
     isRequired: true,
     title: "Bạn có muốn mời bạn bè tham gia cùng?",
   },
@@ -58,7 +58,7 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
       currentMoney: 0,
     },
     activities: [],
-    friends: [],
+    members: [],
     thumbnail: "",
     title: "",
     startDate: 0,
@@ -95,7 +95,7 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
           endDate: 0,
         },
         activities: [],
-        friends: [],
+        members: [],
         thumbnail: "",
 
         title: "",

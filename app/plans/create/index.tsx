@@ -44,7 +44,7 @@ const PlanCreate = () => {
       <FormCreatePiggyBank isShow={step.key.includes("piggy-bank")} />
       {/* <FormCreateActivity /> */}
       <FormCreateActivity isShow={step.key.includes("activities")} />
-      <FormCreateFriends isShow={step.key.includes("friends")} />
+      <FormCreateFriends isShow={step.key.includes("members")} />
       {step.key.includes("done") && <CreateDoneScreen />}
     </VStack>
   );

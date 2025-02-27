@@ -15,17 +15,19 @@ import { FlatList, ListRenderItemInfo } from "react-native";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { router } from "expo-router";
+import { useAuthContext } from "@/contexts/AuthProvider";
 
 interface FormCreateFriendsProps {
   isShow?: boolean;
 }
 
 const FormCreateFriends = ({ isShow }: FormCreateFriendsProps) => {
+  const { user } = useAuthContext();
   const updateStep = useCreatePlanStore((state) => state.updateStep);
   const setData = useCreatePlanStore((state) => state.updateFormData);
 
   const [searchBy, setSearchBy] = useState<"phone" | "email">("email");
-  const [friends, setFriends] = useState<string[]>([]);
+  const [friends, setFriends] = useState<string[]>([user.id]);
   const [userSearched, setUserSearched] = useState<string | null>(null);
 
   const renderFriend = ({ item }: ListRenderItemInfo<string>) => {
@@ -92,7 +94,7 @@ const FormCreateFriends = ({ isShow }: FormCreateFriendsProps) => {
       <ButtonNextStep
         onNext={() => {
           setData({
-            friends: friends,
+            members: friends,
           });
           router.push("/plans/create/status");
         }}

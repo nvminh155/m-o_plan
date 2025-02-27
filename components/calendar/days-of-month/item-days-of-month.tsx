@@ -31,7 +31,7 @@ const ItemDaysOfMonth = ({
   return (
     <View
       style={{ width: ITEM_WIDTH }}
-      className="flex-col items-center justify-center"
+      className="flex-col items-center justify-center "
     >
       <AppText
         className="font-medium text-tertiary-500 self-center"
@@ -42,13 +42,15 @@ const ItemDaysOfMonth = ({
       {item.day > 0 ? (
         <Button
           action={isSelected ?? item.isToday ? "primary" : "secondary"}
-          className={cn("!rounded-full flex-1 !px-0 !py-0")}
+          className={cn("!rounded-full w-full !px-0 !py-0")}
           style={{ aspectRatio: 1 }}
           onPress={() => {
             if (onPressCb) onPressCb(item);
           }}
         >
-          <ButtonText className={cn("font-medium")}>{item.day}</ButtonText>
+          <ButtonText className={cn("font-medium")}>
+            {item.day ?? "1"}
+          </ButtonText>
         </Button>
       ) : (
         <View className="pointer-events-none w-full" style={{ aspectRatio: 1 }}>
