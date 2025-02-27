@@ -28,7 +28,7 @@ export const activitiesSchema = z.array(
 export const planSchema = z.object({
   piggyBank: piggyBankSchema.optional(),
   activities: activitiesSchema.optional(),
-  friends: z.array(z.string().nonempty()).optional(),
+  members: z.array(z.string().nonempty()).optional(),
   thumbnail: z.string().optional(),
   title: z.string().nonempty().max(50),
   startDate: z.number(),

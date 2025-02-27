@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { FlatList, View } from "react-native";
 import ItemDaysOfMonth, { ITEM_WIDTH } from "./item-days-of-month";
+import { useSelectedDate } from "@/stores/selected-date-store";
 
 const daysOfWeek = [
   { id: 0, name: "CN" },
@@ -30,36 +31,44 @@ interface DaysOfMonthProps {
 }
 
 const DaysOfMonth = ({ month }: DaysOfMonthProps) => {
+  const updateSelectedDay = useSelectedDate((state) => state.setSelectedDate);
+
   const flatListRef = useRef<FlatList>(null);
-  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const [selectedDay, setSelectedDay] = useState<number>(new Date().getDate());
 
   const generateDaysOfWeek = useCallback(() => {
-    const currentDate = new Date();
-
+    const today = new Date();
     const firstDay = getFirstDayOfWeek();
 
+    const length = new Date(
+      today.getFullYear(),
+      month ?? today.getMonth() + 1,
+      0
+    ).getDate();
+
     return Array.from({
-      length:
-        getDaysInMonth(
-          currentDate.getFullYear(),
-          month ?? currentDate.getMonth()
-        ) + firstDay,
+      length,
     }).map((_, index) => ({
       name: daysOfWeek[index % 7].name,
-      day: index - firstDay + 1,
+      day: index + 1,
       isLastMonth: index < firstDay,
-      isToday: currentDate.getDate() === index - firstDay + 1,
-      id: index,
+      isToday: today.getDate() === index + 1,
+      id: index + 1,
     }));
   }, [month]);
 
   useEffect(() => {
     if (!flatListRef.current) return;
 
-    flatListRef.current.scrollToIndex({
-      animated: true,
-      index: new Date().getDate() + getFirstDayOfWeek(),
-    });
+    const us = setTimeout(() => {
+      if (!flatListRef.current) return;
+      flatListRef.current.scrollToIndex({
+        animated: true,
+        index: selectedDay - 1,
+      });
+    }, 500);
+
+    return () => clearTimeout(us);
   }, []);
 
   return (
@@ -69,16 +78,18 @@ const DaysOfMonth = ({ month }: DaysOfMonthProps) => {
         className="daysOfMonth"
         data={generateDaysOfWeek()}
         contentContainerClassName="gap-8"
+        showsHorizontalScrollIndicator={false}
         onScrollToIndexFailed={({ index }) => {
           console.log("Failed", index);
         }}
-        getItemLayout={(_, index) => ({
-          length: ITEM_WIDTH,
-          offset: ITEM_WIDTH * index,
-          index,
-        })}
+        onLayout={() => {
+          if (!flatListRef.current) return;
+          flatListRef.current.scrollToIndex({
+            animated: true,
+            index: selectedDay - 1,
+          });
+        }}
         keyExtractor={(item) => item.id}
-        maxToRenderPerBatch={7}
         renderItem={({ item }) => {
           return (
             <ItemDaysOfMonth
@@ -86,6 +97,15 @@ const DaysOfMonth = ({ month }: DaysOfMonthProps) => {
               isSelected={selectedDay ? selectedDay === item.day : null}
               onPressCb={() => {
                 setSelectedDay(item.day);
+                const today = new Date();
+                const monthValue = month ?? today.getMonth();
+
+                const date = new Date(
+                  today.getFullYear(),
+                  monthValue,
+                  item.day
+                );
+                updateSelectedDay(date.getTime());
               }}
             />
           );

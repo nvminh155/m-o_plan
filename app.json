@@ -37,7 +37,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Cho phép $(PRODUCT_NAME) sử dụng vị trí của bạn."
         }
       ]
     ],

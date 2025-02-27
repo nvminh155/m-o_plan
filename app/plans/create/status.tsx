@@ -9,6 +9,7 @@ import { CopyIcon, DownloadIcon, Icon, TickIcon } from "@/components/ui/icon";
 import { Spinner } from "@/components/ui/spinner";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { useAuthContext } from "@/contexts/AuthProvider";
 import { cn } from "@/lib/cn";
 import { planService } from "@/services/planService";
 import { useCreatePlanStore } from "@/stores/create-plans-store";
@@ -88,13 +89,14 @@ const DoneScreen = ({ qrValue }: DoneScreenProps) => {
   );
 };
 const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
+  const { user } = useAuthContext();
   const updateStep = useCreatePlanStore((state) => state.updateStep);
   const formData = useCreatePlanStore((state) => state.formData);
   const [qrValue, setQRValue] = useState("");
 
   const mutation = useMutation({
     mutationFn: (data: PlanSchema) => {
-      return planService.createPlan(data, "user by id");
+      return planService.createPlan(data, user.id);
     },
     onSuccess(res) {
       console.log("SUCCESS CREATE PLAN", res);
