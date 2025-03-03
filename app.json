@@ -19,7 +19,11 @@
       "runtimeVersion": {
         "policy": "appVersion"
       },
-      "package": "com.minhrxpo1505.mo_plan_thuancf"
+      "package": "com.minhrxpo1505.mo_plan_thuancf",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -60,6 +64,7 @@
     },
     "updates": {
       "url": "https://u.expo.dev/e5f19816-484a-42db-9b66-075f8af87f95"
-    }
+    },
+    "owner": "minhrxpo1505"
   }
 }
