@@ -13,48 +13,41 @@ const daysOfWeek = [
   { id: 6, name: "T7" },
 ];
 
-function getDaysInMonth(year: number, month: number) {
-  return new Date(year, month, 0).getDate();
-}
-
-function getFirstDayOfWeek() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth(); // Current month (0-based index)
-
-  const firstDay = new Date(year, month, 1); // First day of the current month
-  return firstDay.getDay(); // Returns 0 (Sunday) to 6 (Saturday)
-}
-
 interface DaysOfMonthProps {
-  month?: number;
+  month?: number; // min 0 max 11
 }
 
 const DaysOfMonth = ({ month }: DaysOfMonthProps) => {
-  const updateSelectedDay = useSelectedDate((state) => state.setSelectedDate);
+  const updateSelectedDay = useSelectedDate((state) => state.updateDay);
 
   const flatListRef = useRef<FlatList>(null);
   const [selectedDay, setSelectedDay] = useState<number>(new Date().getDate());
 
   const generateDaysOfWeek = useCallback(() => {
     const today = new Date();
-    const firstDay = getFirstDayOfWeek();
 
     const length = new Date(
       today.getFullYear(),
-      month ?? today.getMonth() + 1,
+      (month ?? today.getMonth()) + 1,
       0
     ).getDate();
 
     return Array.from({
       length,
-    }).map((_, index) => ({
-      name: daysOfWeek[index % 7].name,
-      day: index + 1,
-      isLastMonth: index < firstDay,
-      isToday: today.getDate() === index + 1,
-      id: index + 1,
-    }));
+    }).map((_, index) => {
+      const date = new Date(
+        today.getFullYear(),
+        month ?? today.getMonth(),
+        index + 1
+      );
+
+      return {
+        name: daysOfWeek[date.getDay()].name,
+        day: index + 1,
+        isToday: today.getDate() === index + 1,
+        id: index + 1,
+      };
+    });
   }, [month]);
 
   useEffect(() => {
@@ -97,15 +90,7 @@ const DaysOfMonth = ({ month }: DaysOfMonthProps) => {
               isSelected={selectedDay ? selectedDay === item.day : null}
               onPressCb={() => {
                 setSelectedDay(item.day);
-                const today = new Date();
-                const monthValue = month ?? today.getMonth();
-
-                const date = new Date(
-                  today.getFullYear(),
-                  monthValue,
-                  item.day
-                );
-                updateSelectedDay(date.getTime());
+                updateSelectedDay(item.day);
               }}
             />
           );

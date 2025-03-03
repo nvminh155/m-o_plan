@@ -17,6 +17,20 @@ import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { toTime } from "@/utils/datetime/to-time";
 
+import {
+  Select,
+  SelectTrigger,
+  SelectInput,
+  SelectIcon,
+  SelectPortal,
+  SelectBackdrop,
+  SelectContent,
+  SelectDragIndicator,
+  SelectDragIndicatorWrapper,
+  SelectItem,
+} from "@/components/ui/select";
+import { ArrowDownIcon } from "@/components/ui/icon";
+
 const hoursOfDay = [
   "00 am",
   "01 am",
@@ -56,7 +70,7 @@ const Header = () => {
       >
         <IconAntd name="close" className="!text-typography-800" />
       </Button>
-
+      <SelectNewMonth />
       <View className="flex-row gap-2 flex-1 justify-end">
         <Button
           size="lg"
@@ -72,6 +86,40 @@ const Header = () => {
   );
 };
 
+const SelectNewMonth = () => {
+  const updateMonth = useSelectedDate((state) => state.updateMonth);
+
+  return (
+    <Select
+      onValueChange={(e) => {
+        console.log("e", e);
+        updateMonth(Number(e));
+      }}
+    >
+      <SelectTrigger variant="outline" size="md">
+        <SelectInput placeholder="Select option" />
+        <SelectIcon className="mr-3" as={ArrowDownIcon} />
+      </SelectTrigger>
+      <SelectPortal>
+        <SelectBackdrop />
+        <SelectContent>
+          <SelectDragIndicatorWrapper>
+            <SelectDragIndicator />
+          </SelectDragIndicatorWrapper>
+          <ScrollView>
+          {Array.from({ length: 13 }).map((_, i) => (
+            <SelectItem
+              key={i + 1}
+              label={`Tháng ${i + 1}`}
+              value={`${i}`}
+            />
+          ))}
+          </ScrollView>
+        </SelectContent>
+      </SelectPortal>
+    </Select>
+  );
+};
 const CalendarScreen = () => {
   const generateHoursOfDay = useCallback(() => {
     return hoursOfDay.map((hour) => hour);
@@ -129,19 +177,17 @@ const ListActivity = () => {
   return (
     <ScrollView contentContainerClassName="gap-16" className="mt-10">
       {query.data?.map((activity, i) => {
-
         const fromHours = new Date(activity.fromHours);
         const endDate = new Date(activity.endDate);
 
         const fromHoursString = toTime(fromHours.getTime());
-  
 
         return (
           <View key={i + 1} className="flex-row items-start gap-3">
-            <AppText className="font-medium text-tertiary-500">{fromHoursString}</AppText>
-            <ActivityOnCalendar
-              data={{...activity, id: `${i + 1}`}}
-            />
+            <AppText className="font-medium text-tertiary-500">
+              {fromHoursString}
+            </AppText>
+            <ActivityOnCalendar data={{ ...activity, id: `${i + 1}` }} />
           </View>
         );
       })}

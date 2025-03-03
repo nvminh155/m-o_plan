@@ -35,11 +35,11 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-app-example
+/app-example
 
 
 /android
 /ios
 
-eas.json
-eas.*
+# eas.json
+# eas.*

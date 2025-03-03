@@ -16,6 +16,9 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "runtimeVersion": {
+        "policy": "appVersion"
+      },
       "package": "com.minhrxpo1505.mo_plan_thuancf"
     },
     "web": {

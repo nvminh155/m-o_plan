@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { VStack } from "../ui/vstack";
 import { Button, ButtonIcon } from "../ui/button";
-import MapView from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { useRouter } from "expo-router";
 import { ResizeFullScreenIcon } from "../ui/icon";
 import * as Location from "expo-location";
@@ -48,6 +48,7 @@ const MapScreen = ({
   return (
     <VStack className={cn("flex-1", className)}>
       <MapView
+      provider={PROVIDER_GOOGLE}
         style={{
           flex: 1,
         }}

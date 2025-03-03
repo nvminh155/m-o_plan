@@ -8,7 +8,7 @@ export const useActivityByUserIdQuery = (
   currentDateTimestamp: number
 ) => {
   const date = new Date(currentDateTimestamp);
-
+console.log('date check', date)
   const ref = collection(db, "/plans");
   const queryFirebase = query(ref, where("members", "array-contains", userId));
 
