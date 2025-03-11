@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { createIcon } from "@gluestack-ui/icon";
-import { G, Path } from "react-native-svg";
+import { G, Path, Rect } from "react-native-svg";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { cssInterop } from "nativewind";
 import { VariantProps } from "@gluestack-ui/nativewind-utils";
@@ -1797,3 +1797,102 @@ const MapIcon = createIcon({
 
 MapIcon.displayName = "MapIcon";
 export { MapIcon };
+
+const PlusThinIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        d="M6 12h6m6 0h-6m0 0V6m0 6v6"
+      />
+    </>
+  ),
+});
+
+PlusThinIcon.displayName = "PlusThinIcon";
+export { PlusThinIcon };
+
+const WithDrawalIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 256 256",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        strokeWidth={12}
+        d="M230 198.65V240a6 6 0 0 1-12 0v-41.35a76.83 76.83 0 0 0-28-59.08v62.74a6 6 0 0 1-11 3.28l-10.68-16.3a3 3 0 0 1-.17-.29a14 14 0 0 0-24.33 13.87L166 236.71a6 6 0 0 1-10 6.58l-22.26-34c-.06-.1-.12-.19-.17-.29A26 26 0 0 1 178 182.14V64a2 2 0 0 0-2-2h-16a6 6 0 0 1 0-12h16a14 14 0 0 1 14 14v60.69a88.88 88.88 0 0 1 40 73.96M86 56a6 6 0 0 0-6-6H64a14 14 0 0 0-14 14v136a6 6 0 0 0 12 0V64a2 2 0 0 1 2-2h16a6 6 0 0 0 6-6m70.24 43.76a6 6 0 0 0-8.48 0L126 121.51V16a6 6 0 0 0-12 0v105.51L92.24 99.76a6 6 0 0 0-8.48 8.48l32 32a6 6 0 0 0 8.48 0l32-32a6 6 0 0 0 0-8.48"
+      />
+    </>
+  ),
+});
+
+WithDrawalIcon.displayName = "WithDrawalIcon";
+export { WithDrawalIcon };
+
+const GiveGiftIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <G
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="20"
+      >
+        <Path d="M13.5 2.5h-7v5h7zm-3.5 0v5M8.5.5l1.5 2l1.5-2M.5 11l2.444 2.036a2 2 0 0 0 1.28.463h6.442c.46 0 .834-.373.834-.833c0-.92-.746-1.667-1.667-1.667H5.354" />
+        <Path d="m3.5 10l.75.75a1.06 1.06 0 0 0 1.5-1.5L4.586 8.085A2 2 0 0 0 3.17 7.5H.5" />
+      </G>
+    </>
+  ),
+});
+
+GiveGiftIcon.displayName = "GiveGiftIcon";
+export { GiveGiftIcon };
+
+const MinusIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path fill="currentColor" d="M19 12.998H5v-2h14z" strokeWidth={2} />
+    </>
+  ),
+});
+
+MinusIcon.displayName = "MinusIcon";
+export { MinusIcon };
+
+const ScheduleIcon = createIconUI({
+
+  viewBox: "0 0 48 48",
+  path: (
+    <>
+        <G
+          fill="none"
+          strokeLinecap="round"
+          strokeWidth="4"
+        >
+          <Rect
+            width="40"
+            height="30"
+            x="4"
+            y="10"
+            strokeLinejoin="round"
+            rx="2"
+          />
+          <Path d="M14 6v8m11 9H14m20 8H14M34 6v8" />
+        </G>
+    </>
+  ),
+});
+
+ScheduleIcon.displayName = "ScheduleIcon";
+export { ScheduleIcon };

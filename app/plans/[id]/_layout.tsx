@@ -47,22 +47,6 @@ const TabsNavigation = () => {
         url: `/plans/${id}`,
       },
       {
-        key: "schedule",
-        href: { ...baseHref, pathname: "/plans/[id]/schedule" },
-        icon: "calendar",
-        url: `/plans/${id}/schedule`,
-      },
-      {
-        key: "message",
-        href: {
-          ...baseHref,
-          pathname: "/chat-private/[id]",
-          params: { id: data?.groupChatId as string },
-        },
-        icon: "message1",
-        url: `/chat-private/${data?.groupChatId}`,
-      },
-      {
         key: "setting",
         href: { ...baseHref, pathname: "/plans/[id]/setting" },
         icon: "setting",
@@ -95,14 +79,6 @@ const TabsNavigation = () => {
           />
         </Button>
       ))}
-
-      <Button
-        variant="link"
-        className="bg-transparent !px-0 !py-0"
-        onPress={() => router.back()}
-      >
-        <IconAntd name="back" className="!text-typography-800" />
-      </Button>
     </View>
   );
 };

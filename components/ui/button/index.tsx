@@ -53,6 +53,7 @@ const buttonStyle = tva({
     },
     variant: {
       link: "!px-0 !py-0",
+      ghost: "",
       outline:
         "bg-transparent border data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
       solid: "",
@@ -117,6 +118,11 @@ const buttonStyle = tva({
       class:
         "bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
     },
+    {
+      action: 'primary',
+      variant: 'ghost',
+      class: 'bg-primary-50'
+    }
   ],
 });
 
@@ -136,6 +142,7 @@ const buttonTextStyle = tva({
     variant: {
       link: "data-[hover=true]:underline data-[active=true]:underline",
       outline: "",
+      ghost: "",
       solid:
         "text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0",
       default:
@@ -208,6 +215,11 @@ const buttonTextStyle = tva({
       action: "default",
       class: "",
     },
+    {
+      action: 'primary',
+      variant: 'ghost',
+      class: 'text-primary-500'
+    }
   ],
 });
 
@@ -220,6 +232,7 @@ const buttonIconStyle = tva({
       solid:
         "text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0",
       default: "",
+      ghost: "",
     },
     size: {
       xs: "h-[18px] w-[18px]",
@@ -277,6 +290,12 @@ const buttonIconStyle = tva({
       action: "primary",
       class:
         "text-primary-500 data-[hover=true]:text-primary-500 data-[active=true]:text-primary-500",
+    },
+    {
+      variant: "ghost",
+      action: "primary",
+      class:
+        "text-primary-500",
     },
   ],
 });
