@@ -1,11 +1,6 @@
-import { IconAntd } from "@/components/icon";
-import { Button, ButtonIcon } from "@/components/ui/button";
-import { cn } from "@/lib/cn";
-import { Href, router, Stack, Tabs, usePathname } from "expo-router";
+import { Tabs } from "expo-router";
 import React from "react";
-import { View } from "react-native";
 
-import { usePlanContext } from "@/contexts/PlanProvider";
 import {
   HomeIcon,
   Icon,
@@ -13,31 +8,67 @@ import {
   SettingsIcon,
 } from "@/components/ui/icon";
 
-type TTabsIcon = {
-  icon: React.ElementType<any, keyof React.JSX.IntrinsicElements>;
-  size: number;
-  color: string;
-};
-const TabsIcon = ({ icon, size, color }: TTabsIcon) => {
-  return (
-    <Icon
-      as={HomeIcon}
-      style={{
-        color: color,
-        fontSize: size,
-      }}
-      className="w-full h-full"
-    />
-  );
-};
 const PlansTabsLayout = () => {
   return (
-    <Stack
+    <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarLabelStyle: {
+          fontWeight: 700,
+          fontSize: 11,
+        },
+        tabBarActiveTintColor: "#F7653D",
       }}
-      initialRouteName="(tabs)"
-    ></Stack>
+      initialRouteName="index"
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Trang chủ",
+          tabBarIcon: ({ color }) => (
+            <Icon
+              as={HomeIcon}
+              style={{
+                color: color,
+              }}
+              className="w-full h-full"
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="member"
+        options={{
+          title: "Thành viên",
+          tabBarIcon: ({ color }) => (
+            <Icon
+              as={MemberFilledIcon}
+              style={{
+                color: color,
+              }}
+              className="w-full h-full"
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="setting"
+        options={{
+          title: "Quản lý",
+          tabBarIcon: ({ color }) => (
+            <Icon
+              as={SettingsIcon}
+              style={{
+                color: color,
+              }}
+              className="w-full h-full"
+            />
+          ),
+        }}
+      />
+    </Tabs>
   );
 };
 

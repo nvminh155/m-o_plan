@@ -1,13 +1,13 @@
-import AppText from "@/components/ui/AppText";
-import React from "react";
-import { View } from "react-native";
+import { Text } from '@/components/ui/text'
+import { VStack } from '@/components/ui/vstack'
+import React from 'react'
 
-const PlanSchedule = () => {
+const Schedule = () => {
   return (
-    <View>
-      <AppText>alsfjljf plan schedule</AppText>
-    </View>
-  );
-};
+    <VStack>
+      <Text>asfasf</Text>
+    </VStack>
+  )
+}
 
-export default PlanSchedule;
+export default Schedule

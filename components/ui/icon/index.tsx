@@ -1871,28 +1871,161 @@ MinusIcon.displayName = "MinusIcon";
 export { MinusIcon };
 
 const ScheduleIcon = createIconUI({
-
   viewBox: "0 0 48 48",
   path: (
     <>
-        <G
-          fill="none"
-          strokeLinecap="round"
-          strokeWidth="4"
-        >
-          <Rect
-            width="40"
-            height="30"
-            x="4"
-            y="10"
-            strokeLinejoin="round"
-            rx="2"
-          />
-          <Path d="M14 6v8m11 9H14m20 8H14M34 6v8" />
-        </G>
+      <G fill="none" strokeLinecap="round" strokeWidth="4">
+        <Rect
+          width="40"
+          height="30"
+          x="4"
+          y="10"
+          strokeLinejoin="round"
+          rx="2"
+        />
+        <Path d="M14 6v8m11 9H14m20 8H14M34 6v8" />
+      </G>
     </>
   ),
 });
 
 ScheduleIcon.displayName = "ScheduleIcon";
 export { ScheduleIcon };
+
+const MemberFilledIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M10 3.5C8.036 3.5 6.421 5.055 6.421 7s1.615 3.5 3.58 3.5c1.654 0 3.06-1.103 3.463-2.613a2.644 2.644 0 1 0 .039-1.61C13.16 4.682 11.713 3.5 10 3.5M7.421 7c0-1.369 1.143-2.5 2.58-2.5c1.436 0 2.578 1.131 2.578 2.5S11.437 9.5 10 9.5C8.564 9.5 7.421 8.369 7.421 7m6.936.143a1.643 1.643 0 1 1 3.286 0a1.643 1.643 0 0 1-3.286 0M8.15 11.917c-.367-.237-.874-.406-1.394-.263q-.24.067-.478.142l-.985.316c-1.155.37-2.044 1.284-2.345 2.438l-.007.027l-.417 2.937c-.152 1.072.439 2.156 1.588 2.423C5.29 20.21 7.2 20.5 10 20.5s4.71-.29 5.888-.563c1.15-.267 1.74-1.351 1.588-2.423l-.417-2.937l-.007-.027c-.3-1.154-1.19-2.069-2.345-2.438l-.984-.316a12 12 0 0 0-.479-.142c-.52-.143-1.027.026-1.393.263c-.394.254-1.045.569-1.85.569s-1.458-.315-1.851-.57m-1.129.701c.155-.043.367-.003.586.138c.489.317 1.329.73 2.393.73c1.065 0 1.905-.413 2.394-.73c.218-.14.43-.18.585-.138q.22.06.439.13l.984.316c.833.267 1.458.915 1.675 1.711l.41 2.88c.09.636-.253 1.175-.825 1.308c-1.097.254-2.93.537-5.662.537s-4.564-.283-5.662-.537c-.571-.133-.914-.672-.824-1.308l.41-2.88c.216-.796.84-1.444 1.674-1.711l.985-.315q.218-.07.438-.13m11.162-2.32a1.05 1.05 0 0 0-.914.202c-.27.21-.748.5-1.269.5a.5.5 0 0 0 0 1c.858 0 1.556-.457 1.883-.71a.1.1 0 0 1 .043-.024h.004q.201.053.399.118l.685.225c.526.173.925.594 1.066 1.114l.283 2.049c.056.403-.156.705-.46.777q-.335.082-.813.16a.5.5 0 1 0 .16.988q.512-.085.884-.175c.895-.213 1.333-1.07 1.22-1.887l-.291-2.106l-.007-.027a2.62 2.62 0 0 0-1.73-1.843l-.685-.225a8 8 0 0 0-.458-.136"
+      />
+    </>
+  ),
+});
+
+MemberFilledIcon.displayName = "MemberFilledIcon";
+export { MemberFilledIcon };
+
+const CaretDownIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M16.53 8.97a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 1 1 1.06-1.06L12 12.44l3.47-3.47a.75.75 0 0 1 1.06 0"
+        clip-rule="evenodd"
+      />
+    </>
+  ),
+});
+
+CaretDownIcon.displayName = "CaretDownIcon";
+export { CaretDownIcon };
+
+const CaretUpIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M16.53 14.03a.75.75 0 0 1-1.06 0L12 10.56l-3.47 3.47a.75.75 0 0 1-1.06-1.06l4-4a.75.75 0 0 1 1.06 0l4 4a.75.75 0 0 1 0 1.06"
+        clip-rule="evenodd"
+      />
+    </>
+  ),
+});
+
+CaretUpIcon.displayName = "CaretUpIcon";
+export { CaretUpIcon };
+
+const CaretLeftIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M14.03 7.47a.75.75 0 0 1 0 1.06L10.56 12l3.47 3.47a.75.75 0 1 1-1.06 1.06l-4-4a.75.75 0 0 1 0-1.06l4-4a.75.75 0 0 1 1.06 0"
+        clip-rule="evenodd"
+      />
+    </>
+  ),
+});
+
+CaretLeftIcon.displayName = "CaretLeftIcon";
+export { CaretLeftIcon };
+
+const CaretRightIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        strokeWidth={1.4}
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M9.97 7.47a.75.75 0 0 1 1.06 0l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 1 1-1.06-1.06L13.44 12L9.97 8.53a.75.75 0 0 1 0-1.06"
+        clipRule="evenodd"
+      />
+    </>
+  ),
+});
+
+CaretRightIcon.displayName = "CaretRightIcon";
+export { CaretRightIcon };
+
+const EditIconfyIcon = createIconUI({
+  viewBox: "0 0 16 16",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M15.49 7.3h-1.16v6.35H1.67V3.28H8V2H1.67A1.21 1.21 0 0 0 .5 3.28v10.37a1.21 1.21 0 0 0 1.17 1.25h12.66a1.21 1.21 0 0 0 1.17-1.25z"
+        strokeWidth={1.1}
+      />
+      <Path
+        fill="currentColor"
+        d="M10.56 2.87L6.22 7.22l-.44.44l-.08.08l-1.52 3.16a1.08 1.08 0 0 0 1.45 1.45l3.14-1.53l.53-.53l.43-.43l4.34-4.36l.45-.44l.25-.25a2.18 2.18 0 0 0 0-3.08a2.17 2.17 0 0 0-1.53-.63a2.2 2.2 0 0 0-1.54.63l-.7.69l-.45.44zM5.51 11l1.18-2.43l1.25 1.26zm2-3.36l3.9-3.91l1.3 1.31L8.85 9zm5.68-5.31a.9.9 0 0 1 .65.27a.93.93 0 0 1 0 1.31l-.25.24l-1.3-1.3l.25-.25a.88.88 0 0 1 .69-.25z"
+        strokeWidth={2}
+      />
+    </>
+  ),
+});
+
+EditIconfyIcon.displayName = "EditIconfyIcon";
+export { EditIconfyIcon };
+
+const LockLightIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M6.616 21q-.672 0-1.144-.472T5 19.385v-8.77q0-.67.472-1.143Q5.944 9 6.616 9H8V7q0-1.671 1.165-2.835Q10.329 3 12 3t2.836 1.165T16 7v2h1.385q.67 0 1.143.472q.472.472.472 1.144v8.769q0 .67-.472 1.143q-.472.472-1.143.472zm0-1h10.769q.269 0 .442-.173t.173-.442v-8.77q0-.269-.173-.442T17.385 10H6.615q-.269 0-.442.173T6 10.616v8.769q0 .269.173.442t.443.173M12 16.5q.633 0 1.066-.434q.434-.433.434-1.066t-.434-1.066T12 13.5t-1.066.434Q10.5 14.367 10.5 15t.434 1.066q.433.434 1.066.434M9 9h6V7q0-1.25-.875-2.125T12 4t-2.125.875T9 7zM6 20V10z"
+      />
+    </>
+  ),
+});
+
+LockLightIcon.displayName = "LockLightIcon";
+export { LockLightIcon };
+
+const HomeIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        d="M20.71 18.65v-7.622a3 3 0 0 0-1.151-2.362l-6.326-4.951a2 2 0 0 0-2.466 0l-6.326 4.95a3 3 0 0 0-1.15 2.363v7.622c0 1.16.94 2.1 2.1 2.1h3.97v-7.965h5.278v7.965h3.97a2.1 2.1 0 0 0 2.1-2.1"
+      />
+    </>
+  ),
+});
+
+HomeIcon.displayName = "HomeIcon";
+export { HomeIcon };
