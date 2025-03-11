@@ -6,4 +6,8 @@
   :root {
     --space-node: 1.5rem;
   }
+  .scroll_smooth {
+    scroll-behavior: smooth;
+    
+  }
 }

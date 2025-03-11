@@ -14,7 +14,7 @@ const Wrapper = ({ className, children, ...rest }: WrapperProps) => {
   return (
     <SafeAreaProvider>
       <SafeAreaView
-        className={cn(`pt-4 bg-white flex-1 px-4`, className)}
+        className={cn(`pt-4 bg-white flex-1 `, className)}
         {...rest}
       >
         {children}

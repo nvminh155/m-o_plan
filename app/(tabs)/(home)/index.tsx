@@ -13,7 +13,7 @@ export default function Index() {
 
         <View className="mt-10">
           <View className="gap-3">
-            <AppText text="Have a Good Day," className="!text-5xl" />
+            <AppText text="Have a 1Good Day," className="!text-5xl" />
             <AppText text="Username" className="!text-5xl" />
           </View>
         </View>

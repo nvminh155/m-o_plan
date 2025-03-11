@@ -35,8 +35,8 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Navigator router={StackRouter} initialRouteName="plans">
-            <SafeAreaView className={"flex-1 !bg-red-500"}>
-              <View className="flex-1 !bg-red-500">
+            <SafeAreaView className={"flex-1 scroll_smooth"}>
+              <View className="flex-1">
                 <Slot />
               </View>
             </SafeAreaView>
