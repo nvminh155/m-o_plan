@@ -34,6 +34,7 @@ type IFormInputProps<
   formLabelProps?: {
     text: string;
   };
+  required?: boolean;
   helperText?: string;
 } & IInputFieldProps;
 
@@ -45,8 +46,10 @@ function FormInput<
   control,
   children,
   formLabelProps,
+  placeholder,
   helperText,
   keyboardType,
+  required,
   ...rest
 }: Readonly<IFormInputProps<TFieldValues, TName>>) {
   const formatValue = (value: string) => {
@@ -67,16 +70,17 @@ function FormInput<
           isReadOnly={false}
           isRequired={false}
         >
-          <FormControlLabel>
+          <FormControlLabel className="flex flex-row items-center gap-1">
             <FormControlLabelText>
               {formLabelProps?.text}
             </FormControlLabelText>
+            {required && <Text style={{ color: "red" }}>*</Text>}
           </FormControlLabel>
           <Input className="my-1" size={"lg"}>
             <InputField
               {...rest}
               value={String(value ?? "")}
-              placeholder={"Trống"}
+              placeholder={placeholder ?? "Trống"}
               keyboardType={keyboardType}
               onChangeText={(text) => {
                 onChange(formatValue(text));

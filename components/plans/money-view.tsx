@@ -7,12 +7,15 @@ import { Text } from "../ui/text";
 import { PlusIcon, PlusThinIcon, SwitchLightIcon, WithDrawalIcon } from "../ui/icon";
 import { TPlan } from "@/types/plan";
 import { VStack } from "../ui/vstack";
+import { useRouter } from "expo-router";
+import { usePlanContext } from "@/contexts/PlanProvider";
 
 interface MoneyViewProps {
   piggyBank: TPlan["piggyBank"];
 }
 
 const MoneyView = ({ piggyBank }: MoneyViewProps) => {
+  
   const [view, setView] = useState<"goal" | "default">("default");
 
   return (
@@ -56,9 +59,19 @@ const MoneyView = ({ piggyBank }: MoneyViewProps) => {
 };
 
 const ActionWithMoney = () => {
+  const router = useRouter();
+  const planContext = usePlanContext();
+
   return (
     <View className="flex-row gap-4 items-center mt-node">
-      <Button action="primary" variant="ghost" className="rounded-full flex-1">
+      <Button action="primary" variant="ghost" className="rounded-full flex-1" onPress={() => {
+        router.push({
+          pathname: '/plans/[id]/contribute',
+          params: {
+            id: planContext.id
+          }
+        })
+      }}>
         <ButtonIcon as={PlusIcon} />
         <ButtonText className="!text-primary-foreground font-semibold">
           Góp quỹ

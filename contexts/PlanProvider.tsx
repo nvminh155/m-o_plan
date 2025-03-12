@@ -6,10 +6,13 @@ import { usePlanQuery } from "@/hooks/query/usePlanQuery";
 type TPlanContext =
   | {
       data?: TPlan;
+      id: string;
     }
   | undefined;
 
-const PlanContext = createContext<TPlanContext>({});
+const PlanContext = createContext<TPlanContext>({
+  id: "???"
+});
 
 interface PlanProviderProps extends React.PropsWithChildren<{}> {}
 const PlanProvider = ({ children }: PlanProviderProps) => {
@@ -21,7 +24,7 @@ const PlanProvider = ({ children }: PlanProviderProps) => {
 
   const query = usePlanQuery(id);
 
-  const value = React.useMemo(() => ({ data: query.data?.data }), [query.data]);
+  const value = React.useMemo(() => ({ data: query.data?.data, id }), [query.data]);
 
   return <PlanContext.Provider value={value}>{children}</PlanContext.Provider>;
 };
