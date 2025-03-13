@@ -57,6 +57,10 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
       endDate: 0,
       currentMoney: 0,
     },
+    budget: {
+      target: 0,
+      current: 0,
+    },
     activities: [],
     members: [],
     thumbnail: "",
@@ -93,6 +97,10 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
           periodDay: 1,
           currentMoney: 0,
           endDate: 0,
+        },
+        budget: {
+          target: 0,
+          current: 0,
         },
         activities: [],
         members: [],

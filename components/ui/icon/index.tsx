@@ -2029,3 +2029,92 @@ const HomeIcon = createIconUI({
 
 HomeIcon.displayName = "HomeIcon";
 export { HomeIcon };
+
+const CameraIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <G fill="none">
+        <Path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+        <Path
+          fill="currentColor"
+          d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3zm3-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zm11 2a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1m-7 5a3 3 0 1 1 6 0a3 3 0 0 1-6 0m3-5a5 5 0 1 0 0 10a5 5 0 0 0 0-10"
+        />
+      </G>
+    </>
+  ),
+});
+
+CameraIcon.displayName = "CameraIcon";
+export { CameraIcon };
+
+const BedIcon = createIcon({
+  Root: Svg,
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M3 18v-5q0-.444.256-.946T4 11.3V9q0-.846.577-1.423T6 7h4.5q.517 0 .883.213q.365.212.617.587q.252-.375.617-.587Q12.983 7 13.5 7H18q.846 0 1.423.577T20 9v2.3q.489.252.744.754q.256.502.256.946v5h-1v-2H4v2zm9.5-7H19V9q0-.425-.288-.712T18 8h-4.5q-.425 0-.712.288T12.5 9zM5 11h6.5V9q0-.425-.288-.712T10.5 8H6q-.425 0-.712.288T5 9z"
+      />
+    </>
+  ),
+});
+
+BedIcon.displayName = "BedIcon";
+export { BedIcon };
+
+const UtensilsIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M8.1 13.34L3.91 9.16a4.01 4.01 0 0 1 0-5.66l7.02 7zm6.78-1.81L13.41 13l6.88 6.88l-1.41 1.41L12 14.41l-6.88 6.88l-1.41-1.41l9.76-9.76c-.71-1.53-.21-3.68 1.38-5.27c1.91-1.92 4.65-2.28 6.11-.82c1.47 1.47 1.11 4.21-.81 6.12c-1.59 1.59-3.74 2.09-5.27 1.38"
+      />
+    </>
+  ),
+});
+
+UtensilsIcon.displayName = "UtensilsIcon";
+export { UtensilsIcon };
+
+const MapPinIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <G fill="none" strokeWidth="1.5">
+        <Path d="M20 10c0 4.418-8 12-8 12s-8-7.582-8-12a8 8 0 1 1 16 0Z" />
+        <Path
+          fill="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 11a1 1 0 1 0 0-2a1 1 0 0 0 0 2"
+        />
+      </G>
+    </>
+  ),
+});
+
+MapPinIcon.displayName = "MapPinIcon";
+export { MapPinIcon };
+
+const PlaneIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        d="M12 9c-3.102 0-4.224 2.603-4.86 5.237c-.808 3.342 2.036 4.857 4.86 4.759c2.824.098 5.668-1.417 4.86-4.759C16.225 11.603 15.103 9 12 9m0 5h.009M4 21h.009M20 21h.009M7 15l-5 2m15-2l5 2M12 9V3M4 18v-1.5M20 18v-1.5"
+        color="currentColor"
+      />
+    </>
+  ),
+});
+
+PlaneIcon.displayName = "PlaneIcon";
+export { PlaneIcon };

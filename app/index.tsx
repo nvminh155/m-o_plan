@@ -7,7 +7,7 @@ const App = () => {
 
   if (!user) return <Redirect href={"/(auth)/login1"} />;
 
-  return <Redirect href={"/(tabs)/(home)"} />;
+  return <Redirect href={"/plans"} />;
 };
 
 export default App;

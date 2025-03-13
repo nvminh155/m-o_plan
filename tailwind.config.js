@@ -230,6 +230,9 @@ module.exports = {
         "3xl": ["30px", "36px"],
         "4xl": ["36px", "40px"],
       },
+      height: {
+        '20': '5rem',
+      },
       boxShadow: {
         "hard-1": "-2px 2px 8px 0px rgba(38, 38, 38, 0.20)",
         "hard-2": "0px 3px 10px 0px rgba(38, 38, 38, 0.20)",

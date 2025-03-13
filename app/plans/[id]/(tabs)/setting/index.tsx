@@ -1,7 +1,7 @@
 import { HStack } from "@/components/ui/hstack";
 import {
   ChevronRightIcon,
-  EditIconfyIcon,
+  EditIcon,
   Icon,
   LockLightIcon,
   SearchIcon,
@@ -14,7 +14,7 @@ const SettingScreen = () => {
   return (
     <VStack className="flex-1 px-4 gap-4">
       <VStack className="mt-4"></VStack>
-      <SectionSetting icon={EditIconfyIcon} name="Cập nhật thông tin quỹ" />
+      <SectionSetting icon={EditIcon} name="Cập nhật thông tin quỹ" />
 
       <SectionSettingGroup title="Cài đặt thông báo">
         <SectionSetting icon={SearchIcon} name="Thông báo quỹ" />
