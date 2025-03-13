@@ -11,7 +11,7 @@ import FormCreatePiggyBank from "@/components/plans/create/form-create-piggy-ban
 import FormStep1 from "@/components/plans/create/form-step1";
 import FormCreateFriends from "@/components/plans/create/form-create-friend";
 import { ArrowLeftIcon } from "@/components/ui/icon";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 
 import CreateDoneScreen from "@/components/plans/create/create-done";
 
@@ -23,6 +23,8 @@ const PlanCreate = () => {
   useEffect(() => {
     clearState();
   }, []);
+
+  return <Redirect href={'/plans/create/onboarding-step1'} />;
 
   return (
     <VStack className="flex-1 rounded-md">

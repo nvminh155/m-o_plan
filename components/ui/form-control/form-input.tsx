@@ -10,15 +10,12 @@ import {
   FormControlHelperText,
 } from "@/components/ui/form-control";
 import { IInputFieldProps, Input, InputField } from "@/components/ui/input";
-import { VStack } from "@/components/ui/vstack";
 import { AlertCircleIcon } from "@/components/ui/icon";
 import React from "react";
 
 import {
   FieldPath,
   FieldValues,
-  useController,
-  UseControllerProps,
   Control,
   Controller,
 } from "react-hook-form";
@@ -76,7 +73,7 @@ function FormInput<
             </FormControlLabelText>
             {required && <Text style={{ color: "red" }}>*</Text>}
           </FormControlLabel>
-          <Input className="my-1" size={"lg"}>
+          <Input className="my-1" size={"md"}>
             <InputField
               {...rest}
               value={String(value ?? "")}

@@ -77,7 +77,7 @@ function FormDateTimePicker<
               {formLabelProps?.text ?? name}
             </FormControlLabelText>
           </FormControlLabel>
-          <Input className="my-1" size={"lg"}>
+          <Input className="my-1" size={"md"}>
             <InputField
               {...rest}
               value={new Date(
