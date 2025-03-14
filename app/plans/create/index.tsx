@@ -16,40 +16,7 @@ import { Redirect, router } from "expo-router";
 import CreateDoneScreen from "@/components/plans/create/create-done";
 
 const PlanCreate = () => {
-  const step = useCreatePlanStore((state) => state.stepString);
-  const clearState = useCreatePlanStore((state) => state.clear);
-  console.log("STEP", step);
-
-  useEffect(() => {
-    clearState();
-  }, []);
-
   return <Redirect href={'/plans/create/onboarding-step1'} />;
-
-  return (
-    <VStack className="flex-1 rounded-md">
-      <Button
-        variant="link"
-        size="xl"
-        className="mr-auto"
-        onPress={() => {
-          router.back();
-          clearState();
-        }}
-      >
-        <ButtonIcon as={ArrowLeftIcon} className="!text-typography-500" />
-      </Button>
-      <Text bold className="text-center py-8">
-        Bước {`${step.id}: ${step.title}`}
-      </Text>
-      <FormStep1 isShow={step.key.includes("base")} />
-      <FormCreatePiggyBank isShow={step.key.includes("piggy-bank")} />
-      {/* <FormCreateActivity /> */}
-      <FormCreateActivity isShow={step.key.includes("activities")} />
-      <FormCreateFriends isShow={step.key.includes("members")} />
-      {step.key.includes("done") && <CreateDoneScreen />}
-    </VStack>
-  );
 };
 
 export default PlanCreate;

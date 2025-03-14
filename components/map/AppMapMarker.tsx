@@ -19,7 +19,6 @@ const BaseMapMarker = ({
   children,
   ...rest
 }: AppMapMarkerProps) => {
-  console.log("set location", coordinate);
   return (
     <Marker coordinate={coordinate} title={title} {...rest}>
       {children}
@@ -30,7 +29,7 @@ const BaseMapMarker = ({
 interface UserMapMarkerProps extends AppMapMarkerProps {
   avatar: any;
 }
-const UserMapMarker = ({
+const UserMarker = ({
   avatar,
   ...rest
 }: UserMapMarkerProps) => {
@@ -43,9 +42,9 @@ const UserMapMarker = ({
   );
 };
 
-export interface DestinationMapMarkerProps extends AppMapMarkerProps {}
+export interface DestinationMarkerProps extends AppMapMarkerProps {}
 
-const DestinationMapMarker = ({ ...rest }: DestinationMapMarkerProps) => {
+const DestinationMarker = ({ ...rest }: DestinationMarkerProps) => {
   return (
     <BaseMapMarker {...rest}>
       <View className="bg-primary-500 rounded-full border-2 w-10 h-10 items-center justify-center border-white">
@@ -55,4 +54,4 @@ const DestinationMapMarker = ({ ...rest }: DestinationMapMarkerProps) => {
   );
 };
 
-export { BaseMapMarker, UserMapMarker, DestinationMapMarker };
+export { BaseMapMarker, UserMarker, DestinationMarker };
