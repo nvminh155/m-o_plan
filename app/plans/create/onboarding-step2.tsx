@@ -1,212 +1,122 @@
-import { useState, useRef, useEffect } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import MapView, {
-  Marker,
-  PROVIDER_GOOGLE,
-  type Region,
-} from "react-native-maps";
-import { useDestinationStore } from "@/stores/destination-store";
+import { useState, useEffect, useRef, useCallback } from "react";
 
-import * as Location from "expo-location";
-
-import { ConfirmationDialog } from "@/components/plans/create/activity/confirmation-dialog";
-import { SearchBar } from "@/components/map/search-bar";
 import { VStack } from "@/components/ui/vstack";
-import { CreateLocationModal } from "@/components/plans/create/activity/create-location-modal";
 
-type SearchResult = {
-  name: string;
-  latitude: number;
-  longitude: number;
-  address: string;
-};
+import MapScreen from "@/components/map";
+import { useCreatePlanStore } from "@/stores/create-plans-store";
+import ButtonNextStep from "@/components/plans/create/button-next-step";
+import { useFieldArray, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { planSchema } from "@/schemas/planSchema";
+import { z } from "zod";
+import BeforeMapScreen from "@/components/plans/create/activity/before-mapscreen";
+import MapView, { Marker } from "react-native-maps";
+import ListActivity from "@/components/plans/create/activity/list-activity";
+import DateOnTrip from "@/components/plans/create/activity/date-on-trip";
+import { useRouter } from "expo-router";
 
-export default function MapScreen() {
-  const mapRef = useRef<MapView>(null);
-  const [region, setRegion] = useState<Region>({
-    latitude: 10.762622,
-    longitude: 106.660172,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+const formSchema = planSchema.pick({ activities: true });
+type TForm = z.infer<typeof formSchema>;
+
+export default function OnboardingStep2() {
+  const router = useRouter();
+
+  const formData = useCreatePlanStore((state) => state.formData);
+  const updateFormData = useCreatePlanStore((state) => state.updateFormData);
+
+  const form = useForm<TForm>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      activities: [],
+    },
   });
-  const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [showFormModal, setShowFormModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { append, remove } = useFieldArray({
+    control: form.control, // control props comes from useForm (optional: if you are using FormProvider)
+    name: "activities", // unique name for your Field Array
+  });
 
-  const { destinations, addDestination } = useDestinationStore();
+  const mapRef = useRef<MapView>(null);
+
+  const [daySelected, setDaySelected] = useState<number | null>(null);
 
   useEffect(() => {
-    (async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
+    if (!daySelected) return;
+  }, [daySelected]);
 
-      const location = await Location.getCurrentPositionAsync({});
-      setRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      });
-    })();
-  }, []);
-
-  const handleSearch = async (query: string) => {
-    if (!query.trim()) return;
-
-    setIsLoading(true);
-    try {
-      // Simulating a search API call
-      // In a real app, you would use a geocoding service like Google Places API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Mock search result
-      const result = {
-        name: query,
-        latitude: region.latitude + (Math.random() - 0.5) * 0.05,
-        longitude: region.longitude + (Math.random() - 0.5) * 0.05,
-        address: `123 ${query} Street, City, Country`,
-      };
-
-      setSearchResult(result);
-
-      // Check if this location exists in our destinations
-      const exists = destinations.some(
-        (dest) =>
-          Math.abs(dest.latitude - result.latitude) < 0.0001 &&
-          Math.abs(dest.longitude - result.longitude) < 0.0001
-      );
-
-      // Move map to the search result
-      mapRef.current?.animateToRegion({
-        latitude: result.latitude,
-        longitude: result.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      });
-
-      // If location doesn't exist, show confirmation dialog
-      if (!exists) {
-        setShowConfirmation(true);
-      }
-    } catch (error) {
-      console.error("Search error:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = (data: TForm) => {
+    updateFormData(data);
+    router.push("/plans/create/status");
   };
 
-  const handleConfirmDestination = () => {
-    setShowConfirmation(false);
-    setShowFormModal(true);
-  };
+  const convertFormData = useCallback(() => {
+    const data = form.getValues("activities");
+    if (!data) return [];
 
-  const handleCancelDestination = () => {
-    setShowConfirmation(false);
-  };
+    return data.filter((activity) => {
+      const a = new Date(activity.onDate);
+      const b = new Date(daySelected ?? activity.onDate);
+      const isBOnA =
+        a.getDate() === b.getDate() &&
+        a.getMonth() === b.getMonth() &&
+        a.getFullYear() === b.getFullYear();
 
-  const handleFormSubmit = (data: any) => {
-    if (searchResult) {
-      addDestination({
-        id: Date.now().toString(),
-        name: data.name,
-        description: data.description,
-        category: data.category,
-        latitude: searchResult.latitude,
-        longitude: searchResult.longitude,
-        address: searchResult.address,
-        images: data.images || [],
-      });
-    }
-    setShowFormModal(false);
-  };
+      return isBOnA;
+    });
+  }, [formData.activities, daySelected]);
 
   return (
-    <VStack className="flex-1">
-      <View style={styles.searchContainer}>
-        <SearchBar onSearch={handleSearch} isLoading={isLoading} />
-      </View>
+    <VStack className="flex-1 pt-4">
+      <ButtonNextStep
+        onNext={() => {
+          form.handleSubmit(onSubmit)();
+        }}
+      />
+      <VStack className="h-1/2 mb-4">
+        <MapScreen ref={mapRef}>
+          {convertFormData().map((activity, index) => {
+            return (
+              <Marker
+                coordinate={{
+                  latitude: activity.location.latitude,
+                  longitude: activity.location.longitude,
+                }}
+                title={`Điểm ${index + 1}`}
+                key={index + 1}
+              ></Marker>
+            );
+          })}
+        </MapScreen>
+      </VStack>
 
-      <MapView
-        ref={mapRef}
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        region={region}
-        onRegionChangeComplete={setRegion}
-      >
-        {searchResult && (
-          <Marker
-            coordinate={{
-              latitude: searchResult.latitude,
-              longitude: searchResult.longitude,
-            }}
-            title={searchResult.name}
-            description={searchResult.address}
-          />
-        )}
+      <DateOnTrip daySelected={daySelected} onPressCB={(day) => setDaySelected(day)} />
 
-        {destinations.map((destination) => (
-          <Marker
-            key={destination.id}
-            coordinate={{
-              latitude: destination.latitude,
-              longitude: destination.longitude,
-            }}
-            title={destination.name}
-            description={destination.description}
-            pinColor="blue"
-          />
-        ))}
-      </MapView>
-
-      <ConfirmationDialog
-        visible={showConfirmation}
-        onConfirm={handleConfirmDestination}
-        onCancel={handleCancelDestination}
-        locationName={searchResult?.name || ""}
+      <ListActivity
+        data={convertFormData()}
+        onPressActivity={(activity) => {
+          mapRef.current?.animateToRegion(
+            {
+              latitude: activity.location.latitude,
+              longitude: activity.location.longitude,
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01,
+            },
+            1000
+          );
+        }}
       />
 
-      {/* <DestinationFormModal
-        visible={showFormModal}
-        onClose={() => setShowFormModal(false)}
-        onSubmit={handleFormSubmit}
-        initialData={{
-          name: searchResult?.name || "",
-          address: searchResult?.address || "",
+      <BeforeMapScreen
+        onDate={daySelected ?? formData.startDate}
+        onCompleteCreate={(data) => {
+          append(
+            {
+              ...data,
+            },
+            { shouldFocus: true }
+          );
+          console.log("data1", data, form.getValues());
         }}
-      /> */}
-
-      <CreateLocationModal
-        isVisible={showFormModal}
-        onClose={() => setShowFormModal(false)}
-        // onSubmit={handleFormSubmit}
-        // initialData={{
-        //   name: searchResult?.name || "",
-        //   address: searchResult?.address || "",
-        // }}
-        location={searchResult}
       />
     </VStack>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  },
-  searchContainer: {
-    position: "absolute",
-    top: 10,
-    left: 10,
-    right: 10,
-    zIndex: 5,
-  },
-});

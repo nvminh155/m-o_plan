@@ -61,6 +61,11 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
       target: 0,
       current: 0,
     },
+    destination: {
+      address: "",
+      latitude: 0,
+      longitude: 0,
+    },
     activities: [],
     members: [],
     thumbnail: "",
@@ -101,6 +106,11 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
         budget: {
           target: 0,
           current: 0,
+        },
+        destination: {
+          address: "",
+          latitude: 0,
+          longitude: 0,
         },
         activities: [],
         members: [],

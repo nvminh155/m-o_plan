@@ -1,78 +1,82 @@
-import React, { useEffect, useState } from "react";
-import { VStack } from "../ui/vstack";
-import { Button, ButtonIcon } from "../ui/button";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import { useRouter } from "expo-router";
-import { ResizeFullScreenIcon } from "../ui/icon";
-import * as Location from "expo-location";
+import React, { useEffect, useRef } from "react";
+import MapView, {
+  MapMarkerProps,
+  MapViewProps,
+  PROVIDER_GOOGLE,
+} from "react-native-maps";
 import {
-  DestinationMapMarker,
-  DestinationMapMarkerProps,
-  UserMapMarker,
+  DestinationMarker,
+  DestinationMarkerProps,
+  UserMarker,
 } from "./AppMapMarker";
 import { cn } from "@/lib/cn";
+import { useLocation } from "@/hooks/useLocation";
+import { useAppStore } from "@/stores/app-store";
 
-interface MapScreenProps {
-  markers?: DestinationMapMarkerProps[];
-  className?: string;
+interface MapScreenProps extends MapViewProps {
+  markers?: DestinationMarkerProps[];
+  otherMarkers?: MapMarkerProps[];
   isShowBtnFullScreen?: boolean;
+  children?: React.ReactNode;
 }
 
-const MapScreen = ({
-  markers = [],
-  className,
-  isShowBtnFullScreen,
-}: MapScreenProps) => {
-  const router = useRouter();
-  const [location, setLocation] = useState<Location.LocationObject | null>(
-    null
-  );
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  console.log("my location", location?.coords);
+const MapScreen = React.forwardRef<
+  React.ElementRef<typeof MapView>,
+  MapScreenProps
+>(
+  (
+    {
+      markers = [],
+      className,
+      isShowBtnFullScreen,
+      initialRegion = {
+        latitude: 13.33420029031534,
+        latitudeDelta: 10.969723141807847,
+        longitude: 108.8669391721487,
+        longitudeDelta: 9.573061466217041,
+      },
+      children,
+      ...rest
+    },
+    ref
+  ) => {
+    const myLocation = useAppStore(state => state.data.location);
 
-  useEffect(() => {
-    async function getCurrentLocation() {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
+    // const mapRef = useRef<MapView | null>(null);
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    }
+    // useEffect(() => {
+    //   if (!mapRef.current) return;
+    //   mapRef.current.fitToSuppliedMarkers(["marker 0"], {
+    //     edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
+    //     animated: true,
+    //   });
+    // }, []);
 
-    getCurrentLocation();
-  }, []);
-
-  return (
-    <VStack className={cn("flex-1", className)}>
+    return (
       <MapView
-      provider={PROVIDER_GOOGLE}
+        ref={ref}
+        provider={PROVIDER_GOOGLE}
         style={{
           flex: 1,
         }}
-        initialRegion={{
-          latitude: 13.33420029031534,
-          latitudeDelta: 10.969723141807847,
-          longitude: 108.8669391721487,
-          longitudeDelta: 9.573061466217041,
-        }}
+        initialRegion={{ ...initialRegion }}
+        className={cn("flex-1", className)}
+        {...rest}
       >
-        {location && (
-          <UserMapMarker
-            coordinate={location.coords}
+        {myLocation && (
+          <UserMarker
+            coordinate={myLocation.coords}
             title="Vị trí của bạn"
             avatar={require("@/assets/images/3x4anime.jpg")}
           />
         )}
 
         {markers.map((marker, index) => (
-          <DestinationMapMarker key={index + 1} {...marker} />
+          <DestinationMarker key={index + 1} {...marker} />
         ))}
-      </MapView>
 
-      {isShowBtnFullScreen && (
+        {children}
+        {/* {isShowBtnFullScreen && (
         <Button
           action="primary"
           size="lg"
@@ -83,9 +87,10 @@ const MapScreen = ({
         >
           <ButtonIcon as={ResizeFullScreenIcon} />
         </Button>
-      )}
-    </VStack>
-  );
-};
+      )} */}
+      </MapView>
+    );
+  }
+);
 
 export default MapScreen;

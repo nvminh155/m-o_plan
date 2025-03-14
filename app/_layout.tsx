@@ -15,6 +15,7 @@ import {
 import { StackRouter } from "@react-navigation/native";
 import { SafeAreaView, View } from "react-native";
 import AuthProvider from "@/contexts/AuthProvider";
+import AppProvider from "@/contexts/AppProvider";
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -33,15 +34,17 @@ export default function RootLayout() {
   return (
     <GluestackUIProvider mode="light">
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <Navigator router={StackRouter} initialRouteName="plans">
-            <SafeAreaView className={"flex-1 scroll_smooth"}>
-              <View className="flex-1">
-                <Slot />
-              </View>
-            </SafeAreaView>
-          </Navigator>
-        </AuthProvider>
+        <AppProvider>
+          <AuthProvider>
+            <Navigator router={StackRouter} initialRouteName="plans">
+              <SafeAreaView className={"flex-1 scroll_smooth"}>
+                <View className="flex-1">
+                  <Slot />
+                </View>
+              </SafeAreaView>
+            </Navigator>
+          </AuthProvider>
+        </AppProvider>
       </QueryClientProvider>
     </GluestackUIProvider>
   );

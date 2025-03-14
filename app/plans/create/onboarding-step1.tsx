@@ -1,5 +1,5 @@
 import { VStack } from "@/components/ui/vstack";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import FormInput from "@/components/ui/form-control/form-input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/modal";
 import MapSearch from "@/components/map/map-search";
 import { CloseIcon, Icon } from "@/components/ui/icon";
+import { Button, ButtonText } from "@/components/ui/button";
+import { useNavigation } from "@react-navigation/native";
 
 const formSchema = planSchema.pick({
   title: true,
@@ -34,8 +36,7 @@ type TForm = z.infer<typeof formSchema>;
 const OnboardingStep1 = () => {
   const router = useRouter();
 
-  const updateStep1 = useCreatePlanStore((state) => state.updateFormData);
-  const updateStep = useCreatePlanStore((state) => state.updateStep);
+  const updateFormData = useCreatePlanStore((state) => state.updateFormData);
 
   const [isShowModalSelectLocation, setIsShowModalSelectLocation] =
     React.useState(false);
@@ -51,17 +52,18 @@ const OnboardingStep1 = () => {
         longitude: 107.0830519,
         address: "Công Viên Cột Cờ, Vũng Tàu, Việt Nam",
       },
+      title: "kljfaslkdfjsd",
+      startDate: new Date().getTime(),  
+      endDate: new Date().getTime(),
     },
   });
 
   const onSubmit = (data: TForm) => {
     console.log("MY DATA CREA PLAN", data);
-    updateStep1(data);
-    updateStep(1);
+    updateFormData(data);
     router.push("/plans/create/onboarding-step2");
   };
 
-  console.log("FORM", form.getValues());
   return (
     <VStack className={cn("flex-1 rounded-md px-4 relative mt-4")}>
       <FormInput
@@ -135,7 +137,7 @@ const OnboardingStep1 = () => {
 
       <ButtonNextStep
         onNext={() => {
-          form.handleSubmit(onSubmit, () => {})();
+          form.handleSubmit(onSubmit)();
         }}
       />
     </VStack>

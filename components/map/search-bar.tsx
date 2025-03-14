@@ -78,7 +78,7 @@ export const SearchBar = ({ onSearch, isLoading = false, onSelected, defaultText
 
       {addresses.length > 0 && (
         <ScrollView
-          className="bg-white h-[200px] border"
+          className="bg-white h-auto max-h-[200px] border"
           style={{
             elevation: 2,
           }}

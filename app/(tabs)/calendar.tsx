@@ -178,7 +178,7 @@ const ListActivity = () => {
     <ScrollView contentContainerClassName="gap-16" className="mt-10">
       {query.data?.map((activity, i) => {
         const fromHours = new Date(activity.fromHours);
-        const endDate = new Date(activity.endDate);
+        // const endDate = new Date(activity.endDate);
 
         const fromHoursString = toTime(fromHours.getTime());
 
