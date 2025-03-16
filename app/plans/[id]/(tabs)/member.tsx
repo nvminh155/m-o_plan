@@ -34,7 +34,6 @@ const CardInviteFriend = ({ title, sourceImg }: CardInviteFriendProps) => {
 const Member = () => {
   return (
     <VStack className="bg-[#f5f5f5] flex-1">
-      <PlanDetailHeader />
       <HStack className="gap-4 mb-12 mt-4 px-4">
         <CardInviteFriend
           title="Mời bạn bè tham gia"

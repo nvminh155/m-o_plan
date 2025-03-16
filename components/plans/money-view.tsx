@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import AppText from "../ui/AppText";
 import { Button, ButtonIcon, ButtonText } from "../ui/button";
 import { HStack } from "../ui/hstack";
 import { Text } from "../ui/text";
-import { PlusIcon, PlusThinIcon, SwitchLightIcon, WithDrawalIcon } from "../ui/icon";
+import { PlusIcon,  SwitchLightIcon, WithDrawalIcon } from "../ui/icon";
 import { TPlan } from "@/types/plan";
 import { VStack } from "../ui/vstack";
 import { useRouter } from "expo-router";
 import { usePlanContext } from "@/contexts/PlanProvider";
 
 interface MoneyViewProps {
-  piggyBank: TPlan["piggyBank"];
+  data: TPlan["budget"];
 }
 
-const MoneyView = ({ piggyBank }: MoneyViewProps) => {
+const MoneyView = ({ data }: MoneyViewProps) => {
   
   const [view, setView] = useState<"goal" | "default">("default");
 
@@ -30,8 +29,8 @@ const MoneyView = ({ piggyBank }: MoneyViewProps) => {
       </Text>
       <View className="self-start justify-start">
         <HStack className="justify-between w-full items-center">
-          <Text className="font-medium !text-tertiary-500">
-            {view === "default" ? "Tiền hiện có" : "Mục tiêu"}
+          <Text className="font-medium !text-tertiary-500" size="sm">
+            {view === "default" ? "Ngân sách hiện có" : "Mục tiêu"}
           </Text>
 
           <Button
@@ -40,6 +39,7 @@ const MoneyView = ({ piggyBank }: MoneyViewProps) => {
             onPress={() => {
               setView(view === "goal" ? "default" : "goal");
             }}
+            size="sm"
           >
             <ButtonIcon as={SwitchLightIcon} size="xl" />
             <ButtonText className="font-medium">
@@ -49,8 +49,8 @@ const MoneyView = ({ piggyBank }: MoneyViewProps) => {
         </HStack>
         <Text className="!text-3xl font-medium">
           {view === "default"
-            ? `${piggyBank?.currentMoney}đ`
-            : `${piggyBank?.amountGoal}đ`}
+            ? `${data?.current}đ`
+            : `${data?.target}đ`}
         </Text>
       </View>
       <ActionWithMoney />

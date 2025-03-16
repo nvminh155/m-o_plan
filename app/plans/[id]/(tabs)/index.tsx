@@ -18,12 +18,12 @@ const DetailPlans = () => {
 
   return (
     <VStack className="flex-1 relative">
-      <PlanDetailHeader />
+      {/* <PlanDetailHeader /> */}
 
       <ScrollView className="flex-1">
         <PlanDetailHomeBanner />
 
-        <MoneyView piggyBank={data.piggyBank} />
+        <MoneyView data={data.budget} />
 
         <PlanDetailMoreAction />
 
