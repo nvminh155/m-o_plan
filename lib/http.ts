@@ -1,6 +1,4 @@
-import { getSession } from "next-auth/react";
-
-type CustomOptions = RequestInit & {
+export type CustomOptions = RequestInit & {
   baseUrl?: string;
   isAuthApi?: boolean;
 };
@@ -22,7 +20,7 @@ type TPayload<TData> = {
   data: TData;
 };
 
-const request = async <TData,>(
+const request = async <TData>(
   method: "GET" | "POST" | "PUT" | "DELETE",
   url: string,
   options: CustomOptions | undefined
@@ -34,9 +32,9 @@ const request = async <TData,>(
   };
 
   if (options?.isAuthApi) {
-    const session = await getSession();
+    // const session = await getSession();
     // console.log("my session", session);
-    baseHeaders["Authorization"] = `Bearer ${session?.user.token ?? ""}`;
+    // baseHeaders["Authorization"] = `Bearer ${session?.user.token ?? ""}`;
   }
 
   const baseUrl =
@@ -49,7 +47,18 @@ const request = async <TData,>(
   }
 
   const fullUrl = `${baseUrl}${url}`;
+  console.log("FULLURL", fullUrl);
 
+  console.log("OPTIONS ", {
+    ...options,
+    headers: {
+      ...baseHeaders,
+      ...options?.headers,
+    },
+    credentials: "include",
+    body,
+    method,
+  });
   const res = await fetch(fullUrl, {
     ...options,
     headers: {

@@ -1,3 +1,7 @@
+import CardHotel from "@/components/card/card-hotel";
+import HotelsScreen from "@/components/test/hotel-screen";
+import TestApiAttraction from "@/components/testapi/api-attraction-screen";
+import TestApiHotel from "@/components/testapi/api-hotel-screen";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { tripadvisorService } from "@/services/tripadvisor";
@@ -31,7 +35,7 @@ const TestApi = () => {
         {query.isError && <Text>Error: {query.error.message}</Text>}
         {query.isSuccess && (
           <VStack>
-            {query.data.data.map((item: any, i: number) => {
+            {/* {query.data.data.map((item: any, i: number) => {
               if (i === 0)
                 console.log(
                   Object.entries(query.data.data.filter((r : any) => r.result_type === "restaurants")[0].result_object)
@@ -39,13 +43,15 @@ const TestApi = () => {
                     .join("\n")
                 );
               return <Text key={i + 1}>{item.scope}</Text>;
-            })}
+            })} */}
 
             {/* {Object.entries(query.data.data[0].result_object)
               .map(([key, value], i) => `${key}: ${typeof value}`)
               .join("\n")} */}
           </VStack>
         )}
+        {/* <TestApiHotel /> */}
+        <TestApiAttraction />
       </ScrollView>
     </VStack>
   );

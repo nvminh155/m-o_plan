@@ -1,4 +1,7 @@
+import { TResponseAutoComplete } from "@/types/tripadvisor/auto-complete";
 import { config, env } from "./constant";
+import { hotelService } from "./hotel";
+import { attractionService } from "./attraction";
 
 type TLocationSearch = {
   query: string;
@@ -11,9 +14,29 @@ type TLocationSearch = {
   lang?: string;
 };
 
+type TAutoComplete = {
+  query: string;
+  lang?: string;
+  units?: "km" | "mi";
+};
+
 export const tripadvisorService = {
+  autoComplete: async (obj: TAutoComplete) => {
+    const url = `${env.BASE_URL}/locations/v2/auto-complete?${objToQueryParams(
+      obj
+    )}`;
+    const options = {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": env.RAPIDAPI_KEY,
+        "x-rapidapi-host": env.RAPIDAPI_HOST,
+      },
+    };
+    const res = await fetch(url, options);
+
+    return (await res.json()) as TResponseAutoComplete;
+  },
   locationSearch: async (obj: TLocationSearch) => {
-    const queryParams = new URLSearchParams();
     obj.currency = config.currency;
     obj.lang = config.lang;
     obj.units = config.units;
@@ -22,13 +45,7 @@ export const tripadvisorService = {
     obj.offset = 0;
     obj.location_id = 1;
 
-    Object.entries(obj).forEach(([key, value]) => {
-      if (value !== undefined) {
-        queryParams.append(key, value.toString());
-      }
-    });
-
-    const url = `${env.BASE_URL}/locations/search?${queryParams.toString()}`;
+    const url = `${env.BASE_URL}/locations/search?${objToQueryParams(obj)}`;
 
     const res = await fetch(url, {
       method: "GET",
@@ -37,7 +54,22 @@ export const tripadvisorService = {
         "x-rapidapi-host": env.RAPIDAPI_HOST,
       },
     });
-  
+
     return await res.json();
   },
+
+  hotel: hotelService,
+  attraction: attractionService,
+};
+
+const objToQueryParams = (obj: Record<string, any>) => {
+  const queryParams = new URLSearchParams();
+
+  Object.entries(obj).forEach(([key, value]) => {
+    if (value !== undefined) {
+      queryParams.append(key, value.toString());
+    }
+  });
+
+  return queryParams.toString();
 };
