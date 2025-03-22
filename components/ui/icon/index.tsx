@@ -22,10 +22,10 @@ const iconStyle = tva({
     size: {
       "2xs": "h-3 w-3",
       xs: "h-3.5 w-3.5",
-      sm: "h-4 w-4",
+      sm: "h-[14px] w-[14px]",
       md: "h-[18px] w-[18px]",
-      lg: "h-5 w-5",
-      xl: "h-6 w-6",
+      lg: "h-[24px] w-[24px]",
+      xl: "h-[24px] w-[24px]",
       "2xl": "h-8 w-8",
     },
   },
@@ -1913,9 +1913,9 @@ const CaretDownIcon = createIconUI({
     <>
       <Path
         fill="currentColor"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M16.53 8.97a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 1 1 1.06-1.06L12 12.44l3.47-3.47a.75.75 0 0 1 1.06 0"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
     </>
   ),
@@ -2118,3 +2118,90 @@ const PlaneIcon = createIconUI({
 
 PlaneIcon.displayName = "PlaneIcon";
 export { PlaneIcon };
+
+const UserIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M12 2a5 5 0 1 1-5 5l.005-.217A5 5 0 0 1 12 2m2 12a5 5 0 0 1 5 5v1a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-1a5 5 0 0 1 5-5z"
+      />
+    </>
+  ),
+});
+
+UserIcon.displayName = "UserIcon";
+export { UserIcon };
+
+const UserHeartIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="m17.841 15.659l.176.177l.178-.177a2.25 2.25 0 1 1 3.182 3.182l-3.36 3.359l-3.358-3.359a2.25 2.25 0 1 1 3.182-3.182M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 7.75-7.996zm0-13c3.315 0 6 2.685 6 6a6 6 0 0 1-5.775 5.996L12 13c-3.315 0-6-2.685-6-6a6 6 0 0 1 5.775-5.996zm0 2C9.79 3 8 4.79 8 7s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4"
+      />
+    </>
+  ),
+});
+
+UserHeartIcon.displayName = "UserHeartIcon";
+export { UserHeartIcon };
+
+const FriendsIcon = createIconUI({
+  viewBox: "0 0 32 32",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M9 7c-3.3 0-6 2.7-6 6c0 1.984.977 3.75 2.469 4.844C2.832 19.152 1 21.864 1 25h2c0-3.324 2.676-6 6-6s6 2.676 6 6h2c0-3.324 2.676-6 6-6s6 2.676 6 6h2c0-3.137-1.832-5.848-4.469-7.156A6 6 0 0 0 29 13c0-3.3-2.7-6-6-6s-6 2.7-6 6c0 1.984.977 3.75 2.469 4.844A8.06 8.06 0 0 0 16 21.125a8.06 8.06 0 0 0-3.469-3.281A6 6 0 0 0 15 13c0-3.3-2.7-6-6-6m0 2c2.223 0 4 1.777 4 4s-1.777 4-4 4s-4-1.777-4-4s1.777-4 4-4m14 0c2.223 0 4 1.777 4 4s-1.777 4-4 4s-4-1.777-4-4s1.777-4 4-4"
+      />
+    </>
+  ),
+});
+
+FriendsIcon.displayName = "FriendsIcon";
+export { FriendsIcon };
+
+const FamilyIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M18 5.808q-.698 0-1.195-.497t-.497-1.195t.497-1.196T18 2.423t1.195.497t.497 1.196q0 .698-.497 1.195T18 5.808M16.73 21.5V11.046h-1.574l1.479-3.969h2.75l3.115 8.308h-2.654V21.5zm-4.232-10.077q-.546 0-.926-.382t-.38-.928t.383-.925t.927-.38t.926.382t.38.928t-.382.925q-.383.38-.928.38M5.5 5.808q-.698 0-1.195-.497t-.497-1.195t.497-1.196T5.5 2.423t1.195.497t.497 1.196q0 .698-.497 1.195T5.5 5.808M3.73 21.5v-6.577H2.078v-7.5h6.846v7.5H7.269V21.5zm7.54 0V18h-1v-5.5h4.46V18h-1v3.5z"
+      />
+    </>
+  ),
+});
+
+FamilyIcon.displayName = "FamilyIcon";
+export { FamilyIcon };
+
+const HeartIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="currentColor"
+        d="M2 9.137C2 14 6.02 16.591 8.962 18.911C10 19.729 11 20.5 12 20.5s2-.77 3.038-1.59C17.981 16.592 22 14 22 9.138S16.5.825 12 5.501C7.5.825 2 4.274 2 9.137"
+      />
+    </>
+  ),
+});
+
+HeartIcon.displayName = "HeartIcon";
+export { HeartIcon };
+
+const CaretDownSolidIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path fill="white" d="m17 10l-5 6l-5-6z" />
+    </>
+  ),
+});
+
+CaretDownSolidIcon.displayName = "CaretDownSolidIcon";
+export { CaretDownSolidIcon };

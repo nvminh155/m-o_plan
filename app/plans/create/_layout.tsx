@@ -1,23 +1,64 @@
+import { Button, ButtonText } from "@/components/ui/button";
+import { HStack } from "@/components/ui/hstack";
+import { Progress, ProgressFilledTrack } from "@/components/ui/progress";
+import { VStack } from "@/components/ui/vstack";
+import { StackRouter } from "@react-navigation/native";
+import { Navigator, Slot, usePathname } from "expo-router";
+import { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 
-import { Stack } from "expo-router";
+type THeaderProps = {
+  onPressCB?: () => void;
+};
+export const CreatePlanHeader = ({ onPressCB }: THeaderProps) => {
+  return (
+    <HStack className="">
+      <Button
+        variant="link"
+        className="ml-auto"
+        onPress={() => {
+          if (onPressCB) onPressCB();
+        }}
+      >
+        <ButtonText>Tiếp</ButtonText>
+      </Button>
+    </HStack>
+  );
+};
 
+const ProgressStep = () => {
+  const pathname = usePathname(); // Get the current route
+  const [progress, setProgress] = useState(0); // Track progress
 
+  useEffect(() => {
+    if (pathname.includes("date-range")) {
+      setProgress(25);
+    } else if (pathname.includes("kind-of-trip")) {
+      setProgress(50);
+    } else if (pathname.includes("step-3")) {
+      setProgress(75);
+    } else if (pathname.includes("step-4")) {
+      setProgress(100);
+    } else {
+      setProgress(0); // Default case
+    }
+  }, [pathname]); // Update progress when route changes
+
+  return (
+    <Progress className="mt-8" value={progress} >
+      <ProgressFilledTrack />
+    </Progress>
+  );
+};
 export default function CreateLayout() {
   return (
-  <Stack initialRouteName="onboarding-step1" screenOptions={{
-    headerShown: false
-  }}>
-    <Stack.Screen name="onboarding-step1" options={{
-      headerShown: true,
-      headerTitle: "Bước 1"
-    }} />
-
-<Stack.Screen name="onboarding-step2" options={{
-      headerShown: true,
-      headerTitle: "Bước 2"
-    }} />
-
-
-  </Stack>
+    <Navigator router={StackRouter} routerOptions={{}} screenOptions={{}}>
+      <VStack className="flex-1 px-6 gap-4 justify-center">
+        <ProgressStep />
+        <ScrollView className="flex-1">
+          <Slot />
+        </ScrollView>
+      </VStack>
+    </Navigator>
   );
 }

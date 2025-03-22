@@ -19,15 +19,15 @@ export const activitySchema = z.object({
   onDate: z.number(),
   fromHours: z.number(),
   toHours: z.number(),
-  location: z
-    .object({
-      latitude: z.number(),
-      longitude: z.number(),
-    })
+  startDate: z.number().default(0),
+  endDate: z.number().default(0),
+  location: z.object({
+    latitude: z.number(),
+    longitude: z.number(),
+  }),
 });
 
 export const planSchema = z.object({
-  piggyBank: piggyBankSchema.optional(),
   budget: z.object({
     current: z.number().default(0),
     target: z.number().default(0),
@@ -37,8 +37,13 @@ export const planSchema = z.object({
     latitude: z.number(),
     longitude: z.number(),
     address: z.string().trim().nonempty(),
+    geo_id: z.string(),
+    location_id: z.string(),
   }),
   members: z.array(z.string().trim().nonempty()).min(1).optional(),
+  type: z.enum(["solo", "partner", "friends", "family"]),
+  numberOfMembers: z.number().min(1),
+  
   thumbnail: z.string().optional(),
   title: z.string().trim().nonempty().max(50),
   startDate: z.number(),

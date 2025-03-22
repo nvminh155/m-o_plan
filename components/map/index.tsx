@@ -12,6 +12,8 @@ import {
 import { cn } from "@/lib/cn";
 import { useLocation } from "@/hooks/useLocation";
 import { useAppStore } from "@/stores/app-store";
+import { MarkerActivity } from "../marker-activity";
+import { View } from "react-native";
 
 interface MapScreenProps extends MapViewProps {
   markers?: DestinationMarkerProps[];
@@ -40,7 +42,7 @@ const MapScreen = React.forwardRef<
     },
     ref
   ) => {
-    const myLocation = useAppStore(state => state.data.location);
+    const myLocation = useAppStore((state) => state.data.location);
 
     // const mapRef = useRef<MapView | null>(null);
 
@@ -53,30 +55,46 @@ const MapScreen = React.forwardRef<
     // }, []);
 
     return (
-      <MapView
-        ref={ref}
-        provider={PROVIDER_GOOGLE}
-        style={{
-          flex: 1,
-        }}
-        initialRegion={{ ...initialRegion }}
-        className={cn("flex-1", className)}
-        {...rest}
-      >
-        {myLocation && (
+      <View className={cn("flex-1", className)}>
+        <MapView
+          ref={ref}
+          provider={PROVIDER_GOOGLE}
+          style={{
+            flex: 1,
+          }}
+          initialRegion={{ ...initialRegion }}
+          className={cn("flex-1", className)}
+          {...rest}
+        >
+          {/* {myLocation && (
           <UserMarker
             coordinate={myLocation.coords}
             title="Vị trí của bạn"
             avatar={require("@/assets/images/3x4anime.jpg")}
           />
-        )}
+        )} */}
 
-        {markers.map((marker, index) => (
-          <DestinationMarker key={index + 1} {...marker} />
-        ))}
+          <MarkerActivity
+            activity={{
+              priority: 10,
+              location: {
+                latitude: myLocation.coords.latitude,
+                longitude: myLocation.coords.longitude,
+              },
+              title: "Đà Nẵng",
 
-        {children}
-        {/* {isShowBtnFullScreen && (
+              id: "1",
+              participants: [],
+            }}
+            isCompleted={false}
+            onPress={() => {}}
+          />
+          {markers.map((marker, index) => (
+            <DestinationMarker key={index + 1} {...marker} />
+          ))}
+
+          {children}
+          {/* {isShowBtnFullScreen && (
         <Button
           action="primary"
           size="lg"
@@ -88,7 +106,8 @@ const MapScreen = React.forwardRef<
           <ButtonIcon as={ResizeFullScreenIcon} />
         </Button>
       )} */}
-      </MapView>
+        </MapView>
+      </View>
     );
   }
 );

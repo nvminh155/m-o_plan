@@ -23,9 +23,19 @@ export default function Index() {
         <Activity
           data={{
             title: "Traveling to Switzerland",
-            description: "Traveling to Switzerland",
+            note: "Traveling to Switzerland",
+            fromHours: new Date().getTime(),
+            toHours: new Date().getTime(),
+            id: "1",
+            location: {
+              latitude: 10.9996864,
+              longitude: 106.678229
+            }
+            ,
             startDate: new Date().getTime(),
             endDate: new Date().getTime(),
+            onDate: new Date().getTime(),
+            type: "food",
           }}
         />
       </ScrollView>

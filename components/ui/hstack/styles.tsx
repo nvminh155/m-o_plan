@@ -11,7 +11,7 @@ export const hstackStyle = tva({
     space: {
       xs: "gap-1",
       sm: "gap-2",
-      md: "gap-3",
+      md: "gap-4",
       lg: "gap-4",
       xl: "gap-5",
       "2xl": "gap-6",

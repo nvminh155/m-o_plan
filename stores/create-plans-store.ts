@@ -37,26 +37,11 @@ const steps = [
 
 interface CreatePlanState {
   formData: PlanSchema;
-  step: number;
-  stepString: (typeof steps)[number];
-  updateStep: (by: number) => void;
   updateFormData: (data: Partial<PlanSchema>) => void;
-  goTo: (step: number) => void;
-  clear: () => void;
 }
-
-const guardStep = (step: number) =>
-  Math.min(Math.max(step, 0), steps.length - 1);
 
 const useCreatePlanStore = create<CreatePlanState>()((set) => ({
   formData: {
-    piggyBank: {
-      amountGoal: 0,
-      amountPeriod: 0,
-      periodDay: 1,
-      endDate: 0,
-      currentMoney: 0,
-    },
     budget: {
       target: 0,
       current: 0,
@@ -65,6 +50,8 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
       address: "",
       latitude: 0,
       longitude: 0,
+      geo_id: "0",
+      location_id: "0",
     },
     activities: [],
     members: [],
@@ -72,58 +59,14 @@ const useCreatePlanStore = create<CreatePlanState>()((set) => ({
     title: "",
     startDate: 0,
     endDate: 0,
+    type: "solo",
+    numberOfMembers: 1,
   },
 
-  step: 0,
-  stepString: steps[0],
   updateFormData: (data) =>
     set((state) => ({
       formData: { ...state.formData, ...data },
     })),
-
-  updateStep: (by) =>
-    set((state) => ({
-      step: guardStep(state.step + by),
-      stepString: steps[guardStep(state.step + by)],
-    })),
-
-  goTo: (step) =>
-    set({
-      step,
-      stepString: steps[step],
-    }),
-
-  clear: () => {
-    set({
-      formData: {
-        piggyBank: {
-          amountGoal: 0,
-          amountPeriod: 0,
-          periodDay: 1,
-          currentMoney: 0,
-          endDate: 0,
-        },
-        budget: {
-          target: 0,
-          current: 0,
-        },
-        destination: {
-          address: "",
-          latitude: 0,
-          longitude: 0,
-        },
-        activities: [],
-        members: [],
-        thumbnail: "",
-
-        title: "",
-        startDate: 0,
-        endDate: 0,
-      },
-      step: 0,
-      stepString: steps[0],
-    });
-  },
 }));
 
 export { useCreatePlanStore };

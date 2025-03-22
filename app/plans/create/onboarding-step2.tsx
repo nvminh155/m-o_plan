@@ -14,6 +14,7 @@ import MapView, { Marker } from "react-native-maps";
 import ListActivity from "@/components/plans/create/activity/list-activity";
 import DateOnTrip from "@/components/plans/create/activity/date-on-trip";
 import { useRouter } from "expo-router";
+import { CreatePlanHeader } from "./_layout";
 
 const formSchema = planSchema.pick({ activities: true });
 type TForm = z.infer<typeof formSchema>;
@@ -66,13 +67,12 @@ export default function OnboardingStep2() {
 
   return (
     <VStack className="flex-1 pt-4">
-      <ButtonNextStep
-        onNext={() => {
-          form.handleSubmit(onSubmit)();
-        }}
-      />
-      <VStack className="h-1/2 mb-4">
-        <MapScreen ref={mapRef}>
+      <CreatePlanHeader />
+
+      <VStack className="h-auto max-h-[300px] mb-4">
+        <MapScreen ref={mapRef} style={{
+          aspectRatio: 16 / 9
+        }}>
           {convertFormData().map((activity, index) => {
             return (
               <Marker
@@ -88,7 +88,10 @@ export default function OnboardingStep2() {
         </MapScreen>
       </VStack>
 
-      <DateOnTrip daySelected={daySelected} onPressCB={(day) => setDaySelected(day)} />
+      <DateOnTrip
+        daySelected={daySelected}
+        onPressCB={(day) => setDaySelected(day)}
+      />
 
       <ListActivity
         data={convertFormData()}

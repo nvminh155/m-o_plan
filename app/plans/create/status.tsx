@@ -30,7 +30,7 @@ const PendingScreen = () => {
           <Spinner size={"large"} />
         </View>
         <Text size="xl" className="font-semibold">
-          Đang tạo ...
+          Đang tạo dựa trên dữ liệu của bạn...
         </Text>
       </VStack>
     </VStack>
