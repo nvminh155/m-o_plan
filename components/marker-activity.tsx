@@ -3,23 +3,29 @@ import type React from "react";
 import { Marker, Callout } from "react-native-maps";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
-import { CaretDownIcon, CaretDownSolidIcon, CheckCircleIcon, Icon, TickIcon } from "./ui/icon";
+import {
+  CaretDownIcon,
+  CaretDownSolidIcon,
+  CheckCircleIcon,
+  Icon,
+  TickIcon,
+} from "./ui/icon";
 import { VStack } from "./ui/vstack";
 import { HStack } from "./ui/hstack";
 import { Badge, BadgeText } from "./ui/badge";
 import { View } from "react-native";
+import { TActivity } from "@/types/plan";
 
-interface CustomMarkerProps {
-  activity: Activity & {
-    priority: number;
-  };
+interface MarkerActivityProps {
+  activity: TActivity;
   isCompleted: boolean;
-  onPress: (activity: Activity) => void;
+  identifier: string;
+  onPress: (activity: TActivity) => void;
 }
-
-export const MarkerActivity: React.FC<CustomMarkerProps> = ({
+export const MarkerActivity: React.FC<MarkerActivityProps> = ({
   activity,
   isCompleted,
+  identifier,
   onPress,
 }) => {
   // Xác định màu dựa trên mức độ ưu tiên
@@ -44,9 +50,18 @@ export const MarkerActivity: React.FC<CustomMarkerProps> = ({
 
   return (
     <Marker
-      coordinate={activity.location}
+      coordinate={{
+        latitude: activity.location?.latitude ?? 0,
+        longitude: activity.location?.longitude ?? 0,
+      }}
       onPress={() => onPress(activity)}
       title="13123"
+      pinColor={isCompleted ? "#16a34a" : "blue"}
+      // pinColor="#16a34a"
+      style={{
+        position: "relative",
+      }}
+      identifier={identifier}
     >
       {/* Circular marker with priority number */}
       <Box
@@ -54,20 +69,18 @@ export const MarkerActivity: React.FC<CustomMarkerProps> = ({
           isCompleted ? "bg-green-600" : "bg-gray-800"
         } flex justify-center items-center shadow-lg`}
         style={{
-          position: 'relative'
+          position: "relative",
         }}
       >
         <Text className="text-white font-bold" size="xs">
-          {activity.priority}
+          {activity.priority === -1 ? activity.id : activity.priority}
         </Text>
         <View className="w-auto h-auto  absolute -bottom-[10px]">
-        <Icon as={CaretDownSolidIcon} className="text-white" />
+          <Icon as={CaretDownSolidIcon} className="text-white" />
         </View>
       </Box>
 
       {/* Checkmark for completed activities */}
-
-
     </Marker>
   );
 };

@@ -21,10 +21,14 @@ export const activitySchema = z.object({
   toHours: z.number(),
   startDate: z.number().default(0),
   endDate: z.number().default(0),
-  location: z.object({
+  location: z.object({ //from tripadvisor
+    name: z.string(),
+    address: z.string(),
     latitude: z.number(),
     longitude: z.number(),
-  }),
+  }).optional(),
+  priority: z.number().default(0),
+  thumbnail: z.string().optional(),
 });
 
 export const planSchema = z.object({
@@ -32,7 +36,7 @@ export const planSchema = z.object({
     current: z.number().default(0),
     target: z.number().default(0),
   }),
-  activities: z.array(activitySchema).optional(),
+  activities: z.array(activitySchema).default([]),
   destination: z.object({
     latitude: z.number(),
     longitude: z.number(),

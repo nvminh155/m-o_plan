@@ -2,18 +2,19 @@ import { Box } from "@/components/ui/box";
 import { CircleIcon, Icon, SearchIcon, TickIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
-import { Activity } from "@/types/fake/activity";
+
+import { TActivity } from "@/types/plan";
 import React from "react";
 import { Marker, Callout } from "react-native-maps";
 
-interface CustomMarkerProps {
-  activity: Activity;
+interface MarkerActivityProps {
+  activity: TActivity;
   isCompleted: boolean;
   identifier:  string;
-  onPress: (activity: Activity) => void;
+  onPress: (activity: TActivity) => void;
 }
 
-export const CustomMarker: React.FC<CustomMarkerProps> = ({
+export const MarkerActivity: React.FC<MarkerActivityProps> = ({
   activity,
   identifier,
   isCompleted,
@@ -21,7 +22,10 @@ export const CustomMarker: React.FC<CustomMarkerProps> = ({
 }) => {
   return (
     <Marker
-      coordinate={activity.location}
+      coordinate={{
+        latitude: activity.location?.latitude ?? 0,
+        longitude: activity.location?.longitude ?? 0
+      }}
       pinColor={isCompleted ? "#16a34a" : "blue"}
       // pinColor="#16a34a"
       onPress={() => onPress(activity)}

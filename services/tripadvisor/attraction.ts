@@ -77,9 +77,30 @@ export const attractionService = {
     );
 
     console.log("res", res.payload.AppPresentation_queryAppListV2[0].sections);
+
+    const mapSections =
+      res.payload.AppPresentation_queryAppListV2[0].mapSections;
+    const pins = mapSections.length > 0 ? mapSections[0].pins : [];
+
+    console.log(pins)
     return {
       ...res,
-      payload: res.payload.AppPresentation_queryAppListV2[0].sections,
+      payload: res.payload.AppPresentation_queryAppListV2[0].sections.map(
+        (section, i) => {
+          if (i > pins.length - 1) {
+            return section;
+          }
+
+          return {
+            ...section,
+            geoCode: pins[i].geoPoint ?? {
+              __typename: "AppPresentation_GeoPoint",
+              latitude: 0,
+              longitude: 0,
+            },
+          };
+        }
+      ),
     };
   },
 };

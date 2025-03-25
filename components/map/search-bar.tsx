@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
-import { ScrollView, TouchableOpacity } from "react-native";
-import { SearchIcon, CloseIcon, Icon } from "@/components/ui/icon";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { SearchIcon, CloseIcon, Icon, MapPinIcon } from "@/components/ui/icon";
 import { Input, InputField, InputIcon } from "../ui/input";
 import { VStack } from "../ui/vstack";
 import { Spinner } from "../ui/spinner";
@@ -15,15 +15,17 @@ import { Text } from "../ui/text";
 import { Heading } from "../ui/heading";
 import { Pressable } from "../ui/pressable";
 
+
+export type TSearchComplete = {
+  address: string;
+  latitude: number;
+  longitude: number;
+  geo_id?: string;
+  location_id?: string;
+}
 interface SearchBarProps {
   onSearch?: (query: string) => void;
-  onSelected?: (data: {
-    address: string;
-    latitude: number;
-    longitude: number;
-    geo_id?: string;
-    location_id?: string;
-  }) => void;
+  onSelected?: (data: TSearchComplete) => void;
   isLoading?: boolean;
   defaultText?: string;
 }
@@ -34,9 +36,9 @@ export const SearchBar = ({
   onSelected,
   defaultText = "",
 }: SearchBarProps) => {
-  const currentSelected = useRef<TTypeahead_LocationItem | undefined>(
-    undefined
-  );
+  // const currentSelected = useRef<TTypeahead_LocationItem | undefined>(
+  //   undefined
+  // );
 
   const [query, setQuery] = useState(defaultText);
   const [timeOutRef, setTimeOutRef] = useState<any>(null);
@@ -50,29 +52,19 @@ export const SearchBar = ({
     const res = await tripadvisorService.autoComplete({ query: text });
     // setAddresses(data);
 
-    const names = res.data.Typeahead_autocomplete.results.filter(
-      (r) => r.__typename === "Typeahead_LocationItem"
-    )[0].detailsV2.names;
-    const geocode = res.data.Typeahead_autocomplete.results.filter(
-      (r) => r.__typename === "Typeahead_LocationItem"
-    )[0].detailsV2.geocode;
+    // const names = res.data.Typeahead_autocomplete.results.filter(
+    //   (r) => r.__typename === "Typeahead_LocationItem"
+    // )[0].detailsV2.names;
+    // const geocode = res.data.Typeahead_autocomplete.results.filter(
+    //   (r) => r.__typename === "Typeahead_LocationItem"
+    // )[0].detailsV2.geocode;
 
     setAddresses(
       res.data.Typeahead_autocomplete.results.filter(
         (r) => r.__typename === "Typeahead_LocationItem"
       )
     );
-    console.log(
-      "data_Typeahead_LocationItem => ",
-      res.data.Typeahead_autocomplete.results
-        .filter((r) => r.__typename === "Typeahead_LocationItem")
-        .map((item) => {
-          return {
-            names: item.detailsV2.names,
-            geocode: item.detailsV2.geocode,
-          };
-        })
-    );
+  
   };
 
   const handleSearch = (text: string) => {
@@ -142,11 +134,11 @@ export const SearchBar = ({
             </Button>
           ))} */}
 
-          {addresses.slice(0,5).map(({ image, detailsV2, documentId }, i) => {
+          {addresses.slice(0, 5).map(({ image, detailsV2, documentId }, i) => {
             //w={width}&h={height}&s=1
             const img_w = 100,
               img_h = 100;
-
+     
             return (
               <Pressable
                 key={i + 1}
@@ -159,19 +151,27 @@ export const SearchBar = ({
                       address: detailsV2.names.name,
                       latitude: detailsV2.geocode.latitude,
                       longitude: detailsV2.geocode.longitude,
-                      geo_id: detailsV2.isGeo ? `${ids[3]}` : "",
+                      geo_id: ids[1],
                       location_id: ids[1],
                     });
                 }}
               >
-                <AppImage
-                  source={{
-                    uri: image.photo.photoSizeDynamic.urlTemplate
-                      .replace("{width}", img_w.toString())
-                      .replace("{height}", img_h.toString()),
-                  }}
-                  className={`w-full h-full max-w-[50px] max-h-[50px] rounded-md`}
-                />
+                {image ? (
+                  <AppImage
+                    source={{
+                      uri: image.photo.photoSizeDynamic.urlTemplate
+                        .replace("{width}", img_w.toString())
+                        .replace("{height}", img_h.toString()),
+                    }}
+                    className={`w-full h-full max-w-[50px] max-h-[50px] rounded-md`}
+                  />
+                ) : (
+                  <View
+                    className={`w-full h-full justify-center bg-gray-300 items-center max-w-[50px] max-h-[50px] rounded-md`}
+                  >
+                    <Icon as={MapPinIcon} className="w-1/2 h-1/2" />
+                  </View>
+                )}
                 <VStack className="flex-1">
                   <Heading size="sm" className="text-wrap flex-1">
                     {detailsV2.names.name}

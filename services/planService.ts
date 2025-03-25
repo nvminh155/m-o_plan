@@ -21,7 +21,6 @@ export const planService = {
     const idDoc = uuid.v4();
     const ref = doc(db, PLAN_PATH, idDoc);
 
-
     const groupChat = await chatService.createGroupChat(
       plan.title,
       createByUserId
@@ -33,9 +32,9 @@ export const planService = {
       members: arrayUnion(bot.ref.id),
     });
 
-
     const docData: TPlan = {
       ...plan,
+      activities: plan.activities.map((a) => ({ ...a, location: a.location })),
       createdAt: Date.now(),
       updatedAt: Date.now(),
       inviteCode: idDoc,
@@ -44,12 +43,11 @@ export const planService = {
       createByUserId,
       logs: [],
       settingId: [],
-      activities: plan.activities ?? [],
     };
+
+
     console.log("docData", docData);
     await setDoc(ref, docData);
-
-   
 
     return {
       ref: ref,

@@ -35,9 +35,9 @@ const ProgressStep = () => {
       setProgress(25);
     } else if (pathname.includes("kind-of-trip")) {
       setProgress(50);
-    } else if (pathname.includes("step-3")) {
+    } else if (pathname.includes("budget")) {
       setProgress(75);
-    } else if (pathname.includes("step-4")) {
+    } else if (pathname.includes("status")) {
       setProgress(100);
     } else {
       setProgress(0); // Default case

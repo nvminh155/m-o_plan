@@ -41,7 +41,7 @@ type TDetailsV2 = {
 
 export type TTypeahead_LocationItem = {
   __typename: "Typeahead_LocationItem";
-  documentId: string; //"loc;   ;g303946"; loc = locationId, g = geoId
+  documentId: string; //"loc;303946   ;g303946"; loc = locationId, g = geoId
   detailsV2: TDetailsV2;
   details: {
     __typename: "LocationInformation";

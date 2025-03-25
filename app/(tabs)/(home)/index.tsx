@@ -28,14 +28,17 @@ export default function Index() {
             toHours: new Date().getTime(),
             id: "1",
             location: {
+              id: '1',
+              name: "Switzerland",
+              address: "Switzerland",
               latitude: 10.9996864,
-              longitude: 106.678229
-            }
-            ,
+              longitude: 106.678229,
+            },
             startDate: new Date().getTime(),
             endDate: new Date().getTime(),
             onDate: new Date().getTime(),
             type: "food",
+            priority: 1,
           }}
         />
       </ScrollView>

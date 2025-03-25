@@ -16,7 +16,7 @@ import { Redirect, router } from "expo-router";
 import CreateDoneScreen from "@/components/plans/create/create-done";
 
 const PlanCreate = () => {
-  return <Redirect href={'/plans/create/onboarding-budget'} />;
+  return <Redirect href={'/plans/create/onboarding-destination'} />;
 };
 
 export default PlanCreate;

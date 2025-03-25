@@ -11,15 +11,28 @@ import { ActivityInfo } from "@/components/plans/id/schedule/activity-info";
 import { Text } from "@/components/ui/text";
 import { Box } from "@/components/ui/box";
 import { cn } from "@/lib/cn";
-import { Activity } from "@/types/fake/activity";
-import { CustomMarker } from "@/components/calendar/schedule/custom-marker";
+
+import { usePlanContext } from "@/contexts/PlanProvider";
+import { TActivity } from "@/types/plan";
+import { MarkerActivity } from "@/components/marker-activity";
+import MapScreen from "@/components/map";
+import { SearchBar, TSearchComplete } from "@/components/map/search-bar";
+import { ConfirmationDialog } from "@/components/map/comfirmation-dialog";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "@/firebaseConfig";
 
 export default function ScheduleScreen() {
+  const { data: planData } = usePlanContext();
+
   const mapRef = useRef<MapView | null>(null);
 
+  const [searchResult, setSearchResult] = useState<TSearchComplete | undefined>(
+    undefined
+  );
   const [selectedActivity, setSelectedActivity] = useState<
-    Activity | undefined
+    TActivity | undefined
   >(undefined);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [completedActivities, setCompletedActivities] = useState<string[]>([]);
 
   // Load completed activities from storage on mount
@@ -58,7 +71,7 @@ export default function ScheduleScreen() {
     }
   }, [completedActivities]);
 
-  const handleMarkerPress = (activity: Activity) => {
+  const handleMarkerPress = (activity: TActivity) => {
     setSelectedActivity(activity);
   };
 
@@ -74,17 +87,57 @@ export default function ScheduleScreen() {
     return completedActivities.includes(activityId);
   };
 
+  const handleSelectSearch = (data: TSearchComplete) => {
+    mapRef.current?.animateToRegion({
+      latitude: data.latitude,
+      longitude: data.longitude,
+      latitudeDelta: 0.0222,
+      longitudeDelta: 0.0221,
+    });
+    setSearchResult(data);
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmDestination = async () => {
+    setShowConfirmation(false);
+    await updateDoc(doc(db, "plans", planData?.id ?? "???"), {
+      activities: arrayUnion({
+        type: "other",
+        endDate: new Date().toISOString(),
+        location: {
+          latitude: searchResult?.latitude ?? 0,
+          longitude: searchResult?.longitude ?? 0,
+          address: searchResult?.address ?? "Unknown",
+          name: searchResult?.address ?? "Unknown",
+        },
+        title: searchResult?.address ?? "Unknown",
+        fromHours: 0,
+        toHours: 0,
+        note: "",
+        onDate: 0,
+        priority: 0,
+        startDate: 0,
+        thumbnail: "",
+      }),
+    });
+    setSearchResult(undefined)
+  };
+
   useEffect(() => {
     if (!mapRef || !mapRef.current) return;
-    mapRef.current.fitToSuppliedMarkers(["marker 0"], {
-      edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
-      animated: true,
-    });
+    mapRef.current.fitToSuppliedMarkers(
+      planData?.activities.map((a, i) => `marker ${i}`) ?? [],
+      {
+        edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
+        animated: true,
+      }
+    );
   }, [mapRef.current]);
 
   return (
     <View style={styles.container}>
-      <MapView
+      <SearchBar onSelected={handleSelectSearch} />
+      <MapScreen
         ref={mapRef}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
@@ -95,16 +148,18 @@ export default function ScheduleScreen() {
           longitudeDelta: 0.0221,
         }}
       >
-        {activities.map((activity, i) => (
-          <CustomMarker
+        {planData?.activities.map((activity, i) => (
+          <MarkerActivity
             key={i + 1}
             identifier={`marker ${i}`}
-            activity={activity}
-            isCompleted={isActivityCompleted(activity.id)}
+            activity={{ ...activity, id: i.toString() }}
+            isCompleted={isActivityCompleted(`${planData.id}-${i}`)}
             onPress={handleMarkerPress}
           />
         ))}
-      </MapView>
+
+        {searchResult && <Marker coordinate={searchResult} />}
+      </MapScreen>
 
       <Box className="bg-white p-4 rounded-lg" style={styles.infoContainer}>
         <ScrollView>
@@ -137,6 +192,15 @@ export default function ScheduleScreen() {
           )}
         </ScrollView>
       </Box>
+
+      <ConfirmationDialog
+        visible={showConfirmation}
+        onConfirm={handleConfirmDestination}
+        onCancel={() => {
+          setShowConfirmation(false);
+        }}
+        locationName={searchResult?.address || ""}
+      />
     </View>
   );
 }

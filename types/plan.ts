@@ -6,7 +6,7 @@ export type PlanSchema = z.infer<typeof planSchema>;
 //member is friends
 
 export type TPlan = Omit<PlanSchema, "activities"> & {
-  id?: string;
+  id: string;
   groupChatId: string;
   createByUserId: string;
   logs: string[];

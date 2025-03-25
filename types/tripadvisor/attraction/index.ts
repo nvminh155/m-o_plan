@@ -1,11 +1,18 @@
 import { TCardPhoto, TListSingleCardContentBase } from "../type-local";
 
+export type TGeoPoint = {
+  __typename: "AppPresentation_GeoPoint";
+  latitude: number;
+  longitude: number;
+};
+
 export type TAttractionSection = {
   __typename: "AppPresentation_SingleCard" | string;
   trackingTitle: string;
   trackingKey: string;
   stableDiffingType: string;
   listSingleCardContent: TAttractionListSingleCardContent;
+  geoCode: TGeoPoint;
 };
 
 export type TAttractionListResponse = {
@@ -22,7 +29,11 @@ export type TAttractionListResponse = {
     availableSorts: any[]; // Có 2 items
     sections: TAttractionSection[]; // Có 16 items
     skippedSections: any[]; // Có 4 items
-    mapSections: any[]; // Có 2 items
+    mapSections: {
+      pins: {
+        geoPoint: TGeoPoint;
+      }[];
+    }[]; // Có 2 items
     impressions: any[]; // Có 1 item
     statusV2: {
       [key: string]: any; // Có 3 key, cần xác định cụ thể hơn nếu biết chi tiết

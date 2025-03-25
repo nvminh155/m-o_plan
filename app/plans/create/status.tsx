@@ -12,6 +12,7 @@ import { VStack } from "@/components/ui/vstack";
 import { useAuthContext } from "@/contexts/AuthProvider";
 import { cn } from "@/lib/cn";
 import { planService } from "@/services/planService";
+import { tripadvisorService } from "@/services/tripadvisor";
 import { useCreatePlanStore } from "@/stores/create-plans-store";
 import { PlanSchema, TPlan } from "@/types/plan";
 import { useMutation } from "@tanstack/react-query";
@@ -22,7 +23,10 @@ import QRCode from "react-native-qrcode-svg";
 
 interface CreateStatusScreenProps {}
 
-const PendingScreen = () => {
+type PendingScreenprops = {
+  text?: string;
+};
+const PendingScreen = ({ text }: PendingScreenprops) => {
   return (
     <VStack className="justify-center flex-1">
       <VStack className="items-center">
@@ -30,7 +34,7 @@ const PendingScreen = () => {
           <Spinner size={"large"} />
         </View>
         <Text size="xl" className="font-semibold">
-          Đang tạo dựa trên dữ liệu của bạn...
+          {text ?? "Đang tạo dựa trên dữ liệu của bạn..."}
         </Text>
       </VStack>
     </VStack>
@@ -88,15 +92,55 @@ const DoneScreen = ({ qrValue }: DoneScreenProps) => {
     </VStack>
   );
 };
+
 const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
   const { user } = useAuthContext();
-  const updateStep = useCreatePlanStore((state) => state.updateStep);
+
   const formData = useCreatePlanStore((state) => state.formData);
   const [qrValue, setQRValue] = useState("");
+  const [message, setMessage] = useState(
+    "Đang tạo dựa trên dữ liệu của bạn..."
+  );
 
   const mutation = useMutation({
-    mutationFn: (data: PlanSchema) => {
-      return planService.createPlan(data, user.id);
+    mutationFn: async (data: PlanSchema) => {
+      const curDate = new Date();
+      setMessage("Đang tìm những địa điểm nên ghé thăm...");
+      const thingsToDo = await tripadvisorService.attraction.list({
+        geoId: 303946,
+        startDate: `2025-03-${curDate.getDate()}`,
+        endDate: `2025-03-${curDate.getDate() + 2}`,
+      });
+
+      setMessage("Đang tạo kế hoạch...");
+
+      const activities1 = thingsToDo.payload
+        .filter((item) => item.__typename === "AppPresentation_SingleCard")
+        .map((item, i) => {
+          return {
+            thumbnail: "",
+            startDate: 0,
+            endDate: 0,
+            fromHours: 0,
+            toHours: 0,
+            note: "",
+            onDate: 0,
+            priority: i,
+            title: item.listSingleCardContent.cardTitle.string,
+            type: "other",
+            location: {
+              name: item.listSingleCardContent.cardTitle.string,
+              address: "",
+              latitude: item.geoCode.latitude,
+              longitude: item.geoCode.longitude,
+            },
+             
+          };
+        }) as TPlan["activities"];
+
+
+        console.log("activities", activities1);
+      return planService.createPlan({ ...data, activities: activities1 }, user.id);
     },
     onSuccess(res) {
       console.log("SUCCESS CREATE PLAN", res);
@@ -104,7 +148,7 @@ const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
     },
     onError(error) {
       console.log("ERROR CREATE PLAN", error);
-      updateStep(-1);
+      setMessage("Có lỗi xảy ra, vui lòng thử lại");
     },
   });
 
@@ -122,7 +166,9 @@ const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
 
   return (
     <VStack className="flex-1">
-      {(mutation.isIdle || mutation.isPending) && <PendingScreen />}
+      {(mutation.isIdle || mutation.isPending) && (
+        <PendingScreen text={message} />
+      )}
       {mutation.isSuccess && <DoneScreen qrValue={qrValue} />}
     </VStack>
   );

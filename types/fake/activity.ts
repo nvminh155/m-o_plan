@@ -1,3 +1,5 @@
+import { TActivity } from "../plan"
+
 export interface Participant {
   id: string
   role: string
@@ -16,7 +18,7 @@ export interface Activity {
 }
 
 export interface ActivityInfoProps {
-  activity: Activity
+  activity: TActivity
   isCompleted: boolean
 }
 
