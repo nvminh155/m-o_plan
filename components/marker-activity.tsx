@@ -1,18 +1,9 @@
-import { Activity } from "@/types/fake/activity";
 import type React from "react";
-import { Marker, Callout } from "react-native-maps";
+import { Marker } from "react-native-maps";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
-import {
-  CaretDownIcon,
-  CaretDownSolidIcon,
-  CheckCircleIcon,
-  Icon,
-  TickIcon,
-} from "./ui/icon";
-import { VStack } from "./ui/vstack";
-import { HStack } from "./ui/hstack";
-import { Badge, BadgeText } from "./ui/badge";
+import { CaretDownSolidIcon, Icon } from "./ui/icon";
+
 import { View } from "react-native";
 import { TActivity } from "@/types/plan";
 
@@ -46,7 +37,7 @@ export const MarkerActivity: React.FC<MarkerActivityProps> = ({
     }
   };
 
-  const priorityColor = getPriorityColor(activity.priority);
+  // const priorityColor = getPriorityColor(activity.priority);
 
   return (
     <Marker
@@ -55,7 +46,6 @@ export const MarkerActivity: React.FC<MarkerActivityProps> = ({
         longitude: activity.location?.longitude ?? 0,
       }}
       onPress={() => onPress(activity)}
-      title="13123"
       pinColor={isCompleted ? "#16a34a" : "blue"}
       // pinColor="#16a34a"
       style={{

@@ -186,7 +186,7 @@ export default function ScheduleScreen() {
               <ButtonText>
                 {isActivityCompleted(selectedActivity.id)
                   ? "Đã hoàn thành"
-                  : "Mark done"}
+                  : "Đánh dấu đã đến"}
               </ButtonText>
             </Button>
           )}

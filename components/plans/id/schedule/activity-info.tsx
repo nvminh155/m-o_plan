@@ -18,12 +18,11 @@ export const ActivityInfo: React.FC<ActivityInfoProps> = ({
 
       <Divider className="my-1" />
 
-      {Array.from({ length: 3 }).map((participant, index) => (
-        <HStack key={index} space="md" className="items-center">
-          <Text className="font-semibold">- User{index + 1}:</Text>
-          <Text>{"role"}</Text>
-        </HStack>
-      ))}
+      <HStack space="md" className="items-center">
+        <Text className="">
+          {activity.note ? activity.note : "Không có"}
+        </Text>
+      </HStack>
 
       {isCompleted && (
         <Badge className="bg-primary-600 self-start mt-2">

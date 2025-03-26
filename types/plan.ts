@@ -17,8 +17,6 @@ export type TPlan = Omit<PlanSchema, "activities"> & {
   updatedAt: number;
 };
 
-export type TActivity =   (TPlan["activities"][number]) & {
-  id: string | number;
+export type TActivity = TPlan["activities"][number] & {
+  id: string;
 };
-
-
