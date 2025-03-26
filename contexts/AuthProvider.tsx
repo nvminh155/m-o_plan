@@ -87,6 +87,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             if (!docs.empty) {
               setUser(docs.docs[0].data() as TUser);
               router.push("/(tabs)/(home)");
+              // router.push({
+              //   pathname: "/plans/[id]/schedule",
+              //   params: { id: "b725bc6e-11de-4b67-8096-f319ece1ce56" },
+              // });
             }
           })
           .catch((e) => {

@@ -32,7 +32,7 @@ const TestApiHotel = () => {
       });
     },
   });
-  console.log("query", query.data);
+  // console.log("query", query.data);
   if (query.isLoading || !query.data) {
     return <Text>Loading hotel search...</Text>;
   }

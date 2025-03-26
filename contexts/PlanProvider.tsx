@@ -24,7 +24,7 @@ const PlanProvider = ({ children }: PlanProviderProps) => {
 
   const query = usePlanQuery(id);
 
-  const value = React.useMemo(() => ({ data: query.data?.data, id }), [query.data]);
+  const value = React.useMemo(() => ({ data: query.data?.data, id }), [query.data, id]);
 
   return <PlanContext.Provider value={value}>{children}</PlanContext.Provider>;
 };

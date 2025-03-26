@@ -6,6 +6,9 @@ import { Pressable } from "../ui/pressable";
 import {
   ChevronDownIcon,
   ChevronUpIcon,
+  EditIcon,
+  EditIconfyIcon,
+  HeartFillIcon,
   HeartIcon,
   Icon,
   MapPinIcon,
@@ -14,10 +17,29 @@ import {
 } from "../ui/icon";
 import { VStack } from "../ui/vstack";
 import { Text } from "../ui/text";
-import { Button, ButtonText } from "../ui/button";
+import { Button, ButtonGroup, ButtonText } from "../ui/button";
 import Avatar from "../ui/Avatar";
 import { Input, InputField } from "../ui/input";
 import { cn } from "@/lib/cn";
+import { usePlanContext } from "@/contexts/PlanProvider";
+import { z } from "zod";
+import { activitySchema } from "@/schemas/planSchema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TActivity } from "@/types/plan";
+import FormInput from "../ui/form-control/form-input";
+import FormDateTimePicker from "../ui/form-control/form-datetime-picker";
+import {
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+} from "../ui/modal";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "@/firebaseConfig";
+import { I } from "@expo/html-elements";
+import { toDate } from "@/utils/convertTimestamp";
 // import { Avatar, Input, InputField } from "@gluestack-ui/react"
 // import { Heart, MapPin, ChevronUp, ChevronDown, Send } from "lucide-react-native"
 // import { Box, HStack, VStack, Image, Text, Pressable, Icon, Button, ButtonText } from "../ui"
@@ -34,19 +56,28 @@ interface HotelProps {
     description: string;
     imageUrl: string;
     isFavorite?: boolean;
+    onDate?: number;
+    duration?: number; // hour
   };
-
+  activity: TActivity & {
+    isFavorite?: boolean;
+    duration?: number;
+  };
   onFavoritePress?: (id: string) => void;
   onSeeRatesPress?: (id: string) => void;
 }
 
 const CardHotel: React.FC<HotelProps> = ({
   data,
+  activity,
   onFavoritePress,
   onSeeRatesPress,
 }) => {
+  const { data: planData } = usePlanContext();
+
   const [favorite, setFavorite] = useState(data.isFavorite);
   const [expanded, setExpanded] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   const handleFavoritePress = () => {
     setFavorite(!favorite);
@@ -82,10 +113,10 @@ const CardHotel: React.FC<HotelProps> = ({
   };
 
   return (
-    <Box className="border-b border-gray-200 bg-white pb-4 mb-4 ">
+    <Box className="border-b border-gray-200 bg-white pb-4 mb-4 rounded-xl">
       <VStack className="gap-4 items-start flex-1">
         {/* Hotel Image */}
-        <Box className="relative w-full h-[200px] rounded-md">
+        <Box className="relative w-full h-[200px] rounded-tl-xl rounded-tr-xl overflow-hidden">
           {/* image gluestack */}
           <AppImage
             source={{
@@ -100,7 +131,22 @@ const CardHotel: React.FC<HotelProps> = ({
           >
             <Icon
               // heart icon gluestack
-              as={HeartIcon}
+              as={!favorite ? HeartIcon : HeartFillIcon}
+              size="md"
+              className={cn("overflow-hidden", {
+                "text-red-500 fill-red-500": favorite,
+                "text-gray-400 fill-transparent": !favorite,
+              })}
+            />
+          </Pressable>
+
+          <Pressable
+            className="absolute top-24 left-2 bg-white rounded-full p-2"
+            onPress={() => setEditMode(true)}
+          >
+            <Icon
+              // heart icon gluestack
+              as={EditIconfyIcon}
               size="md"
               className={cn("overflow-hidden", {
                 "text-red-500 fill-red-500": favorite,
@@ -111,34 +157,46 @@ const CardHotel: React.FC<HotelProps> = ({
         </Box>
 
         {/* Hotel Information */}
-        <VStack className="flex-1 gap-1">
+        <VStack className="flex-1 gap-1 px-4">
           <Text className="text-green-600 font-bold text-xs">
             {data.location}
           </Text>
           <Text className="font-bold text-xl line-clamp-2 text-wrap">
             {data.name}
           </Text>
-          {/*   */}
 
-          <HStack className="items-center gap-4 mb-2">
+          <VStack className="gap-4 mb-2">
             <HStack className="items-center gap-1">
-              <Text className="text-sm">Khách sạn {data.stars} sao</Text>
+              <Text className="text-sm">Thời lượng: </Text>
+              <Text className="text-sm">
+                {activity.fromHours ? activity.fromHours : "Chưa có"}
+              </Text>
             </HStack>
-            <HStack className="items-center gap-1">
-              <Icon as={MapPinIcon} size="sm" className="text-gray-600" />
-              <Text className="text-sm">{data.address}</Text>
-            </HStack>
-          </HStack>
 
-          <Text
-            className={cn(`text-sm text-gray-700 leading-loose`, {
-              "line-clamp-3": !expanded,
+            <HStack className="items-center gap-1">
+              <Text className="text-sm">Ngày bắt đầu: </Text>
+              <Text className="text-sm">
+                {activity.onDate > 0 ? toDate(activity.onDate) : "Chưa có"}
+              </Text>
+            </HStack>
+          </VStack>
+
+          <VStack>
+            <Text
+              className={cn(`text-sm text-gray-700 leading-loose`, {
+                "line-clamp-3": !expanded,
+              })}
+            >
+              Ghi chú: {activity.note ? activity.note : "Chưa có"}
+            </Text>
+          </VStack>
+
+          <Pressable
+            onPress={toggleDescription}
+            className={cn("mt-1", {
+              hidden: !activity.note,
             })}
           >
-            {data.description}
-          </Text>
-
-          <Pressable onPress={toggleDescription} className="mt-1">
             <HStack className="items-center gap-1">
               <Text className="text-gray-700 font-semibold text-sm">
                 {expanded ? "Thu gọn" : "Đọc thêm"}
@@ -151,19 +209,107 @@ const CardHotel: React.FC<HotelProps> = ({
             </HStack>
           </Pressable>
         </VStack>
-      </VStack>
 
-      {/* Bottom Actions */}
-      {/* <Box className="mt-4 border-t border-gray-200 pt-4">
-        <Button
-          className="border border-amber-500 w-[120px] self-start"
-          onPress={handleSeeRatesPress}
-        >
-          <ButtonText className="text-amber-500">See rates</ButtonText>
-        </Button>
-      </Box> */}
+        <FormEditHotel
+          editMode={editMode}
+          activity={activity}
+          onClose={() => setEditMode(false)}
+          onEdit={async (data) => {
+            console.log("Edit data", data);
+            const activities = planData?.activities.map((item, i) => {
+              if (i.toString() === activity.id) {
+                return {
+                  ...item,
+                  ...data,
+                };
+              }
+
+              return item;
+            });
+
+            await updateDoc(doc(db, `plans/${planData?.id}`), {
+              activities: activities,
+            }).then(async (r) => {
+              setEditMode(false);
+            });
+          }}
+        />
+      </VStack>
     </Box>
   );
 };
 
+const formSchema = activitySchema;
+type TForm = z.infer<typeof formSchema>;
+
+interface FormEditHotelProps {
+  activity: TActivity;
+  editMode: boolean;
+  onEdit: (data: TForm) => void;
+  onClose?: () => void;
+}
+
+const FormEditHotel = ({
+  activity,
+  editMode,
+  onClose,
+  onEdit,
+}: FormEditHotelProps) => {
+  const form = useForm<TForm>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      ...activity,
+      onDate: new Date().getTime(),
+    },
+  });
+
+  return (
+    <Modal onClose={onClose} isOpen={editMode}>
+      <ModalBackdrop />
+      <ModalContent>
+        <ModalBody>
+          <FormInput
+            control={form.control}
+            name="fromHours"
+            formLabelProps={{
+              text: "Thời lượng",
+            }}
+            keyboardType="number-pad"
+            placeholder="Nhập thời lượng"
+          />
+          <FormDateTimePicker
+            control={form.control}
+            name="onDate"
+            formLabelProps={{
+              text: "Ngày bắt đầu",
+            }}
+            onChangeCB={(date) => {
+              form.setValue("endDate", date);
+              form.setValue("startDate", date);
+            }}
+          />
+          <FormInput
+            control={form.control}
+            name="note"
+            formLabelProps={{
+              text: "Ghi chú",
+            }}
+            placeholder=""
+          />
+        </ModalBody>
+
+        <ModalFooter>
+          <ButtonGroup>
+            <Button onPress={form.handleSubmit(onEdit)}>
+              <ButtonText>Cập nhật</ButtonText>
+            </Button>
+            <Button onPress={() => {}} action="secondary">
+              <ButtonText>Hủy</ButtonText>
+            </Button>
+          </ButtonGroup>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+};
 export default CardHotel;

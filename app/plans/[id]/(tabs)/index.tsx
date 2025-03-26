@@ -6,7 +6,6 @@ import { usePlanContext } from "@/contexts/PlanProvider";
 import Loading from "@/components/ui/loading";
 import { VStack } from "@/components/ui/vstack";
 
-import PlanDetailHeader from "@/components/plans/id/home/header";
 import PlanDetailHomeBanner from "@/components/plans/id/home/banner";
 import PlanDetailRecentlyActivity from "@/components/plans/id/home/recently-activity";
 import PlanDetailMoreAction from "@/components/plans/id/home/more-action";

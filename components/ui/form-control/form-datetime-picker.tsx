@@ -37,6 +37,7 @@ type IFormDateTimePickerProps<
     text: string;
   };
   helperText?: string;
+  onChangeCB?: (value: number) => void;
   mode?: "date" | "time" | "datetime" | "countdown";
 } & IInputFieldProps;
 
@@ -50,6 +51,7 @@ function FormDateTimePicker<
   formLabelProps,
   helperText,
   mode,
+  onChangeCB,
   ...rest
 }: Readonly<IFormDateTimePickerProps<TFieldValues, TName>>) {
   const [dateTimePicker, setDateTimePicker] = React.useState({
@@ -114,6 +116,9 @@ function FormDateTimePicker<
                   date: new Date(e.nativeEvent.timestamp),
                 });
                 onChange(e.nativeEvent.timestamp);
+                if(onChangeCB) {
+                  onChangeCB(e.nativeEvent.timestamp);
+                }
               }}
             />
           )}

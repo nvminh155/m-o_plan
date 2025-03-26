@@ -117,15 +117,17 @@ const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
       const activities1 = thingsToDo.payload
         .filter((item) => item.__typename === "AppPresentation_SingleCard")
         .map((item, i) => {
+          const cardPhoto = item.listSingleCardContent.cardPhoto;
+
           return {
-            thumbnail: "",
+            thumbnail:  cardPhoto ? cardPhoto.sizes.urlTemplate : "",
             startDate: 0,
             endDate: 0,
             fromHours: 0,
             toHours: 0,
             note: "",
             onDate: 0,
-            priority: i,
+            priority: -1,
             title: item.listSingleCardContent.cardTitle.string,
             type: "other",
             location: {

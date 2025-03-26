@@ -66,14 +66,14 @@ const MapScreen = React.forwardRef<
           className={cn("flex-1", className)}
           {...rest}
         >
-          {/* {myLocation && (
+          {myLocation && (
           <UserMarker
             coordinate={myLocation.coords}
             title="Vị trí của bạn"
             avatar={require("@/assets/images/3x4anime.jpg")}
           />
-        )} */}
-
+        )}
+{/* 
           <MarkerActivity
             activity={{
               priority: 10,
@@ -88,7 +88,7 @@ const MapScreen = React.forwardRef<
             }}
             isCompleted={false}
             onPress={() => {}}
-          />
+          /> */}
           {markers.map((marker, index) => (
             <DestinationMarker key={index + 1} {...marker} />
           ))}

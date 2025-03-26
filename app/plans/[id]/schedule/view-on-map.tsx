@@ -152,7 +152,7 @@ export default function ScheduleScreen() {
           <MarkerActivity
             key={i + 1}
             identifier={`marker ${i}`}
-            activity={{ ...activity, id: i.toString() }}
+            activity={{ ...activity, id: (i+1).toString() }}
             isCompleted={isActivityCompleted(`${planData.id}-${i}`)}
             onPress={handleMarkerPress}
           />

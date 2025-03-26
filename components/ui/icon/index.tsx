@@ -1988,7 +1988,7 @@ const EditIconfyIcon = createIconUI({
       <Path
         fill="currentColor"
         d="M10.56 2.87L6.22 7.22l-.44.44l-.08.08l-1.52 3.16a1.08 1.08 0 0 0 1.45 1.45l3.14-1.53l.53-.53l.43-.43l4.34-4.36l.45-.44l.25-.25a2.18 2.18 0 0 0 0-3.08a2.17 2.17 0 0 0-1.53-.63a2.2 2.2 0 0 0-1.54.63l-.7.69l-.45.44zM5.51 11l1.18-2.43l1.25 1.26zm2-3.36l3.9-3.91l1.3 1.31L8.85 9zm5.68-5.31a.9.9 0 0 1 .65.27a.93.93 0 0 1 0 1.31l-.25.24l-1.3-1.3l.25-.25a.88.88 0 0 1 .69-.25z"
-        strokeWidth={2}
+        strokeWidth={1}
       />
     </>
   ),
@@ -2193,6 +2193,22 @@ const HeartIcon = createIconUI({
 
 HeartIcon.displayName = "HeartIcon";
 export { HeartIcon };
+
+const HeartFillIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="red"
+        d="M2 9.137C2 14 6.02 16.591 8.962 18.911C10 19.729 11 20.5 12 20.5s2-.77 3.038-1.59C17.981 16.592 22 14 22 9.138S16.5.825 12 5.501C7.5.825 2 4.274 2 9.137"
+      />
+    </>
+  ),
+});
+
+HeartFillIcon.displayName = "HeartFillIcon";
+export { HeartFillIcon };
+
 
 const CaretDownSolidIcon = createIconUI({
   viewBox: "0 0 24 24",
