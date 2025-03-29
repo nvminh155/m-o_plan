@@ -1,13 +1,18 @@
 import Activity from "@/components/activity/next-activity";
 import FastSchedule from "@/components/home/fast-schedule";
 import Header from "@/components/home/header";
+import { TransportSelection } from "@/components/test/transport-selection";
 import AppText from "@/components/ui/AppText";
 import Wrapper from "@/components/ui/Wrapper";
+import { useRouter } from "expo-router";
 import { ScrollView, View } from "react-native";
 
 export default function Index() {
+
   return (
     <Wrapper className="min-h-full !p-0">
+     
+
       <ScrollView contentContainerClassName="flex-1 min-h-screen pb-5 mb-10">
         <Header />
 

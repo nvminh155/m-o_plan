@@ -66,7 +66,7 @@ const Action = ({ item, active }: ActionProps) => {
       <MyIcon
         name={item.iconName}
         className={cn({
-          "!text-typography-800": !active,
+          "!text-secondary-foreground-500": !active,
         })}
         size={20}
       />

@@ -119,10 +119,10 @@ const buttonStyle = tva({
         "bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
     },
     {
-      action: 'primary',
-      variant: 'ghost',
-      class: 'bg-primary-50'
-    }
+      action: "primary",
+      variant: "ghost",
+      class: "bg-primary-50",
+    },
   ],
 });
 
@@ -133,7 +133,7 @@ const buttonTextStyle = tva({
       primary:
         "text-primary-foreground-600 data-[hover=true]:text-primary-foreground-600 data-[active=true]:text-primary-foreground-700",
       secondary:
-        "text-typography-500 data-[hover=true]:text-typography-600 data-[active=true]:text-typography-700",
+        "text-secondary-foreground-500 data-[hover=true]:text-secondary-foreground-600 data-[active=true]:text-secondary-foreground-700",
       positive:
         "text-success-600 data-[hover=true]:text-success-600 data-[active=true]:text-success-700",
       negative:
@@ -167,7 +167,7 @@ const buttonTextStyle = tva({
       variant: "solid",
       action: "secondary",
       class:
-        "text-typography-800 data-[hover=true]:text-typography-800 data-[active=true]:text-typography-800",
+        "text-secondary-foreground-500 data-[hover=true]:text-secondary-foreground-500 data-[active=true]:text-secondary-foreground-500",
     },
     {
       variant: "solid",
@@ -216,10 +216,10 @@ const buttonTextStyle = tva({
       class: "",
     },
     {
-      action: 'primary',
-      variant: 'ghost',
-      class: 'text-primary-500'
-    }
+      action: "primary",
+      variant: "ghost",
+      class: "text-primary-500",
+    },
   ],
 });
 
@@ -265,7 +265,7 @@ const buttonIconStyle = tva({
       variant: "solid",
       action: "secondary",
       class:
-        "text-typography-800 data-[hover=true]:text-typography-800 data-[active=true]:text-typography-800",
+        "text-secondary-foreground-500 data-[hover=true]:text-secondary-foreground-500 data-[active=true]:text-secondary-foreground-500",
     },
     {
       variant: "solid",
@@ -294,8 +294,7 @@ const buttonIconStyle = tva({
     {
       variant: "ghost",
       action: "primary",
-      class:
-        "text-primary-500",
+      class: "text-primary-500",
     },
   ],
 });
