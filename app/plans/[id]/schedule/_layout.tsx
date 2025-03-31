@@ -104,7 +104,7 @@ const PlansTabsLayout = () => {
       <Tabs.Screen
         name="build-with-ai"
         options={{
-          title: "AI",
+          title: "Bắt đầu",
           tabBarIcon: ({ color }) => (
             <Icon
               as={MemberFilledIcon}
