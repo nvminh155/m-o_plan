@@ -10,7 +10,7 @@ import { Platform, SafeAreaView, StatusBar } from "react-native";
 // import { ThemedView } from "@/components/ThemedView";
 // import * as Updates from "expo-updates";
 
-export default function HomeScreen() {
+export default function NotiScreen() {
   const { notification, expoPushToken, error } = useNotification();
   const [value, setValue] = useState("");
 
