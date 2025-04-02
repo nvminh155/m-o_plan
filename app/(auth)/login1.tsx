@@ -4,7 +4,6 @@ import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { useAuthContext } from "@/contexts/AuthProvider";
-
 import React from "react";
 
 const LoginScreen = () => {
@@ -16,6 +15,7 @@ const LoginScreen = () => {
         source={require("@/assets/images/banner_auth.avif")}
         className="w-full h-[300px]"
       />
+      
       <VStack className="mt-12">
         <HStack className="gap-3">
           <Text size="4xl" bold>

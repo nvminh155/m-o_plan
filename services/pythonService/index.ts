@@ -1,7 +1,8 @@
+import { env } from "@/config/env";
 import { http } from "@/lib/http";
 import { TPlan } from "@/types/plan";
 
-const BASE_URL = "http://192.168.190.108:8000";
+
 
 export const pythonService = {
   buildTripWithAI: async (data: TPlan) => {
@@ -11,7 +12,7 @@ export const pythonService = {
         data_from_mobile: JSON.stringify(data),
       },
       {
-        baseUrl: BASE_URL,
+        baseUrl: env.BASE_URL_PYTHON_SERVER,
       }
     );
   },

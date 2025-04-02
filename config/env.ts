@@ -1,4 +1,4 @@
-const WINDOW_IP = '192.168.100.64'
+const WINDOW_IP = '192.168.42.81'
 const BASE = `http://${WINDOW_IP}`
 
 export const env = {

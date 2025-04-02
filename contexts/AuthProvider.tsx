@@ -86,11 +86,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             const docs = await getDocs(userQuery);
             if (!docs.empty) {
               setUser(docs.docs[0].data() as TUser);
-              // router.push("/(tabs)/(home)");
-              router.push({
-                pathname: "/plans/[id]/schedule",
-                params: { id: "336278a9-5ae8-4f8f-8710-4131211609db" },
-              })
+              router.push("/(tabs)/(home)");
+              // router.push({
+              //   pathname: "/plans/[id]/schedule",
+              //   params: { id: "336278a9-5ae8-4f8f-8710-4131211609db" },
+              // })
               // router.push({
               //   pathname: "/plans/[id]/schedule",
               //   params: { id: "b725bc6e-11de-4b67-8096-f319ece1ce56" },
