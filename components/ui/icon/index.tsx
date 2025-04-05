@@ -2209,7 +2209,6 @@ const HeartFillIcon = createIconUI({
 HeartFillIcon.displayName = "HeartFillIcon";
 export { HeartFillIcon };
 
-
 const CaretDownSolidIcon = createIconUI({
   viewBox: "0 0 24 24",
   path: (
@@ -2221,3 +2220,33 @@ const CaretDownSolidIcon = createIconUI({
 
 CaretDownSolidIcon.displayName = "CaretDownSolidIcon";
 export { CaretDownSolidIcon };
+
+const StopIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="white"
+        d="M6 16V8q0-.825.588-1.412T8 6h8q.825 0 1.413.588T18 8v8q0 .825-.587 1.413T16 18H8q-.825 0-1.412-.587T6 16"
+      />
+    </>
+  ),
+});
+
+StopIcon.displayName = "StopIcon";
+export { StopIcon };
+
+const NextIcon = createIconUI({
+  viewBox: "0 0 24 24",
+  path: (
+    <>
+      <Path
+        fill="white"
+        d="M16.5 17V7q0-.425.288-.712T17.5 6t.713.288T18.5 7v10q0 .425-.288.713T17.5 18t-.712-.288T16.5 17m-11-.875v-8.25q0-.45.3-.725t.7-.275q.125 0 .275.025t.275.125l6.2 4.15q.225.15.338.363T13.7 12t-.112.463t-.338.362l-6.2 4.15q-.125.1-.275.125t-.275.025q-.4 0-.7-.275t-.3-.725"
+      />
+    </>
+  ),
+});
+
+NextIcon.displayName = "NextIcon";
+export { NextIcon };

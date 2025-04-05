@@ -1,5 +1,5 @@
-const WINDOW_IP = "192.168.42.81";
-const BASE = `http://${WINDOW_IP}`;
+const WINDOW_IP = '192.168.100.64'
+const BASE = `http://${WINDOW_IP}`
 
 export const env = {
   BASE_URL_NODE_SERVER: `${BASE}:3000`,

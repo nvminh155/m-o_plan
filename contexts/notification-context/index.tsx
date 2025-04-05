@@ -7,7 +7,7 @@ import React, {
   ReactNode,
 } from "react";
 import * as Notifications from "expo-notifications";
-import { Subscription } from "expo-modules-core";
+
 import { registerForPushNotificationsAsync } from "@/utils/registerForPushNotificationsAsync";
 
 interface NotificationContextType {
@@ -42,8 +42,8 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
     useState<Notifications.Notification | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  const notificationListener = useRef<Subscription>();
-  const responseListener = useRef<Subscription>();
+  const notificationListener = useRef<Notifications.EventSubscription>();
+  const responseListener = useRef<Notifications.EventSubscription>();
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(
@@ -59,12 +59,20 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
+        // Handle the notification response here
+        // Example: handle user tap on the notification
+
+        const actionIdentifier = response.actionIdentifier;
+        const data = response.notification.request.content.data;
+        // const isCategoryAction = actionIdentifier.startsWith("identifier_btn_");
+
+        if(data.channelId === "CHANNEL_ID_TRIP_STARTED") return;
+
         console.log(
           "🔔 Notification Response: ",
           JSON.stringify(response, null, 2),
-          JSON.stringify(response.notification.request.content.data, null, 2)
+          JSON.stringify(data, null, 2)
         );
-        // Handle the notification response here
       });
 
     return () => {

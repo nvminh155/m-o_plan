@@ -14,6 +14,7 @@ import { useLocation } from "@/hooks/useLocation";
 import { useAppStore } from "@/stores/app-store";
 import { MarkerActivity } from "../marker-activity";
 import { View } from "react-native";
+import { Text } from "../ui/text";
 
 interface MapScreenProps extends MapViewProps {
   markers?: DestinationMarkerProps[];
@@ -53,7 +54,7 @@ const MapScreen = React.forwardRef<
     //     animated: true,
     //   });
     // }, []);
-
+    return <Text>asfasf</Text>
     return (
       <View className={cn("flex-1", className)}>
         <MapView

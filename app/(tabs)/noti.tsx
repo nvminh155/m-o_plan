@@ -13,6 +13,7 @@ import { Platform, SafeAreaView, StatusBar } from "react-native";
 export default function NotiScreen() {
   const { notification, expoPushToken, error } = useNotification();
   const [value, setValue] = useState("");
+  const [valueCategory, setValueCategory] = useState("your_id_category");
 
   if (error) {
     return <Text>Error: {error.message}</Text>;
@@ -55,13 +56,23 @@ export default function NotiScreen() {
           />
         </Input>
 
+
+        <Input>
+          <InputField
+            placeholder="categoryid"
+            value={valueCategory}
+            onChangeText={setValueCategory}
+          />
+        </Input>
+
         <Button
           onPress={async () => {
             const res = await notificationService.sendNotification({
-              token: expoPushToken ?? "???",
+              to: expoPushToken ?? "???",
               title: "Test",
               body: value,
               data: { data: "goes here" },
+              categoryId: valueCategory,
             });
 
             console.log("res", res);

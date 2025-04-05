@@ -65,7 +65,7 @@ const buttonStyle = tva({
       sm: "px-3 h-10",
       md: "px-4 h-12",
       lg: "px-5 h-14",
-      xl: "px-6 h-16",
+      xl: "px-[0.6rem] h-16",
       auto: "h-auto px-3",
     },
   },
@@ -239,7 +239,7 @@ const buttonIconStyle = tva({
       sm: "h-[18px] w-[18px]",
       md: "h-[24px] w-[24px]",
       lg: "h-[26px] w-[26px]",
-      xl: "h-8 w-8",
+      xl: "h-[28px] w-[28px]",
     },
     action: {
       primary:
