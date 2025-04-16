@@ -22,7 +22,7 @@ type Pax = {
 };
 
 type AttractionBody = {
-  geoId: number; // Required: The geoId field from locations API
+  geoId: number | string; // Required: The geoId field from locations API
   filters?: TFilter[]; // Optional: List of filters
   boundingBox?: BoundingBox; // Optional: Geographical bounding box
   pax?: Pax[]; // Required: Array of passenger details

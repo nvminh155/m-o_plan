@@ -1,8 +1,8 @@
 import { IconAntd } from "@/components/icon";
 import { Button, ButtonIcon } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
-import { Href, router, Stack, Tabs, usePathname } from "expo-router";
-import React from "react";
+import { Href, router, Stack, Tabs, useLocalSearchParams, usePathname } from "expo-router";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 
 import { usePlanContext } from "@/contexts/PlanProvider";
@@ -12,6 +12,7 @@ import {
   MemberFilledIcon,
   SettingsIcon,
 } from "@/components/ui/icon";
+import { useQueryClient } from "@tanstack/react-query";
 
 type TTabsIcon = {
   icon: React.ElementType<any, keyof React.JSX.IntrinsicElements>;
@@ -31,6 +32,22 @@ const TabsIcon = ({ icon, size, color }: TTabsIcon) => {
   );
 };
 const PlansTabsLayout = () => {
+    const {
+      id,
+    }: {
+      id: string;
+    } = useLocalSearchParams();
+
+  const queryClient = useQueryClient();
+
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["plans", id]
+    })
+  }, [])
+
+
   return (
     <Stack
       screenOptions={{

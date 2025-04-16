@@ -33,7 +33,7 @@ export default function App() {
           className="py-2 rounded-lg items-center"
           onPress={() => {
             router.push({
-              pathname: "/plans/[id]",
+              pathname: "/plans/[id]/schedule",
               params: { id: item.id ?? "????" },
             });
           }}

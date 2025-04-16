@@ -2,6 +2,7 @@ import { Button, ButtonText } from "@/components/ui/button";
 import { HStack } from "@/components/ui/hstack";
 import { Progress, ProgressFilledTrack } from "@/components/ui/progress";
 import { VStack } from "@/components/ui/vstack";
+import { cn } from "@/lib/cn";
 import { StackRouter } from "@react-navigation/native";
 import { Navigator, Slot, usePathname } from "expo-router";
 import { useEffect, useState } from "react";
@@ -45,7 +46,12 @@ const ProgressStep = () => {
   }, [pathname]); // Update progress when route changes
 
   return (
-    <Progress className="mt-8" value={progress} >
+    <Progress
+      className={cn("mt-8", {
+        hidden: progress == 100,
+      })}
+      value={progress}
+    >
       <ProgressFilledTrack />
     </Progress>
   );

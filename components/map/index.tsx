@@ -54,7 +54,7 @@ const MapScreen = React.forwardRef<
     //     animated: true,
     //   });
     // }, []);
-    return <Text>asfasf</Text>
+    // return <Text>asfasf</Text>
     return (
       <View className={cn("flex-1", className)}>
         <MapView

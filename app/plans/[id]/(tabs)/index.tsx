@@ -12,7 +12,7 @@ import PlanDetailMoreAction from "@/components/plans/id/home/more-action";
 
 const DetailPlans = () => {
   const { data } = usePlanContext();
-
+  console.log(data)
   if (!data) return <Loading />;
 
   return (
@@ -22,7 +22,7 @@ const DetailPlans = () => {
       <ScrollView className="flex-1">
         <PlanDetailHomeBanner />
 
-        <MoneyView data={data.budget} />
+        {/* <MoneyView data={data.budget} /> */}
 
         <PlanDetailMoreAction />
 

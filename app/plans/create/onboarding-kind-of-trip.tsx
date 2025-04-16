@@ -117,7 +117,7 @@ const TripType = ({ onPressCB }: TripTypeProps) => {
           >
             <Icon
               as={item.icon}
-              className={cn("", {
+              className={cn("text-black", {
                 "text-white": selectedType?.key === item.key,
               })}
               size="lg"

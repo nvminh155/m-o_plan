@@ -104,16 +104,17 @@ const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
 
   const mutation = useMutation({
     mutationFn: async (data: PlanSchema) => {
+      console.log("DÂT TO CREATE",  Number(data.destination.geo_id))
       const curDate = new Date();
       setMessage("Đang tìm những địa điểm nên ghé thăm...");
       const thingsToDo = await tripadvisorService.attraction.list({
-        geoId: 303946,
-        startDate: `2025-03-${curDate.getDate()}`,
-        endDate: `2025-03-${curDate.getDate() + 2}`,
+        geoId: Number(data.destination.geo_id) ?? 303946,
+        startDate: `2025-04-${curDate.getDate()}`,
+        endDate: `2025-04-${curDate.getDate() + 2}`,
       });
 
       setMessage("Đang tạo kế hoạch...");
-
+      console.log("THINGS TO DO", JSON.stringify(thingsToDo))
       const activities1 = thingsToDo.payload
         .filter((item) => item.__typename === "AppPresentation_SingleCard")
         .map((item, i) => {
@@ -133,8 +134,8 @@ const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
             location: {
               name: item.listSingleCardContent.cardTitle.string,
               address: "",
-              latitude: item.geoCode.latitude,
-              longitude: item.geoCode.longitude,
+              latitude: item?.geoCode?.latitude ?? 0,
+              longitude: item?.geoCode?.longitude ?? 0,
             },
              
           };
@@ -146,6 +147,7 @@ const CreateStatusScreen = ({}: CreateStatusScreenProps) => {
     },
     onSuccess(res) {
       console.log("SUCCESS CREATE PLAN", res);
+      router.replace("/plans")
       setQRValue(res.data.inviteCode);
     },
     onError(error) {

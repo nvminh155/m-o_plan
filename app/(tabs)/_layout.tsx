@@ -18,7 +18,7 @@ export default function RootLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="calendar"
         options={{
           title: "Lịch",
@@ -32,7 +32,7 @@ export default function RootLayout() {
         options={{
           title: "Tin nhắn",
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="plans"
         options={{

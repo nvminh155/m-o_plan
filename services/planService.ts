@@ -34,6 +34,7 @@ export const planService = {
 
     const docData: TPlan = {
       ...plan,
+      title: plan.destination.address + " - " + plan.numberOfMembers,
       activities: plan.activities.map((a) => ({ ...a, location: a.location })),
       createdAt: Date.now(),
       updatedAt: Date.now(),

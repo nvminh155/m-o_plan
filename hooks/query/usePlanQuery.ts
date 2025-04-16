@@ -4,6 +4,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 
+
+
 export const usePlanQuery = (id: string) => {
   const queryClient = useQueryClient();
 
