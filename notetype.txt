@@ -1,0 +1,147 @@
+
+6 chapter
+
+
+(loai hinhf kinh doanh) type=["9189"]
+								khach san
+(tien nghi) amenity=["9156", "9658", 		"21778",		"9176"]
+		sat bien				dieu hoa	duong ra bien	wifi mien phi
+
+	
+	
+styles = {
+	"5184": "Bình dân",
+	"9654": "Hạng trung",
+	"6216": "Dành cho gia đình",
+	"6296": "Thương gia",
+	"9624": "Lãng mạn",
+	"9650": "Sang trọng",
+	"5951": "Hiện đại"
+}
+
+price = {
+	minValue:0
+	maxValue:11403330
+}
+
+
+
+ATTRACTIONS
+
+
+AppPresentation_StandardFilterGroup
+
+//"Types of attractions"
+category = {
+	"40": "Spas & Wellness",
+	"47": "Sights & Landmarks",
+	"20": "Nightlife",
+	"49": "Museums",
+	"55": "Boat Tours & Water Sports",
+	"56": "Fun & Games",
+	"53": "Casinos & Gambling",
+	"57": "Nature & Parks"
+}
+
+//"Spas & Wellness"
+type = {
+	"127: Spas",
+	"129: Health/Fitness Clubs & Gyms",
+	"255: Thermal Spas"
+}
+
+//Awards
+awardCategories = {
+	"coe: undefined"
+}
+
+//Traveler rating
+rating = {
+	"40", "50"
+}
+
+
+//open now
+openNow = {
+	"true": "Open now",
+}
+
+
+// "Suggested duration",
+suggestedDuration = [
+	"UNDER_1_HOUR: <1 hour",
+	"ONE_TO_2_HOURS: 1-2 hours",
+	"TWO_TO_3_HOURS: 2-3 hours",
+	"OVER_3_HOURS: More than 3 hours"
+]
+
+
+// "Good for",
+anyTag = [
+	"11295: "Good for a Rainy Day"",
+	"11309: "Budget-friendly"",
+	"12169: "Good for Couples"",
+	"12159: "Honeymoon spot"",
+	"11306: "Good for Kids"",
+	"12170: "Good for Big Groups"",
+	"11292: "Free Entry"",
+	"12163: "Adventurous"",
+	"12156: "Hidden Gems"",
+	"11312: "Good for Adrenaline Seekers""
+]
+
+
+// "Category types",
+navbar = [
+	"ATTRACTIONOVERVIEW:-true: Attractions",
+	"ATTRACTIONOVERVIEW:42-false: Tours",
+	"ATTRACTIONOVERVIEW:63-false: Day Trips",
+	"ATTRACTIONOVERVIEW:61-false: "Outdoor Activities"",
+	"ATTRACTIONOVERVIEW:58-false: "Concerts & Shows"",
+	"ATTRACTIONOVERVIEW:36-false: "Food & Drink"",
+	"ATTRACTIONOVERVIEW:26-false: "Shopping"",
+	"ATTRACTIONOVERVIEW:59-false: "Transportation""
+]
+
+
+
+//restaurent filter 
+
+
+//"Establishment type"
+"establishment" = {
+	"9900": "Coffee & Tea",
+	"10591": "Restaurants",
+	"9909": "Dessert",
+}
+
+body_test = {
+  "geoId": 303946,
+  "partySize": 2,
+  "reservationTime": "2025-03-25T20:00",
+  "sort": "POPULARITY",
+  "sortOrder": "desc",
+  "filters": [
+    {
+      "id": "establishment",
+      "value": [
+        "9900", "10591"
+      ]
+    },
+    {
+      "id": "cuisine",
+      "value": ["10675"]
+    }
+  ],
+ 
+  "updateToken": ""
+}
+
+
+
+
+Chọn type , số người đi, số trẻ em => budget => filter chọn hotel (để xác định họ sẽ ở lại đâu nhằm xác định các địa điểm tham quan gần đó) => save data => query restaurent => save data => query attractions => save data => ask AI, with budget they can go where, require use within budget ? => show tour example
+
+
+reputation
+evironmentalist

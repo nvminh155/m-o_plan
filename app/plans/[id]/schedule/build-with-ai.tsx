@@ -19,6 +19,7 @@ import { notificationService } from "@/services/notification-service";
 import { useMutation } from "@tanstack/react-query";
 import { useNotification } from "@/contexts/notification-context";
 import { CHANNEL_IDS } from "@/utils/notification-helper";
+import * as Notifications from "expo-notifications";
 
 const CATEGORY_ID_BTN_NEXT = "CATEGORY_ID_BTN_NEXT";
 const CATEGORY_ID_BTN_COMPLETE = "CATEGORY_ID_BTN_COMPLETE";
@@ -26,9 +27,15 @@ const CATEGORY_ID_BTN_EXIT = "CATEGORY_ID_BTN_EXIT";
 const CATEGORY_ID_BTN_OPEN_APP = "CATEGORY_ID_BTN_OPEN_APP";
 const ASYNC_STORAGE_KEY_TRIP_STATE = "tripState";
 
+enum ETripStatus {
+  OFF = "off",
+  PREPARING = "preparing",
+  RUNNING = "running",
+}
+
 const setNotificationCategory = async (
   CATEGORY_ID: string,
-  type: "complete" | "running"
+  type: "complete" | ETripStatus.RUNNING
 ) => {
   setNotificationCategoryAsync(CATEGORY_ID, [
     {
@@ -56,9 +63,9 @@ const setNotificationCategory = async (
 const StartYourTrip = () => {
   const { expoPushToken } = useNotification();
   const { data: planData } = usePlanContext();
-  const [isStartedTrip, setIsStartedTrip] = React.useState<
-    "off" | "preparing" | "running"
-  >("off");
+  const [isStartedTrip, setIsStartedTrip] = React.useState<ETripStatus>(
+    ETripStatus.OFF
+  );
 
   const CATEGORY_ID = useMemo(() => {
     //master category to check on server
@@ -66,6 +73,11 @@ const StartYourTrip = () => {
   }, [planData?.id]);
   // const CHANNEL_ID_TRIP_STARTED = CHANNEL_IDS.CHANNEL_ID_TRIP_STARTED + `_${expoPushToken}_PlanID[${planData?.id}]`;
   const CHANNEL_ID_TRIP_STARTED = CHANNEL_IDS.CHANNEL_ID_TRIP_STARTED;
+
+  const handleChangeTripStatus = (newStatus: ETripStatus) => {
+    setIsStartedTrip(newStatus);
+    AsyncStorage.setItem(ASYNC_STORAGE_KEY_TRIP_STATE, newStatus as string);
+  };
 
   const sendNotification = async (nextActivityId: number) => {
     const activities = planData?.activities ?? [];
@@ -82,6 +94,33 @@ const StartYourTrip = () => {
     // console.log("zzz,", newNextActivityId, nextActivityId, activities.length);
 
     const ac = activities[nextActivityId];
+
+    return await Notifications.scheduleNotificationAsync({
+      content: {
+        title:
+          `Điểm đến ${newNextActivityId === -1 ? "cuối" : ""} của bạn là: ` +
+          activities[nextActivityId]?.title,
+        body: `Thời lượng: ${Math.abs(ac.toHours - ac.fromHours)} giờ\n${
+          ac.note ? "Ghi chú: " + ac.note : ""
+        }`,
+        subtitle:
+          "Chúc bạn có một chuyến đi vui vẻ! Sử dụng các nút bên dưới để điều hướng",
+        categoryIdentifier: CATEGORY_ID,
+        data: {
+          planId: planData?.id,
+          categoryId: CATEGORY_ID,
+          categoryIdentifier: CATEGORY_ID,
+          channelId: "default",
+          // activities: JSON.stringify(planData?.activities),
+          nextActivityId: newNextActivityId,
+        },
+      },
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+        seconds: 2,
+        channelId: "default",
+      },
+    });
 
     return await notificationService.sendNotification({
       to: expoPushToken ?? "???expoPushToken",
@@ -113,8 +152,11 @@ const StartYourTrip = () => {
 
     onSuccess: (data) => {
       console.log("Notification sent successfully", data);
-      setIsStartedTrip("running");
-      AsyncStorage.setItem(ASYNC_STORAGE_KEY_TRIP_STATE, "running");
+      setIsStartedTrip(ETripStatus.RUNNING);
+      AsyncStorage.setItem(
+        ASYNC_STORAGE_KEY_TRIP_STATE,
+        ETripStatus.RUNNING as string
+      );
     },
   });
 
@@ -138,23 +180,24 @@ const StartYourTrip = () => {
         }
 
         if (actionIdentifier === CATEGORY_ID_BTN_EXIT) {
-          setIsStartedTrip("off");
-          AsyncStorage.setItem(ASYNC_STORAGE_KEY_TRIP_STATE, "off");
+          setIsStartedTrip(ETripStatus.OFF);
+          AsyncStorage.setItem(
+            ASYNC_STORAGE_KEY_TRIP_STATE,
+            ETripStatus.OFF as string
+          );
           await deleteNotificationCategoryAsync(CATEGORY_ID);
         }
 
         if (actionIdentifier === CATEGORY_ID_BTN_NEXT) {
           // deleteNotificationCategoryAsync(CATEGORY_ID);
-          await sendNotification(
-            myData.nextActivityId <= 1 ? 10 : myData.nextActivityId
-          );
+          await sendNotification(myData.nextActivityId as any);
           await dismissAllNotificationsAsync();
         }
 
         if (actionIdentifier === CATEGORY_ID_BTN_COMPLETE) {
           await dismissAllNotificationsAsync();
-          setIsStartedTrip("off");
-          AsyncStorage.setItem(ASYNC_STORAGE_KEY_TRIP_STATE, "off");
+
+          handleChangeTripStatus(ETripStatus.OFF);
         }
 
         // console.log(
@@ -166,44 +209,47 @@ const StartYourTrip = () => {
     );
 
     return () => {
-      removeNotificationSubscription(res_event_listener);
+      
     };
   }, []);
 
   useEffect(() => {
     const loadState = async () => {
-      const savedState = await AsyncStorage.getItem(
+      const savedState = (await AsyncStorage.getItem(
         ASYNC_STORAGE_KEY_TRIP_STATE
-      );
-      if (savedState === "running") {
-        setIsStartedTrip("running");
-      }
-      if (savedState === "preparing") {
-        setIsStartedTrip("preparing");
-      }
+      )) as ETripStatus;
+
+
+      handleChangeTripStatus(savedState)
     };
     loadState();
   }, []);
 
   useEffect(() => {
-    if (isStartedTrip === "off" || isStartedTrip === "running") return;
+    if (
+      isStartedTrip === ETripStatus.OFF ||
+      isStartedTrip === ETripStatus.RUNNING
+    )
+      return;
 
-    setNotificationCategory(CATEGORY_ID, "running");
+    setNotificationCategory(CATEGORY_ID, ETripStatus.RUNNING);
 
     mutation.mutate();
   }, [isStartedTrip]);
 
   const handleNextActivity = async () => {};
   const handlePressStartTrip = () => {
-    setIsStartedTrip("preparing");
-    AsyncStorage.setItem(ASYNC_STORAGE_KEY_TRIP_STATE, "preparing");
+    handleChangeTripStatus(ETripStatus.PREPARING);
   };
 
+  console.log("StartYourTrip render", isStartedTrip);
   return (
     <VStack className="flex-1 items-center justify-center  bg-white">
       <HStack
         className={cn("mb-10 gap-5", {
-          hidden: isStartedTrip === "off" || isStartedTrip === "preparing",
+          hidden:
+            isStartedTrip === ETripStatus.OFF ||
+            isStartedTrip === ETripStatus.PREPARING,
         })}
       >
         <VStack className="items-center">
@@ -211,8 +257,7 @@ const StartYourTrip = () => {
             className="flex-col rounded-full"
             size="xl"
             onPress={() => {
-              setIsStartedTrip("off");
-              AsyncStorage.setItem(ASYNC_STORAGE_KEY_TRIP_STATE, "off");
+              handleChangeTripStatus(ETripStatus.OFF);
             }}
           >
             <ButtonIcon as={StopIcon} />
@@ -234,10 +279,10 @@ const StartYourTrip = () => {
 
       <Button
         className={cn({
-          hidden: isStartedTrip === "running",
+          hidden: isStartedTrip === ETripStatus.RUNNING,
         })}
         onPress={handlePressStartTrip}
-        disabled={mutation.isPending || isStartedTrip === "preparing"}
+        disabled={mutation.isPending || isStartedTrip === ETripStatus.PREPARING}
       >
         <ButtonText>Bắt đầu chuyến đi của tôi</ButtonText>
       </Button>

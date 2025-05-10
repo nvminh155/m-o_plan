@@ -3,14 +3,19 @@ import AppText from "@/components/ui/AppText";
 import { cn } from "@/lib/cn";
 import { Image } from "expo-image";
 import React from "react";
-import { View } from "react-native";
-import { BellOutLineIcon } from "@/components/ui/icon";
+import { ImageBackground, View } from "react-native";
+import { BellOutLineIcon, Icon, UserIcon } from "@/components/ui/icon";
 import MapScreen from "@/components/map";
 import { TActivity } from "@/types/plan";
 import ActivitySubtitle from "./activity-subtitle";
 import ActivityProvider, {
   useActivityContext,
 } from "@/contexts/ActivityProvider";
+import { Text } from "../ui/text";
+import { VStack } from "../ui/vstack";
+import AppImage from "../image/AppImage";
+import { HStack } from "../ui/hstack";
+import { Heading } from "../ui/heading";
 
 interface NextActivityProps {
   data: TActivity;
@@ -19,42 +24,21 @@ interface NextActivityProps {
 const NextActivity = ({ data }: NextActivityProps) => {
   return (
     <ActivityProvider data={data}>
-      <View className="flex-1 mt-5 rounded-[30px]">
-        <Image
-          source={require("@/assets/images/3x4anime.jpg")}
-          className="absolute w-full h-full z-[0] rounded-[30px] changeme"
-          style={{
-            aspectRatio: 3 / 4,
-          }}
+      <VStack className="flex-1">
+        <AppImage
+          source={require("@/assets/images/banner_test.jpg")}
+          className="absolute w-full h-full top-0 left-0"
         />
-        <View
-          className="members flex-row bg-white rounded-[23px] p-0.5 mr-4 mt-4"
-          style={{
-            alignSelf: "flex-end",
-          }}
-        >
-          {Array.from({ length: 3 }).map((_, index) => (
-            <View key={index + 1} style={{ alignSelf: "flex-start" }}>
-              <Image
-                source={"https://picsum.photos/seed/696/3000/2000"}
-                className={cn(
-                  "h-10 w-10 rounded-full border-[1.5px] border-white",
-                  {
-                    "-ml-5": index !== 0,
-                  }
-                )}
-              />
-            </View>
-          ))}
-          <View className="bg justify-center items-center flex-row text-white rounded-full pr-2">
-            <AppText containerClassName="self-center" className="font-medium">
-              +2
-            </AppText>
-          </View>
-        </View>
-
-        <MapActivity />
-      </View>
+        <HStack className="bg-white absolute bottom-0 left-0">
+          <VStack>
+            <Heading size="sm">Hoạt động mới</Heading>
+            <HStack className="gap-2">
+              <Icon as={UserIcon} />
+              <Text>2 người</Text>
+            </HStack>
+          </VStack>
+        </HStack>
+      </VStack>
     </ActivityProvider>
   );
 };

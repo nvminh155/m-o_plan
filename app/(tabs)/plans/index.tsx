@@ -1,13 +1,15 @@
 import AppImage from "@/components/image/AppImage";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { PlusIcon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { VStack } from "@/components/ui/vstack";
 import Wrapper from "@/components/ui/Wrapper";
 import { planService } from "@/services/planService";
 import { TPlan } from "@/types/plan";
 import { useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import React from "react";
-import { View, Text, FlatList, ListRenderItemInfo } from "react-native";
+import { View, FlatList, ListRenderItemInfo } from "react-native";
 
 export default function App() {
   const query = useQuery({
@@ -43,7 +45,7 @@ export default function App() {
       </View>
     </View>
   );
-
+  console.log("query", query.data?.data);
   return (
     <Wrapper>
       <Button
@@ -57,13 +59,20 @@ export default function App() {
       >
         <ButtonIcon as={PlusIcon} />
       </Button>
-      <FlatList
-        data={query.data?.data}
-        renderItem={renderPlan}
-        keyExtractor={(item) => item.id ?? ""}
-        contentContainerStyle={{ paddingBottom: 16 }}
-        className="mt-node"
-      />
+
+      {!query.data?.data || query.data?.data.length === 0 ? (
+        <VStack className="justify-center items-center flex-1">
+          <Text size="3xl">Chưa có thông tin</Text>
+        </VStack>
+      ) : (
+        <FlatList
+          data={query.data?.data}
+          renderItem={renderPlan}
+          keyExtractor={(item) => item.id ?? ""}
+          contentContainerStyle={{ paddingBottom: 16 }}
+          className="mt-node"
+        />
+      )}
     </Wrapper>
   );
 }

@@ -1,53 +1,93 @@
-import Activity from "@/components/activity/next-activity";
-import FastSchedule from "@/components/home/fast-schedule";
-import Header from "@/components/home/header";
-import { TransportSelection } from "@/components/test/transport-selection";
-import AppText from "@/components/ui/AppText";
+import AppImage from "@/components/image/AppImage";
+import { Button, ButtonIcon } from "@/components/ui/button";
+import { HStack } from "@/components/ui/hstack";
+import {
+  BusIcon,
+  FlightIcon,
+  HotairBalloonIcon,
+  HotelIcon,
+  Icon,
+  SearchIcon,
+} from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { VStack } from "@/components/ui/vstack";
 import Wrapper from "@/components/ui/Wrapper";
-import { useRouter } from "expo-router";
-import { ScrollView, View } from "react-native";
+import { Image } from "expo-image";
 
 export default function Index() {
-
   return (
-    <Wrapper className="min-h-full !p-0">
-     
+    <Wrapper className="!p-0 bg-[#f5f5f5]/10 flex-1">
+      <Image
+        source={require("@/assets/images/test_img.jpg")}
+        className="w-full h-1/2 max-h-[300px]"
+      />
 
-      <ScrollView contentContainerClassName="flex-1 min-h-screen pb-5 mb-10">
-        <Header />
+      <HStack
+        className="gap-4 bg-white rounded-full px-5 mx-6 -mt-10 py-4 mb-4"
+        style={{
+          shadowColor: "#888",
+          shadowOffset: { width: -2, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 6,
+          elevation: 8,
+        }}
+      >
+        <Icon as={SearchIcon} size="lg" className="text-primary-500" />
 
-        <View className="mt-10">
-          <View className="gap-3">
-            <AppText text="Have a 1Good Day," className="!text-5xl" />
-            <AppText text="Username" className="!text-5xl" />
-          </View>
-        </View>
+        <VStack>
+          <Text className="font-medium">Bạn muốn đi đâu?</Text>
+          <HStack className="gap-4">
+            <Text className="text-[#333]/30" size="xs">
+              Bất cứ đâu
+            </Text>
+            <Text className="text-[#333]/30" size="xs">
+              Bất kỳ tuần nào
+            </Text>
+            <Text className="text-[#333]/30" size="xs">
+              Thêm mọi người
+            </Text>
+          </HStack>
+        </VStack>
+      </HStack>
 
-        <FastSchedule />
-
-        <Activity
-          data={{
-            title: "Traveling to Switzerland",
-            note: "Traveling to Switzerland",
-            fromHours: new Date().getTime(),
-            toHours: new Date().getTime(),
-            id: "1",
-            location: {
-              id: '1',
-              name: "Switzerland",
-              address: "Switzerland",
-              latitude: 10.9996864,
-              longitude: 106.678229,
-            },
-            startDate: new Date().getTime(),
-            endDate: new Date().getTime(),
-            onDate: new Date().getTime(),
-            type: "food",
-            priority: 1,
-          }}
-        />
-      </ScrollView>
-      {/* <MapScreen /> */}
+      <HStack className="gap-4  mx-10 justify-between my-7">
+        <VStack className="items-center">
+          <Button className="bg-white rounded-full w-20 h-20">
+            <ButtonIcon as={HotelIcon} className="text-black" />
+          </Button>
+          <Text size="xs" className="text-gray-600">
+            Khách sạn
+          </Text>
+        </VStack>
+        <VStack className="items-center">
+          <Button className="bg-white rounded-full w-20 h-20">
+            <ButtonIcon as={FlightIcon} className="text-black" color={"#333"} />
+          </Button>
+          <Text size="xs" className="text-gray-600">
+            Chuyến bay
+          </Text>
+        </VStack>
+        <VStack className="items-center">
+          <Button className="bg-white rounded-full w-20 h-20">
+            <ButtonIcon as={BusIcon} className="text-black" color="#000" />
+          </Button>
+          <Text size="xs" className="text-gray-600">
+            Tham quan
+          </Text>
+        </VStack>
+        <VStack className="items-center">
+          <Button className="bg-white rounded-full w-20 h-20">
+            <ButtonIcon
+              as={HotairBalloonIcon}
+              className="text-black"
+              color="#999"
+            />
+          </Button>
+          <Text size="xs" className="text-gray-600">
+            Trải nghiệm
+          </Text>
+        </VStack>
+      </HStack>
     </Wrapper>
   );
 }
